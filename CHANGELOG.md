@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-07
+
 ### 追加
 
 - データ元の利用条件の確認結果（`docs/license-review.md`）と、VLIZ への確認メールの下書き（`docs/vliz-permission-request.md`）
