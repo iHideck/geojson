@@ -1,0 +1,15 @@
+id: marine-regions-eez-v12
+title: "Maritime Boundaries Geodatabase: Exclusive Economic Zones (200NM), version 12"
+publisher: Flanders Marine Institute (VLIZ)
+version: "12"
+retrieved: null
+license: CC-BY-4.0
+license_url: https://www.marineregions.org/disclaimer.php
+page_url: https://doi.org/10.14284/632
+# ダウンロードは申込みの画面を通る。VLIZ の返事で取得の方法が決まるまで、手で置く
+manual: true
+files:
+  - url: https://www.marineregions.org/downloads.php
+    name: World_EEZ_v12_20231025_gpkg.zip
+    sha256: null
+    bytes: null

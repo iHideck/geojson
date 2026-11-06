@@ -6,6 +6,9 @@ on:
     paths:
       - Dockerfile
       - Makefile
+      - layers.yml
+      - sources/**
+      - scripts/**
       - mk/**
       - package.json
       - package-lock.json
@@ -40,5 +43,11 @@ jobs:
           tags: geojson-tools:local
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      # 国土数値情報だけで 800MB あるので、取得した元データを台帳の内容ごとにキャッシュする。古いものは SHA256 の照合で取り直す
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache/sources
+          key: sources-${{ hashFiles('sources/*.yml') }}
+          restore-keys: sources-
       - name: イメージの中で make build-in-image を動かす
-        run: docker run --rm -v "$PWD":/work -w /work -u "$(id -u):$(id -g)" -e HOME=/tmp geojson-tools:local make build-in-image
+        run: mkdir -p .cache && docker run --rm -v "$PWD":/work -v "$PWD/.cache":/cache -e GEOJSON_CACHE=/cache -w /work -u "$(id -u):$(id -g)" -e HOME=/tmp geojson-tools:local make build-in-image

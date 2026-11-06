@@ -1,0 +1,15 @@
+id: gsi-mencho-2026
+title: 令和8年全国都道府県市区町村別面積調（7月1日時点）
+publisher: 国土地理院
+version: 2026-07-01
+retrieved: 2026-11-06
+license: PDL-1.0
+license_url: https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html
+page_url: https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm
+# 国土地理院のサーバーは古い TLS の再交渉を使い、OpenSSL 3 は既定で拒む。中身は SHA256 で照合するので、この接続だけ許す
+legacy_tls: true
+files:
+  - url: https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/GSI-menseki20260701.pdf
+    name: GSI-menseki20260701.pdf
+    sha256: 9a08c47b208646f4d1387f065e80c563ec54282243d42d3f4ae73cae688987b5
+    bytes: 1302901

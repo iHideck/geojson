@@ -1,0 +1,13 @@
+id: ksj-n03-2026
+title: 国土数値情報 行政区域データ 2026年（令和8年）版
+publisher: 国土交通省
+version: N03-20260101
+retrieved: 2026-11-06
+license: CC-BY-4.0
+license_url: https://nlftp.mlit.go.jp/ksj/other/agreement_01.html
+page_url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html
+files:
+  - url: https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2026/N03-20260101_GML.zip
+    name: N03-20260101_GML.zip
+    sha256: 1f714fca019e22e6f84012dba420384fc7b49c6ad8bd0a867ab1cfb593a78477
+    bytes: 803201348

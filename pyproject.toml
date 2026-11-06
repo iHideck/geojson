@@ -3,7 +3,9 @@ name = "geojson-boundaries"
 version = "0.0.0"
 description = "日本と世界の境界データを作る道具"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "pyyaml>=6.0.3",
+]
 
 [dependency-groups]
 dev = [
@@ -21,6 +23,7 @@ pythonpath = ["scripts"]
 [tool.ruff]
 line-length = 120
 target-version = "py314"
+src = ["scripts", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]
