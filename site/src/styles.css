@@ -1,12 +1,19 @@
 :root {
-  --ink: #d6e0f5;
-  --ink-dim: #8fa0c7;
   --ocean: #0b1733;
-  --panel: rgb(11 23 51 / 86%);
-  --rule: #2a3f72;
-  --accent: #f4b35e;
-  --sans: system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+  --ink: #dfe7f7;
+  --ink-2: #9fb0d0;
+  --ink-3: #8a9bc0;
+  --panel: rgb(9 18 40 / 93%);
+  --panel-solid: #0b1630;
+  --panel-line: rgb(151 176 222 / 22%);
+  --accent: #f3b35b;
+  --accent-2: #7fd3f7;
+  --head: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+  --body: system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Roboto Mono", monospace;
+  --inset: 22px;
+  --radius: 2px;
+  --cartouche: inset 0 0 0 3px var(--panel), inset 0 0 0 4px var(--panel-line);
 }
 
 * {
@@ -19,70 +26,966 @@ body {
   height: 100%;
   background: var(--ocean);
   color: var(--ink);
-  font-family: var(--sans);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid var(--panel-line);
+  border-radius: 3px;
+  padding: 0 4px;
+  color: var(--ink-2);
 }
 
 #map {
   position: fixed;
   inset: 0;
+  background: radial-gradient(120% 90% at 60% 40%, #0c1d42 0%, #060d22 55%, #03060f 100%);
 }
 
-.panel {
+#frame {
   position: fixed;
-  top: 16px;
-  left: 16px;
-  padding: 12px 14px;
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  background: var(--panel);
-  backdrop-filter: blur(6px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  color: var(--ink-2);
 }
 
-.panel h2 {
-  margin: 0 0 8px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--ink-dim);
+/* 上の帯 */
+.topbar {
+  position: fixed;
+  z-index: 5;
+  top: var(--inset);
+  left: var(--inset);
+  right: var(--inset);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  pointer-events: none;
 }
 
-.seg {
+.topbar > * {
+  pointer-events: auto;
+}
+
+.brand {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-top: 6px;
+  gap: 12px;
+  padding: 10px 16px 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  box-shadow: var(--cartouche);
 }
 
-.seg-label {
-  min-width: 6em;
-  font-size: 13px;
-}
-
-.seg button {
-  padding: 3px 8px;
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--ink);
-  font: 12px var(--mono);
-  cursor: pointer;
-}
-
-.seg button[aria-pressed="true"] {
-  border-color: var(--accent);
+.brand-mark {
+  width: 30px;
+  height: 30px;
   color: var(--accent);
 }
 
-.seg button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.brand-title {
+  margin: 0;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.32em;
 }
 
+.brand-sub {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--ink-2);
+  letter-spacing: 0.08em;
+}
+
+.tools {
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 300px;
+  padding: 0 12px;
+  height: 40px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  color: var(--ink-2);
+}
+
+.search svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.search input {
+  all: unset;
+  flex: 1;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.search input::placeholder {
+  color: var(--ink-3);
+}
+
+#search-results {
+  position: absolute;
+  top: 44px;
+  left: -1px;
+  right: -1px;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: var(--panel-solid);
+  border: 1px solid var(--panel-line);
+  max-height: 320px;
+  overflow: auto;
+}
+
+#search-results li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 12px;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+#search-results li small {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+#search-results li[aria-selected="true"] {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+#search-results li.empty {
+  color: var(--ink-3);
+  cursor: default;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 40px;
+  padding: 0 6px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+}
+
+.menu > button {
+  background: none;
+  border: 0;
+  font-size: 13px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.menu > button:hover {
+  color: var(--accent);
+}
+
+.lang {
+  display: inline-flex;
+  margin-left: 6px;
+  border-left: 1px solid var(--panel-line);
+  padding-left: 8px;
+}
+
+.lang button {
+  background: none;
+  border: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.lang button[aria-pressed="true"] {
+  color: var(--ink);
+}
+
+.menu-button {
+  display: none;
+}
+
+/* 凡例 */
+.panel {
+  position: fixed;
+  z-index: 4;
+  left: var(--inset);
+  top: calc(var(--inset) + 70px);
+  width: 308px;
+  max-height: calc(100% - var(--inset) * 2 - 150px);
+  overflow: auto;
+  padding: 14px 16px 12px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  box-shadow: var(--cartouche);
+  backdrop-filter: blur(8px);
+  scrollbar-width: thin;
+}
+
+.sheet-handle {
+  display: none;
+}
+
+.panel-head {
+  border-bottom: 1px solid var(--panel-line);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-family: var(--head);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.panel-head h2 .en {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.layers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  column-gap: 10px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px dotted var(--panel-line);
+}
+
+.layer:last-child {
+  border-bottom: 0;
+}
+
+.layer .sample {
+  width: 44px;
+  height: 12px;
+  grid-row: 1 / span 2;
+  overflow: visible;
+}
+
+.layer .name {
+  font-size: 13.5px;
+}
+
+.layer .name small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  margin-top: 1px;
+}
+
+.layer .opacity {
+  grid-column: 2 / span 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.layer .opacity input {
+  flex: 1;
+  accent-color: var(--accent);
+  height: 14px;
+}
+
+.layer .opacity output {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-3);
+  width: 26px;
+  text-align: right;
+}
+
+.toggle {
+  appearance: none;
+  width: 30px;
+  height: 16px;
+  border: 1px solid var(--ink-3);
+  border-radius: 9px;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+}
+
+.toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  transition: transform 0.18s;
+}
+
+.toggle:checked {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.toggle:checked::after {
+  transform: translateX(14px);
+  background: var(--accent);
+}
+
+.res {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.res-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.res-label {
+  font-size: 12px;
+  color: var(--ink-2);
+  min-width: 5em;
+}
+
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.seg button {
+  background: none;
+  border: 0;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-family: var(--mono);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.seg button + button {
+  border-left: 1px solid var(--panel-line);
+}
+
+.seg button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--ink);
+}
+
+.credits {
+  margin: 12px 0 0;
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+  display: grid;
+  gap: 2px;
+}
+
+.credits-head {
+  color: var(--ink-2);
+}
+
+/* 読み取り（大きな字） */
+.readout {
+  position: fixed;
+  z-index: 4;
+  left: var(--inset);
+  bottom: var(--inset);
+  display: flex;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  box-shadow: var(--cartouche);
+  font-family: var(--mono);
+  font-size: 15px;
+}
+
+.ro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+}
+
+.ro + .ro {
+  border-left: 1px solid var(--panel-line);
+}
+
+.ro .k {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.ro .v {
+  font-variant-numeric: tabular-nums;
+  white-space: pre;
+}
+
+#scalebar {
+  width: 124px;
+  height: 10px;
+  color: var(--ink-2);
+}
+
+.bar-label {
+  font-size: 11px;
+  color: var(--ink-2);
+}
+
+/* コンパス */
+.compass {
+  position: fixed;
+  z-index: 3;
+  right: calc(var(--inset) + 6px);
+  bottom: calc(var(--inset) + 56px);
+  width: 92px;
+  height: 92px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.compass svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.compass .needle {
+  transform: rotate(var(--bearing, 0deg));
+}
+
+/* 注意書き（いつも見える） */
 .disclaimer {
   position: fixed;
-  left: 16px;
-  bottom: 8px;
+  z-index: 4;
+  right: var(--inset);
+  bottom: var(--inset);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 520px;
+  padding: 7px 12px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  font-size: 11.5px;
+  color: var(--ink-2);
+}
+
+.disclaimer .short {
+  display: none;
+}
+
+.disclaimer svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--accent);
+}
+
+/* 地物の詳細 */
+.card {
+  position: fixed;
+  z-index: 6;
+  right: var(--inset);
+  top: calc(var(--inset) + 70px);
+  width: 290px;
+  max-height: calc(100% - var(--inset) * 2 - 200px);
+  overflow: auto;
+  padding: 16px 18px 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  box-shadow: var(--cartouche);
+  animation: card-in 0.22s ease-out;
+}
+
+.card[hidden] {
+  display: none;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.card-close,
+.dialog-close {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  background: none;
+  border: 0;
+  font-size: 20px;
+  color: var(--ink-2);
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+.card-kind {
+  font-size: 11px;
+  color: var(--accent-2);
+  letter-spacing: 0.12em;
+}
+
+.card-name {
+  margin: 4px 0 0;
+  font-family: var(--head);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.card-en {
   font-size: 12px;
-  color: var(--ink-dim);
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.card-codes {
+  margin: 12px 0 0;
+  display: grid;
+  gap: 4px;
+}
+
+.card-codes div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dotted var(--panel-line);
+  padding: 4px 0;
+}
+
+.card-codes dt {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.card-codes dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  text-align: right;
+}
+
+.card-credit {
+  margin: 10px 0 0;
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.card-actions button,
+.dialog .copy {
+  flex: 1;
+  background: none;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  padding: 6px 8px;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.card-status {
+  display: block;
+  min-height: 1em;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--accent-2);
+}
+
+/* 演出のスキップ */
+.skip {
+  position: fixed;
+  z-index: 7;
+  left: 50%;
+  bottom: calc(var(--inset) + 64px);
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.skip[hidden] {
+  display: none;
+}
+
+/* データ・使い方・ライセンス */
+.dialog {
+  width: min(760px, calc(100% - 32px));
+  max-height: calc(100% - 64px);
+  padding: 22px 26px;
+  background: var(--panel-solid);
+  color: var(--ink);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  box-shadow: var(--cartouche);
+}
+
+.dialog::backdrop {
+  background: rgb(3 6 15 / 70%);
+}
+
+.dialog h2 {
+  margin: 0 0 12px;
+  font-family: var(--head);
+  font-size: 20px;
+  letter-spacing: 0.1em;
+}
+
+.dialog h3 {
+  margin: 18px 0 6px;
+  font-size: 15px;
+}
+
+.dialog p,
+.dialog li {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.dialog .meta {
+  margin: 2px 0;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.dialog a {
+  color: var(--accent-2);
+}
+
+.dialog table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.dialog th,
+.dialog td {
+  padding: 5px 6px;
+  border-bottom: 1px dotted var(--panel-line);
+  text-align: left;
+}
+
+.dialog th {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.dialog pre {
+  overflow: auto;
+  padding: 10px 12px;
+  background: rgb(0 0 0 / 25%);
+  border: 1px solid var(--panel-line);
+  font: 12px/1.6 var(--mono);
+}
+
+/* WebGL が無いときの静止画と、読み込みの失敗 */
+.fallback {
+  display: none;
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  z-index: 1;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 120px 24px 24px;
+}
+
+.fallback img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--panel-line);
+}
+
+.fallback figcaption {
+  max-width: 640px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+body[data-fallback="1"] .fallback {
+  display: grid;
+}
+
+body[data-fallback="1"] :is(#map, #frame, .panel, .readout, .compass, .search, .skip) {
+  display: none;
+}
+
+.status {
+  position: fixed;
+  z-index: 8;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 14px 18px;
+  background: var(--panel-solid);
+  border: 1px solid var(--panel-line);
+  font-size: 13px;
+}
+
+/* 横幅が狭い PC では、注意書きを読み取りの上に置く */
+@media (max-width: 1180px) and (min-width: 641px) {
+  .disclaimer {
+    left: var(--inset);
+    right: auto;
+    bottom: calc(var(--inset) + 56px);
+  }
+  .compass {
+    bottom: var(--inset);
+  }
+}
+
+/* スマートフォン */
+@media (max-width: 640px) {
+  :root {
+    --inset: 12px;
+  }
+  .topbar {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    padding: 8px 12px 8px 10px;
+    gap: 9px;
+  }
+  .brand-mark {
+    width: 24px;
+    height: 24px;
+  }
+  .brand-title {
+    font-size: 14px;
+    letter-spacing: 0.26em;
+  }
+  .brand-sub {
+    font-size: 10.5px;
+  }
+  .menu-button {
+    display: grid;
+    place-content: center;
+    gap: 4px;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    padding: 0;
+    cursor: pointer;
+  }
+  .menu-button span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--ink);
+  }
+  .tools {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .topbar[data-open="1"] .tools {
+    display: flex;
+  }
+  .search {
+    width: 100%;
+  }
+  .menu {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 4px 6px;
+  }
+  .panel {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    max-height: 40%;
+    border-radius: 14px 14px 0 0;
+    border-bottom: 0;
+    padding: 0 16px 14px;
+  }
+  .panel[data-collapsed="1"] {
+    max-height: 52px;
+    overflow: hidden;
+  }
+  .sheet-handle {
+    display: block;
+    width: 100%;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    position: relative;
+  }
+  .sheet-handle::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 9px;
+    width: 40px;
+    height: 4px;
+    margin-left: -20px;
+    border-radius: 2px;
+    background: var(--ink-3);
+  }
+  .readout {
+    left: var(--inset);
+    right: var(--inset);
+    bottom: calc(40% + 8px);
+    font-size: 12px;
+    justify-content: space-between;
+  }
+  .panel[data-collapsed="1"] ~ .readout {
+    bottom: 60px;
+  }
+  .ro {
+    padding: 6px 9px;
+    gap: 5px;
+  }
+  .ro .k,
+  #scalebar,
+  .bar-label {
+    display: none;
+  }
+  .disclaimer {
+    left: var(--inset);
+    right: var(--inset);
+    top: calc(var(--inset) + 56px);
+    bottom: auto;
+    max-width: none;
+    font-size: 10.5px;
+    padding: 5px 10px;
+  }
+  .topbar[data-open="1"] ~ .disclaimer {
+    display: none;
+  }
+  .disclaimer .long {
+    display: none;
+  }
+  .disclaimer .short {
+    display: inline;
+  }
+  .compass {
+    width: 54px;
+    height: 54px;
+    right: calc(var(--inset) + 4px);
+    bottom: auto;
+    top: calc(var(--inset) + 100px);
+  }
+  .card {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: auto;
+    max-height: 40%;
+    border-radius: 14px 14px 0 0;
+    background: var(--panel-solid);
+  }
+  .card-name {
+    font-size: 22px;
+  }
+  .skip {
+    bottom: calc(40% + 52px);
+  }
+  #map .maplibregl-ctrl-bottom-right {
+    display: none;
+  }
+}
+
+/* ズームのボタンは、コンパスの上に置く。MapLibre の CSS は後から読むので、#map を付けて指定を強くする */
+#map .maplibregl-ctrl-bottom-right {
+  right: calc(var(--inset) + 22px);
+  bottom: calc(var(--inset) + 150px);
+}
+
+@media (max-width: 1180px) and (min-width: 641px) {
+  #map .maplibregl-ctrl-bottom-right {
+    bottom: calc(var(--inset) + 96px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* OGP と静止画を撮るとき（scripts/capture.ts）は、地図と題字だけを残す */
+html[data-shot] :is(.tools, .panel, .readout, .compass, .disclaimer, .card, .skip, #frame, .maplibregl-control-container) {
+  display: none !important;
 }
