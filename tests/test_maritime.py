@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 from shapely.geometry import shape
 
-from boundaries import geo, maritime, registry
+from boundaries import geo, maritime, metadata, package, registry
 
 FIXTURES = Path(__file__).parent / "fixtures" / "maritime"
 LAW = registry.cache_dir() / "sources" / "egov-ryokai-sekorei" / "law_data.json"
@@ -61,6 +61,21 @@ def test_synthetic_eez_is_simplified_with_registry_attributes(tmp_path, monkeypa
         assert [f["properties"]["mrgid"] for f in fc["features"]] == ["9001", "9002", "9003"]
         assert geo.problems(fc, res.precision) == []
     assert {o.format for o in built.outputs} == {"geojson", "topojson"}
+
+
+@pytest.mark.skipif(not HAS_MAPSHAPER, reason="mapshaper が無い（make setup で入れる）")
+def test_maritime_layers_built_with_the_flag_still_stay_out_of_data(tmp_path, monkeypatch):
+    monkeypatch.setenv("GEOJSON_ENABLE_MARITIME", "1")
+    reg = registry.load()
+    eez = reg.layer("world/eez")
+    dist, data = tmp_path / "dist", tmp_path / "data"
+    metadata.write(maritime.build_from_geojson(eez, FIXTURES / "eez.geojson", tmp_path, dist), reg, dist)
+    stale = data / "world" / "eez" / "50m.topojson"
+    stale.parent.mkdir(parents=True)
+    stale.write_text("{}")
+    written = package.package(registry.Registry(layers=(eez,), sources=reg.sources), dist, data)
+    assert written == []
+    assert not (data / "world").exists()
 
 
 SYNTHETIC_LAW = (
