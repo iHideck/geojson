@@ -74,7 +74,8 @@ const countries = JSON.parse(await readFile(path, "utf8"));
 - クレジットとライセンス / Credits and licenses: DATA_LICENSE.md
 
 境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。
-The boundaries have no legal status and must not be used for surveying, navigation or other purposes that need positional accuracy or safety.
+The boundaries have no legal status and must not be used for surveying, navigation
+or other purposes that need positional accuracy or safety.
 """
 
 
