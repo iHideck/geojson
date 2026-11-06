@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import re
+import ssl
 import sys
 import urllib.request
 from datetime import date
@@ -37,12 +38,20 @@ def sha256_of(path: Path) -> str:
     return digest.hexdigest()
 
 
-def download(url: str, dest: Path) -> str:
+def tls_context(legacy: bool) -> ssl.SSLContext:
+    context = ssl.create_default_context()
+    if legacy:
+        context.options |= ssl.OP_LEGACY_SERVER_CONNECT
+    return context
+
+
+def download(url: str, dest: Path, legacy_tls: bool = False) -> str:
     """dest.part に書いてから名前を変え、途中で止まっても壊れたファイルを残さない。"""
     part = dest.with_name(dest.name + ".part")
     digest = hashlib.sha256()
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=120) as response, part.open("wb") as out:
+    context = tls_context(legacy_tls) if url.startswith("https:") else None
+    with urllib.request.urlopen(request, timeout=120, context=context) as response, part.open("wb") as out:
         while chunk := response.read(CHUNK):
             digest.update(chunk)
             out.write(chunk)
@@ -63,7 +72,7 @@ def ensure(source: registry.Source, cache: Path) -> list[Path]:
             )
         dest.parent.mkdir(parents=True, exist_ok=True)
         print(f"取得: {f.url}", file=sys.stderr)
-        got = download(f.url, dest)
+        got = download(f.url, dest, source.legacy_tls)
         if got != f.sha256:
             dest.unlink()
             raise ChecksumMismatch(f"{source.id}: {f.name} の SHA256 が台帳と違う（台帳 {f.sha256}、取得 {got}）")
@@ -76,7 +85,7 @@ def update(source: registry.Source, cache: Path, ledger: Path) -> None:
     for f in source.files:
         dest = cache / source.id / f.name
         dest.parent.mkdir(parents=True, exist_ok=True)
-        got = download(f.url, dest)
+        got = download(f.url, dest, source.legacy_tls)
         size = dest.stat().st_size
         block = re.compile(rf"(- url: {re.escape(f.url)}\n(?:    .*\n)*?    sha256: )\S+(\n    bytes: )\S+")
         text, n = block.subn(rf"\g<1>{got}\g<2>{size}", text)

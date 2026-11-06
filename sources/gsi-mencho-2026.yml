@@ -6,6 +6,8 @@ retrieved: 2026-11-06
 license: PDL-1.0
 license_url: https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html
 page_url: https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm
+# 国土地理院のサーバーは古い TLS の再交渉を使い、OpenSSL 3 は既定で拒む。中身は SHA256 で照合するので、この接続だけ許す
+legacy_tls: true
 files:
   - url: https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/GSI-menseki20260701.pdf
     name: GSI-menseki20260701.pdf

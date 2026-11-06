@@ -21,6 +21,7 @@ def make_source(tmp_path: Path, payload: bytes, sha256: str | None, manual: bool
         license_url="https://example.org/license",
         page_url="https://example.org/",
         manual=manual,
+        legacy_tls=False,
         files=(file,),
     )
 
@@ -69,3 +70,8 @@ def test_update_rewrites_the_checksum_size_and_date(tmp_path):
     assert f"sha256: {hashlib.sha256(payload).hexdigest()}" in text
     assert f"bytes: {len(payload)}" in text
     assert "retrieved: 2020-01-01" not in text
+
+
+def test_legacy_renegotiation_is_allowed_only_when_the_ledger_asks():
+    assert fetch.tls_context(legacy=True).options & fetch.ssl.OP_LEGACY_SERVER_CONNECT
+    assert not fetch.tls_context(legacy=False).options & fetch.ssl.OP_LEGACY_SERVER_CONNECT

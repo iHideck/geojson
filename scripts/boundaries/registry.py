@@ -45,6 +45,7 @@ class Source:
     license_url: str
     page_url: str
     manual: bool
+    legacy_tls: bool
     files: tuple[SourceFile, ...]
 
 
@@ -141,6 +142,7 @@ def _parse_source(path: Path) -> Source:
         license_url=_require(data, "license_url", where),
         page_url=_require(data, "page_url", where),
         manual=manual,
+        legacy_tls=bool(data.get("legacy_tls", False)),
         files=tuple(files),
     )
 
