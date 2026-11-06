@@ -13,6 +13,7 @@ IN_IMAGE = docker run --rm --platform $(PLATFORM) -v "$(CURDIR)":/work -v "$(GEO
 setup: # 手元で開発するための依存（Python と Node）を入れる
 	uv sync --frozen
 	npm ci
+	npm ci --prefix site
 
 .PHONY: build-image
 build-image: # データを作る道具のイメージを作る（GDAL・tippecanoe・mapshaper・uv）

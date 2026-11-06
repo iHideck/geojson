@@ -17,3 +17,4 @@
 - 海域（EEZ・領海・接続水域・公海・基線）の処理。既定は無効で、`GEOJSON_ENABLE_MARITIME=1` のときだけ作る。日本の直線基線は領海法施行令の別表第一から作る
 - 配布形式。リリースには GeoPackage（QGIS のスタイル入り）・QGIS プロジェクト・Shapefile（UTF-8）・FlatGeobuf・GeoParquet・PMTiles・属性の CSV・QML と SLD のスタイル・`SHA256SUMS` を、GitHub Pages には PMTiles・FlatGeobuf・GeoJSON・`metadata.json`・STAC のカタログを置く
 - ビューアが読む目録（`latest/catalog.json`）と検索の索引（`latest/search.json`）。PMTiles の地物に、索引の行と同じ番号を付ける
+- ビューア Midnight Chart の地図。MapLibre GL JS と PMTiles で、GitHub Pages の上だけで動く。ズームに応じて解像度を切り替え、手動でも選べる

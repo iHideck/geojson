@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Midnight Chart — 日本と世界の境界</title>
+    <meta name="description" content="日本の陸と海の境界を、同じ基準で重ねて見られる地図。データは GeoJSON・GeoPackage・PMTiles などで配っています。" />
+    <meta name="color-scheme" content="dark" />
+  </head>
+  <body>
+    <div id="map" role="region" aria-label="境界の地図"></div>
+    <aside class="panel" aria-label="解像度">
+      <h2>解像度</h2>
+      <div id="resolutions"></div>
+    </aside>
+    <p class="disclaimer">境界は法的な境界を示しません。航海など安全に関わる用途には使えません。</p>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
