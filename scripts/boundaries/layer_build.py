@@ -58,6 +58,30 @@ class IslandRule:
     near_degrees: float = 0.02
 
 
+def regroup_parts(parts: Path, dest: Path) -> None:
+    """島ごとに簡略化した部分を、元の地物（fid の順）に戻す。同じ地物の部分どうしは重ならないので、並べるだけでよい。"""
+    groups: dict[int, tuple[dict, list]] = {}
+    for f in geo.load(parts)["features"]:
+        geometry = f.get("geometry")
+        if not geometry:
+            continue
+        fid = f["properties"]["fid"]
+        props = {k: v for k, v in f["properties"].items() if k != "fid" and not k.startswith("k_")}
+        polygons = geometry["coordinates"] if geometry["type"] == "MultiPolygon" else [geometry["coordinates"]]
+        groups.setdefault(fid, (props, []))[1].extend(polygons)
+    features = [
+        {
+            "type": "Feature",
+            "properties": props,
+            "geometry": {"type": "MultiPolygon", "coordinates": polygons}
+            if len(polygons) > 1
+            else {"type": "Polygon", "coordinates": polygons[0]},
+        }
+        for _, (props, polygons) in sorted(groups.items())
+    ]
+    dest.write_text(json.dumps({"type": "FeatureCollection", "features": features}, ensure_ascii=False))
+
+
 def explode_for_islands(source: Path, rule: IslandRule, resolutions: list[str], dest: Path) -> list[str]:
     """島ごとの地物にし、解像度ごとに残すかどうかの列 k_<解像度> と、元の地物の番号 fid を付ける。属性名を返す。"""
     points = [Point(lon, lat) for _, lon, lat in rule.protected]
@@ -110,6 +134,7 @@ def simplify_and_write(
     object_name: str | None = None,
     islands: IslandRule | None = None,
     work: Path | None = None,
+    clean: bool = True,
 ) -> Built:
     out_dir = dist / layer.id
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -128,9 +153,26 @@ def simplify_and_write(
         output = [*keep, "-o", "format=geojson", "rfc7946", precision, geojson]
         if islands is None:
             tools.mapshaper("-i", source, *args, *output)
-        else:
+        elif clean:
             dissolve = ["-dissolve", "fid", f"copy-fields={','.join(fields)}", "-clean"]
             tools.mapshaper("-i", exploded, "-filter", f"k_{res.id}", *args, *dissolve, *output)
+        else:
+            # mapshaper の -dissolve と -clean は、地物どうしの重なりを片付けて、重なった地物を消す。
+            # 重なりが元データの描き方そのもののときは、島ごとの部分を Python で元の地物に戻す
+            parts = (work or out_dir) / f"{layer.slug}-{res.id}-parts.geojson"
+            tools.mapshaper("-i", exploded, "-filter", f"k_{res.id}", *args, "-o", "format=geojson", parts)
+            regrouped = (work or out_dir) / f"{layer.slug}-{res.id}-regrouped.geojson"
+            regroup_parts(parts, regrouped)
+            tools.mapshaper("-i", regrouped, *output)
+            # -clean を通さないので、簡略化と丸めで妥当でなくなった形を、ここで直す
+            fixed_fc, fixed = geo.repaired(geo.load(geojson), res.precision)
+            if fixed:
+                repaired = (work or out_dir) / f"{layer.slug}-{res.id}-repaired.geojson"
+                repaired.write_text(json.dumps(fixed_fc, ensure_ascii=False))
+                tools.mapshaper("-i", repaired, *output)
+                built.processing.append(
+                    f"{res.id}: 簡略化と丸めで妥当でなくなった {len(fixed)} 件の形を、座標の格子を保ったまま直した"
+                )
         after = geo.load(geojson)
         topojson = topojson_from(geojson, out_dir / f"{res.id}.topojson", name, res.precision)
         after_areas = _areas(after)

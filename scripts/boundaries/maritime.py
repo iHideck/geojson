@@ -77,10 +77,14 @@ def build_from_geojson(layer: Layer, source: Path, work: Path, dist: Path) -> Bu
         simplify_args={r.id: ["-simplify", f"interval={INTERVAL_M[r.id]}", "keep-shapes"] for r in layer.resolutions},
         islands=PARTS,
         work=work,
+        # Marine Regions では、共同管理の区域の多くが、両国の EEZ にそのまま重ねて描かれている。-clean は
+        # その重なりを片付けて区域を丸ごと消すので、重なりは元データのとおりに残す
+        clean=False,
         processing=[
             f"Marine Regions の {layer.sources[0]} を使った",
             "属性を mrgid・iso_a3（主権国 ISO_SOV1）・name_en（GEONAME）・pol_type にした",
             "180度線をまたぐ面は、180度線で分けた",
+            "主張が重なる区域や共同管理の区域は、Marine Regions のとおりに、ほかの区域と重ねたまま残した",
         ],
     )
 
