@@ -3,6 +3,19 @@ revision = 5
 requires-python = ">=3.14"
 
 [[package]]
+name = "antimeridian"
+version = "0.4.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "shapely" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4b/b9/5f7cc9cd82b00cedf4fca84e537ca72e7db33b6595f7737387a9a8ba05ce/antimeridian-0.4.9.tar.gz", hash = "sha256:7ac3799ab74613d87425b92e09a098a8eb71998bbe33d02d17302c566fd31064", size = 12633295, upload-time = "2026-09-03T21:34:25.923Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/e6/097a020525a877f286991afbd4e91758658e83427c8e6f5681f11cbe7005/antimeridian-0.4.9-py3-none-any.whl", hash = "sha256:0f6a0e875264422de4809bc04aefaec449d3957a8082b05ea648dd5d3017b7a1", size = 15699, upload-time = "2026-09-03T21:34:24.016Z" },
+]
+
+[[package]]
 name = "attrs"
 version = "26.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -43,6 +56,7 @@ name = "geojson-boundaries"
 version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "antimeridian" },
     { name = "numpy" },
     { name = "openpyxl" },
     { name = "pypdf" },
@@ -62,6 +76,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "antimeridian", specifier = ">=0.4.9" },
     { name = "numpy", specifier = ">=2.5.4" },
     { name = "openpyxl", specifier = ">=3.1.5" },
     { name = "pypdf", specifier = ">=6.21.4" },

@@ -14,3 +14,4 @@
 - `metadata.json` の JSON Schema、サイズの報告（`docs/size-report.md`）、係争地の扱い（`docs/disputed-areas.md`）
 - 都道府県境 `japan/prefectures` と市区町村境 `japan/municipalities`（medium・low）。国土数値情報から作り、全国地方公共団体コード（検査数字付き）と英語名を付ける。測量法の手続きの確認が済むまで公開しない
 - 主な島 `japan/islands`。国土地理院の面積調の 1km² 以上の島と竹島・沖ノ鳥島を、Wikidata の座標で点にする
+- 海域（EEZ・領海・接続水域・公海・基線）の処理。既定は無効で、`GEOJSON_ENABLE_MARITIME=1` のときだけ作る。日本の直線基線は領海法施行令の別表第一から作る
