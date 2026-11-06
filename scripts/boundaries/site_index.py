@@ -2,7 +2,7 @@
 
 パスは、GitHub Pages のサイトの根からの相対パスで書く。ビューアは、自分の置き場所（/geojson/）に足して読む。
 検索の索引は、地物を最も細かい解像度の GeoJSON と同じ順に並べる。PMTiles の地物の番号（tippecanoe の
---generate-ids）も同じ順なので、ビューアは地図の上の地物から索引の行を番号で引ける。
+--generate-ids）は同じ順に 1 から振られるので、ビューアは地図の上の番号 n の地物を、索引の n - 1 行目で引ける。
 """
 
 from __future__ import annotations

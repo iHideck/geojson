@@ -115,7 +115,7 @@
         {
           "format": "pmtiles",
           "name": "world-countries-50m.pmtiles",
-          "bytes": 1638391,
+          "bytes": 1684372,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.pmtiles",
           "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/50m.pmtiles"
         }
@@ -162,7 +162,7 @@
         {
           "format": "pmtiles",
           "name": "world-countries-110m.pmtiles",
-          "bytes": 243405,
+          "bytes": 273241,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.pmtiles",
           "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/110m.pmtiles"
         }
