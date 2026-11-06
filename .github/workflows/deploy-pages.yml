@@ -1,0 +1,76 @@
+name: GitHub Pages に出す（リリースなし）
+
+# ビューアだけを直したときなどに、main の内容を GitHub Pages に出す。手で動かす。
+# データは作り直すが、GitHub Release は作らない（Release の URL は、前のリリースのまま）
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: main から動かしたか確かめる
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: test "$GITHUB_REF" = refs/heads/main
+
+  data:
+    needs: check
+    uses: ./.github/workflows/data.yml
+    with:
+      upload: true
+
+  pages:
+    needs: data
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml
+
+  # デプロイの成否を Slack の #geojson-deploy に知らせる（release.yml と同じ形）
+  notify-success:
+    name: Slack に知らせる（成功）
+    needs: pages
+    if: success()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }}
+    steps:
+      - name: Slack Notification (Deploy Success)
+        if: env.SLACK_WEBHOOK != ''
+        uses: rtCamp/action-slack-notify@33ca3be66c6f378fe1610fd1d5258632dbed5e58 # v2.4.0
+        env:
+          SLACK_COLOR: good
+          SLACK_MESSAGE: "Env: `prd`\nMsg: geojson の deploy に成功しました:rocket: (`${{ github.ref_name }}`)"
+      - name: Webhook の URL がないときは知らせない
+        if: env.SLACK_WEBHOOK == ''
+        run: echo "SLACK_WEBHOOK_URL_DEPLOY が設定されていないため、通知を送りません"
+
+  notify-failure:
+    name: Slack に知らせる（失敗）
+    needs: [check, data, pages]
+    if: always() && contains(needs.*.result, 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }}
+    steps:
+      - name: Slack Notification (Deploy Failed)
+        if: env.SLACK_WEBHOOK != ''
+        uses: rtCamp/action-slack-notify@33ca3be66c6f378fe1610fd1d5258632dbed5e58 # v2.4.0
+        env:
+          SLACK_COLOR: danger
+          SLACK_MESSAGE: "<!channel>\nEnv: `prd`\nMsg: geojson の deploy に失敗しました:cry: (`${{ github.ref_name }}`)"
+      - name: Webhook の URL がないときは知らせない
+        if: env.SLACK_WEBHOOK == ''
+        run: echo "SLACK_WEBHOOK_URL_DEPLOY が設定されていないため、通知を送りません"
