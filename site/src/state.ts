@@ -19,7 +19,13 @@ export type ViewState = {
 
 export const STAGES = 4;
 // 最初は隠しておくレイヤー
-export const HIDDEN_BY_DEFAULT: readonly string[] = ["japan/municipalities"];
+export const HIDDEN_BY_DEFAULT: readonly string[] = [
+  "japan/municipalities",
+  // 海域は、排他的経済水域だけを最初から見せる。全部を重ねると、海岸の近くの線が込み合う
+  "world/territorial-seas",
+  "world/contiguous-zones",
+  "world/high-seas",
+];
 
 export function initialState(catalog: Catalog, lang: Lang): ViewState {
   const ids = new Set(catalog.layers.map((l) => l.id));

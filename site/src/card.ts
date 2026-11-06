@@ -23,8 +23,9 @@ export function createCard(root: HTMLElement, handlers: CardHandlers): {
   });
   return {
     show(layer, entry, lang, t) {
-      const name = lang === "en" ? (text(entry.name_en) ?? text(entry.name_ja)) : text(entry.name_ja);
-      const other = lang === "en" ? text(entry.name_ja) : text(entry.name_en);
+      // 海域の地物には日本語の名前が無いので、英語の名前で埋める
+      const name = lang === "en" ? (text(entry.name_en) ?? text(entry.name_ja)) : (text(entry.name_ja) ?? text(entry.name_en));
+      const other = lang === "en" ? text(entry.name_ja) : text(entry.name_ja) ? text(entry.name_en) : null;
       const rows = Object.entries(t.field)
         .map(([field, label]) => [label, text(entry[field])] as const)
         .filter((row): row is readonly [string, string] => row[1] !== null);

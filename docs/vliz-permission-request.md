@@ -2,6 +2,8 @@
 
 Marine Regions の海域データを、このリポジトリで配布・表示してよいかを VLIZ に確かめるためのメールです。送るのはリポジトリの管理者です。
 
+VLIZ から、このメールの使い方のすべてについて、問題ないとの返事を得ました。許可の範囲と、守ることは `docs/license-review.md` にあります。
+
 - 送り先は info@marineregions.org です（Marine Regions の Disclaimer ページの問い合わせ先）。
 - 送る前に、`<...>` の部分を埋めます。
 - 返事を受けたら、許可の範囲と条件を `docs/license-review.md` に書き写し、返事のメールを保存しておきます。許可の範囲に入る形式と配信先だけを、feature flag で有効にします。

@@ -1,6 +1,6 @@
 # レイヤーの登録表。取得・変換・検査・ビューア・README は、すべてこの表を読む
 #
-# enabled: false のレイヤーは作らない。feature_flag の環境変数が 1 のときだけ作る
+# enabled: false のレイヤーは作らない。feature_flag の環境変数が 1 のときだけ作る（いまは基線だけ）
 # publish: false のレイヤーは作って検査するが、data/・GitHub Pages・リリースに含めない
 # 解像度は細かい順に並べる。zoom は PMTiles を作るズームの範囲で、隣の解像度と隙間なく重ねる
 
@@ -100,13 +100,11 @@ layers:
       - { name: name_ja, type: string, nullable: true, description: 日本語の名称 }
       - { name: pol_type, type: string, nullable: true, description: 種類（200NM・Joint regime・Overlapping claim など） }
     license: CC-BY-4.0
-    credit: &eez_credit
-      ja: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase, version 12. https://www.marineregions.org/ （簡略化して作成）"
-      en: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase, version 12. https://www.marineregions.org/ (simplified)"
-    enabled: false
-    feature_flag: GEOJSON_ENABLE_MARITIME
-    publish: false
-    hold: VLIZ の許可を待っている
+    credit:
+      ja: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Maritime Boundaries and Exclusive Economic Zones (200NM), version 12. Available online at https://www.marineregions.org/. https://doi.org/10.14284/632 （geojson が簡略化して作成）"
+      en: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Maritime Boundaries and Exclusive Economic Zones (200NM), version 12. Available online at https://www.marineregions.org/. https://doi.org/10.14284/632 Simplified by the geojson project."
+    enabled: true
+    publish: true
 
   - id: world/territorial-seas
     title: { ja: 領海, en: Territorial seas }
@@ -117,11 +115,11 @@ layers:
       - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes: *maritime_attributes
     license: CC-BY-4.0
-    credit: *eez_credit
-    enabled: false
-    feature_flag: GEOJSON_ENABLE_MARITIME
-    publish: false
-    hold: VLIZ の許可を待っている
+    credit:
+      ja: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Territorial Seas (12NM), version 4. Available online at https://www.marineregions.org/. https://doi.org/10.14284/633 （geojson が簡略化して作成）"
+      en: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Territorial Seas (12NM), version 4. Available online at https://www.marineregions.org/. https://doi.org/10.14284/633 Simplified by the geojson project."
+    enabled: true
+    publish: true
 
   - id: world/contiguous-zones
     title: { ja: 接続水域, en: Contiguous zones }
@@ -132,11 +130,11 @@ layers:
       - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes: *maritime_attributes
     license: CC-BY-4.0
-    credit: *eez_credit
-    enabled: false
-    feature_flag: GEOJSON_ENABLE_MARITIME
-    publish: false
-    hold: VLIZ の許可を待っている
+    credit:
+      ja: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 4. Available online at https://www.marineregions.org/. https://doi.org/10.14284/630 （geojson が簡略化して作成）"
+      en: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 4. Available online at https://www.marineregions.org/. https://doi.org/10.14284/630 Simplified by the geojson project."
+    enabled: true
+    publish: true
 
   - id: world/baselines
     title: { ja: 基線, en: Baselines }
@@ -156,7 +154,7 @@ layers:
     enabled: false
     feature_flag: GEOJSON_ENABLE_MARITIME
     publish: false
-    hold: 海域のレイヤーと同じく、管理者が有効にするまで含めない
+    hold: 施行令の基点の測地系（日本測地系か世界測地系か）を、一次資料で確かめるまで含めない
 
   - id: world/high-seas
     title: { ja: 公海, en: High seas }
@@ -168,9 +166,7 @@ layers:
     attributes: *maritime_attributes
     license: CC-BY-4.0
     credit:
-      ja: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. https://www.marineregions.org/ （簡略化して作成）"
-      en: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. https://www.marineregions.org/ (simplified)"
-    enabled: false
-    feature_flag: GEOJSON_ENABLE_MARITIME
-    publish: false
-    hold: VLIZ の許可を待っている
+      ja: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. Available online at https://www.marineregions.org/. https://doi.org/10.14284/696 （geojson が簡略化して作成）"
+      en: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. Available online at https://www.marineregions.org/. https://doi.org/10.14284/696 Simplified by the geojson project."
+    enabled: true
+    publish: true

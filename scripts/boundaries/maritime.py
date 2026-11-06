@@ -1,20 +1,18 @@
-"""海域のレイヤー（既定は無効）。Marine Regions の GeoPackage と、領海法施行令の別表第一から作る。
+"""海域のレイヤー。Marine Regions（VLIZ の WFS の GeoJSON）と、領海法施行令の別表第一から作る。
 
-GEOJSON_ENABLE_MARITIME=1 のときだけ作る。Marine Regions のデータは、VLIZ の許可を得るまで取得も配布もしない。
+基線（領海法施行令から作る）は、基点の測地系を確かめるまで、GEOJSON_ENABLE_MARITIME=1 のときだけ作る。
 """
 
 from __future__ import annotations
 
 import json
 import re
-import shutil
-import subprocess
 from pathlib import Path
 
 import antimeridian
 from shapely.geometry import mapping, shape
 
-from boundaries import geo, tools
+from boundaries import geo
 from boundaries.layer_build import Built, IslandRule, Metrics, Output, simplify_and_write, topojson_from
 from boundaries.registry import Layer
 
@@ -43,7 +41,8 @@ def split_antimeridian(geometry: dict) -> dict:
     if not crosses:
         return geometry
     # 地図では経緯度を直線として描くので、180度線との交点も経緯度の上の直線で求める
-    fixed = antimeridian.fix_shape(shape(geometry), great_circle=False)
+    # 外側の輪が時計回りのもの（公海など）は、反時計回りにそろえる（fix_winding）。面積は変わらない
+    fixed = antimeridian.fix_shape(shape(geometry), great_circle=False, fix_winding=True)
     return dict(fixed) if isinstance(fixed, dict) else mapping(fixed)
 
 
@@ -62,20 +61,10 @@ def prepare(fc: dict) -> dict:
     return {"type": "FeatureCollection", "features": features}
 
 
-def _gpkg_to_geojson(archive: Path, work: Path) -> Path:
-    unzipped = tools.unzip(archive, work / "unzipped")
-    gpkg = next(unzipped.rglob("*.gpkg"))
-    out = work / "source.geojson"
-    if shutil.which("ogr2ogr") is None:
-        raise RuntimeError("Marine Regions の GeoPackage を読むには GDAL が要る。make build（イメージの中）で作る")
-    subprocess.run(["ogr2ogr", "-f", "GeoJSON", "-t_srs", "EPSG:4326", str(out), str(gpkg)], check=True)
-    return out
-
-
 def build_marine_regions(layer: Layer, sources: dict[str, list[Path]], work: Path, dist: Path) -> Built:
     work.mkdir(parents=True, exist_ok=True)
-    [archive] = sources[layer.sources[0]]
-    return build_from_geojson(layer, _gpkg_to_geojson(archive, work), work, dist)
+    [source] = sources[layer.sources[0]]
+    return build_from_geojson(layer, source, work, dist)
 
 
 def build_from_geojson(layer: Layer, source: Path, work: Path, dist: Path) -> Built:

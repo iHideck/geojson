@@ -5,6 +5,7 @@ Marine Regions のデータは使わない。
 """
 
 import shutil
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -64,10 +65,10 @@ def test_synthetic_eez_is_simplified_with_registry_attributes(tmp_path, monkeypa
 
 
 @pytest.mark.skipif(not HAS_MAPSHAPER, reason="mapshaper が無い（make setup で入れる）")
-def test_maritime_layers_built_with_the_flag_still_stay_out_of_data(tmp_path, monkeypatch):
-    monkeypatch.setenv("GEOJSON_ENABLE_MARITIME", "1")
+def test_a_held_maritime_layer_stays_out_of_data_even_when_built(tmp_path):
+    """公開しないレイヤー（いまは基線）は、作っても data/ に詰めず、古いファイルと空のフォルダーも消す。"""
     reg = registry.load()
-    eez = reg.layer("world/eez")
+    eez = replace(reg.layer("world/eez"), publish=False, hold="検査のために止める")
     dist, data = tmp_path / "dist", tmp_path / "data"
     metadata.write(maritime.build_from_geojson(eez, FIXTURES / "eez.geojson", tmp_path, dist), reg, dist)
     stale = data / "world" / "eez" / "50m.topojson"

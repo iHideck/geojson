@@ -47,6 +47,8 @@ class Source:
     page_url: str
     manual: bool
     legacy_tls: bool
+    # GeoServer の WFS の応答。毎回変わる timeStamp を固定してから照合する
+    geoserver: bool
     files: tuple[SourceFile, ...]
 
 
@@ -153,6 +155,7 @@ def _parse_source(path: Path) -> Source:
         page_url=_require(data, "page_url", where),
         manual=manual,
         legacy_tls=bool(data.get("legacy_tls", False)),
+        geoserver=bool(data.get("geoserver", False)),
         files=tuple(files),
     )
 

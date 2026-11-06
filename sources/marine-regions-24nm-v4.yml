@@ -2,14 +2,14 @@ id: marine-regions-24nm-v4
 title: "Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 4"
 publisher: Flanders Marine Institute (VLIZ)
 version: "4"
-retrieved: null
+retrieved: 2026-11-07
 license: CC-BY-4.0
 license_url: https://www.marineregions.org/disclaimer.php
 page_url: https://doi.org/10.14284/630
-# ダウンロードは申込みの画面を通る。VLIZ の返事で取得の方法が決まるまで、手で置く
-manual: true
+# VLIZ の許可を得て、VLIZ の WFS から GeoJSON で取る。応答の timeStamp は毎回変わるので、固定してから照合する
+geoserver: true
 files:
-  - url: https://www.marineregions.org/downloads.php
-    name: World_24NM_v4_20231025_gpkg.zip
-    sha256: null
-    bytes: null
+  - url: https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=MarineRegions:eez_24nm&outputFormat=application/json&srsName=EPSG:4326
+    name: eez_24nm.json
+    sha256: cd4a63e72d6f323d94018078da6916bf7c7e6ebadcad85f7827b434ed9f8530f
+    bytes: 105808739

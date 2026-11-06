@@ -53,7 +53,16 @@ const ja = {
   codeLicense: "コードは MIT ライセンスです。",
   dataLicense: "データのライセンスとクレジットの書き方",
   maritimeNote: "海域（EEZ・領海・接続水域・基線・公海）のデータは、まだ配っていません。",
-  kind: { "world/countries": "国・地域", "japan/prefectures": "都道府県", "japan/municipalities": "市区町村", "japan/islands": "島" } as Record<string, string>,
+  kind: {
+    "world/countries": "国・地域",
+    "japan/prefectures": "都道府県",
+    "japan/municipalities": "市区町村",
+    "japan/islands": "島",
+    "world/eez": "排他的経済水域",
+    "world/territorial-seas": "領海",
+    "world/contiguous-zones": "接続水域",
+    "world/high-seas": "公海",
+  } as Record<string, string>,
   field: {
     iso_a2: "ISO 3166-1 alpha-2",
     iso_a3: "ISO 3166-1 alpha-3",
@@ -65,6 +74,8 @@ const ja = {
     name_kana: "読み",
     area_km2: "面積（km²）",
     pref_ja: "都道府県",
+    pol_type: "区域の種類",
+    mrgid: "MRGID（Marine Regions）",
   } as Record<string, string>,
 };
 
@@ -122,7 +133,16 @@ const en: typeof ja = {
   codeLicense: "The code is under the MIT License.",
   dataLicense: "Data licenses and how to credit",
   maritimeNote: "Maritime zones (EEZ, territorial seas, contiguous zones, baselines, high seas) are not distributed yet.",
-  kind: { "world/countries": "Country or area", "japan/prefectures": "Prefecture", "japan/municipalities": "Municipality", "japan/islands": "Island" } as Record<string, string>,
+  kind: {
+    "world/countries": "Country or area",
+    "japan/prefectures": "Prefecture",
+    "japan/municipalities": "Municipality",
+    "japan/islands": "Island",
+    "world/eez": "Exclusive economic zone",
+    "world/territorial-seas": "Territorial sea",
+    "world/contiguous-zones": "Contiguous zone",
+    "world/high-seas": "High seas",
+  } as Record<string, string>,
   field: {
     iso_a2: "ISO 3166-1 alpha-2",
     iso_a3: "ISO 3166-1 alpha-3",
@@ -134,6 +154,8 @@ const en: typeof ja = {
     name_kana: "Reading",
     area_km2: "Area (km²)",
     pref_ja: "Prefecture",
+    pol_type: "Zone type",
+    mrgid: "MRGID (Marine Regions)",
   } as Record<string, string>,
 };
 

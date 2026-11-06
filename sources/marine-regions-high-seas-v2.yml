@@ -2,14 +2,14 @@ id: marine-regions-high-seas-v2
 title: "Maritime Boundaries Geodatabase: High Seas, version 2"
 publisher: Flanders Marine Institute (VLIZ)
 version: "2"
-retrieved: null
+retrieved: 2026-11-07
 license: CC-BY-4.0
 license_url: https://www.marineregions.org/disclaimer.php
 page_url: https://doi.org/10.14284/696
-# ダウンロードは申込みの画面を通る。VLIZ の返事で取得の方法が決まるまで、手で置く
-manual: true
+# VLIZ の許可を得て、VLIZ の WFS から GeoJSON で取る。応答の timeStamp は毎回変わるので、固定してから照合する
+geoserver: true
 files:
-  - url: https://www.marineregions.org/downloads.php
-    name: World_High_Seas_v2_20241010_gpkg.zip
-    sha256: null
-    bytes: null
+  - url: https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=MarineRegions:high_seas&outputFormat=application/json&srsName=EPSG:4326
+    name: high_seas.json
+    sha256: 77a988bc8122513b67072b7b35460f417ecadebe1c90cd6504485841599ce70b
+    bytes: 13478961
