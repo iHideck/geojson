@@ -1,0 +1,2032 @@
+id: wikidata-islands
+title: Wikidata の島の項目（版を固定した JSON）
+publisher: Wikidata（Wikimedia Foundation）
+version: 2026-11-06
+retrieved: 2026-11-06
+license: CC0-1.0
+license_url: https://www.wikidata.org/wiki/Wikidata:Licensing
+page_url: https://www.wikidata.org/
+# python -m boundaries.wikidata_islands が作る。island は面積調の島（都道府県|所属市区町村|島名）、within は座標を認めた所属市区町村からの距離（度）
+files:
+  - island: "||北海道"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q35581.json?revision=2564978978
+    name: Q35581.json
+    sha256: 1d9bcce9d8a14afca83bed93b7d1284b08f0be0558b9751a20ce9d5dae579eaa
+    bytes: 143001
+  - island: "||本州"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q13989.json?revision=2564977654
+    name: Q13989.json
+    sha256: 21fe6822131f96aa20f84f74d4a46de0d1f50bb405e1b45c1c2e153a45d15931
+    bytes: 92937
+  - island: "||四国"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q13991.json?revision=2564977660
+    name: Q13991.json
+    sha256: 711f55b8b0db659ed06eb843bd8f18053dc50dac8661a76d7ce85d36076716e4
+    bytes: 70850
+  - island: "||九州"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q13987.json?revision=2564977648
+    name: Q13987.json
+    sha256: 8f28f821f974e1f5105014e733bda29b9f393318b2f77250fb50e6d53ee09315
+    bytes: 85724
+  - island: "||沖縄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q600614.json?revision=2565116722
+    name: Q600614.json
+    sha256: e8c082ac1f87c378068d09ae58739ec59c8cb026c454500234767357910fac37
+    bytes: 75604
+  - island: "北海道|留別村・紗那村・蘂取村|択捉島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q215727.json?revision=2548709054
+    name: Q215727.json
+    sha256: 635738450e818dd88e1f9efb8daa1b4288fa7ffd396502943ca6002bc0ef6135
+    bytes: 53340
+  - island: "北海道|泊村・留夜別村|国後島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q847285.json?revision=2555324009
+    name: Q847285.json
+    sha256: 77a53fe625596bd986df296901b9a3f01d4fd033036feebecaf977705b58143c
+    bytes: 48991
+  - island: "北海道|色丹村|色丹島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1043128.json?revision=2548709174
+    name: Q1043128.json
+    sha256: 12762a6fcaa2bd728747c544e35dec38586108c4524433ecf02b07fd06019706
+    bytes: 40602
+  - island: "北海道|利尻富士町・利尻町|利尻島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q495476.json?revision=2556386020
+    name: Q495476.json
+    sha256: 4fc6979e88ae9147b83f948d1447f095678e05f672aae3f54295ee1cb3925299
+    bytes: 26772
+  - island: "北海道|奥尻町|奥尻島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q675101.json?revision=2556378959
+    name: Q675101.json
+    sha256: 4bbaa44a1b00567ee35c0f04eb2ddaa5032e88cfe2226ba51cc1e0b787395b88
+    bytes: 20157
+  - island: "北海道|礼文町|礼文島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q623490.json?revision=2556385576
+    name: Q623490.json
+    sha256: ee05599337d0b79bf29089e97b5a5f83676e7e51f34e23b475b93a6a5970b007
+    bytes: 26763
+  - island: "北海道|根室市|志発島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q904898.json?revision=2456805060
+    name: Q904898.json
+    sha256: ca35a0f20ef09185965281cf98579bcd4ea91ebc10667a34736479d52b261908
+    bytes: 23695
+  - island: "北海道|根室市|水晶島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q904438.json?revision=2456805076
+    name: Q904438.json
+    sha256: 6da70010d2f31bc902de114d8db871b12e013649493ff75a64943cce9989bbcc
+    bytes: 25397
+  - island: "北海道|根室市|多楽島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q904875.json?revision=2456805042
+    name: Q904875.json
+    sha256: 3b82c65252dbba1f61ce68390ab5ef11a93402edc2ec0d14b5ab2769e876ec15
+    bytes: 25086
+  - island: "北海道|根室市|勇留島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q2529407.json?revision=2509000692
+    name: Q2529407.json
+    sha256: 4db92e8ba2a4517a0e3005d2cb86b645f0a3964af075fabafed0e50abf84c327
+    bytes: 31889
+  - island: "北海道|松前町|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q7370377.json?revision=2565342568
+    name: Q7370377.json
+    sha256: 9374de80f4f3dfeddbf418fbdd107448c16a6851d3613cbe4181cb8071225420
+    bytes: 20004
+  - island: "北海道|羽幌町|天売島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q490610.json?revision=2556385232
+    name: Q490610.json
+    sha256: 88a725af72f4160fe127ecbbb6e27c5fc0a817623fd44da26b5729f4b650af64
+    bytes: 16352
+  - island: "北海道|羽幌町|焼尻島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3108859.json?revision=2556411702
+    name: Q3108859.json
+    sha256: 2ec7bfc4e7ddb25dfab5ccecbf761f6a88ff7b2affe81b75dd96b91650d365c0
+    bytes: 15693
+  - island: "北海道|根室市|秋勇留島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q926674.json?revision=2487114775
+    name: Q926674.json
+    sha256: 32d4345e9fc39d3f7fca74b10604c8967ce873a42b072b74fd2b7fd7919a1c26
+    bytes: 29556
+  - island: "北海道|根室市|ユルリ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11173972.json?revision=2448115397
+    name: Q11173972.json
+    sha256: 4fc1e95c07fcc3222a69df0760f25ff041051206e2b9dd8b5d1af133607e1b19
+    bytes: 8952
+  - island: "北海道|松前町|小島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q994214.json?revision=2181263809
+    name: Q994214.json
+    sha256: d2ae462a42732bd3aa5ad6cbefe10b19aa370f0cfd355d4c262b3300aa3268de
+    bytes: 16319
+  - island: "北海道|色丹村|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20031359.json?revision=2456702521
+    name: Q20031359.json
+    sha256: 2d6f9b1c0b9c5a16eb35fb118e6522070965f4b50fd43a4dd00391f93a0e7289
+    bytes: 15565
+  - island: "北海道|厚岸町|大黒島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10938711.json?revision=2513851377
+    name: Q10938711.json
+    sha256: a5cc16e5640a81d179e6e0ade2e9e3a26993af73e0550fa69aa81e68b458ea62
+    bytes: 9390
+  - island: "宮城県|石巻市|金華山"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q6413909.json?revision=2487120777
+    name: Q6413909.json
+    sha256: 7a69f8920fa6462fbf4e23332a09c5122df55a6ffd270b0a3acb85929f50d66e
+    bytes: 14160
+  - island: "宮城県|気仙沼市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3594049.json?revision=2565235043
+    name: Q3594049.json
+    sha256: 16537ff7bc49763d9ec542118523cc9c297ad82913ddf56555a1e0927ccb79b2
+    bytes: 11757
+  - island: "宮城県|東松島市|宮戸島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11454772.json?revision=2456703091
+    name: Q11454772.json
+    sha256: 349e87ba75e2c99ee3feb389ffabc123f8cac5864ef835aeea6ffea3f54742b7
+    bytes: 12390
+  - island: "宮城県|石巻市|網地島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11607173.json?revision=2456702905
+    name: Q11607173.json
+    sha256: 8fa4dc3d1cdd95cb6d3ee44267445f26fa23d1fe9ea7d19add312fd4c6b12931
+    bytes: 9330
+  - island: "宮城県|石巻市|田代島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1061394.json?revision=2565088788
+    name: Q1061394.json
+    sha256: f5d281cee19105a911bea29a28c58a1b404fd5033fb4d9ae375f83f91445e180
+    bytes: 21400
+  - island: "宮城県|女川町|出島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11395612.json?revision=2456703004
+    name: Q11395612.json
+    sha256: 10e81c1dfd5051f26f93475b416b93a869328d67b586ace6940176a6ff75f713
+    bytes: 10692
+  - island: "宮城県|塩竈市|寒風沢島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20160219.json?revision=2456702529
+    name: Q20160219.json
+    sha256: e6260705ef361f1b033eaab35a8b60e90b5ce36af6e61c0757a736886240892b
+    bytes: 6666
+  - island: "山形県|酒田市|飛島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q49493.json?revision=2555261672
+    name: Q49493.json
+    sha256: 2f2f3192b02fa8d982999780990b68b8d97e25a1b2873c127adab03091cd9200
+    bytes: 12674
+  - island: "東京都|大島町|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1070580.json?revision=2564286216
+    name: Q1070580.json
+    sha256: a4b792f8cdf4b3aee2ed766c19b6b7bf53eb5fa789d3a254024f568ef0a3aeed
+    bytes: 34682
+  - island: "東京都|八丈町|八丈島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1191120.json?revision=2564286407
+    name: Q1191120.json
+    sha256: 7f804e10ee810553cb81608f32d0b3246df09a8df3ba575a694dd307a01c89ae
+    bytes: 35009
+  - island: "東京都|三宅村|三宅島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1075076.json?revision=2564285988
+    name: Q1075076.json
+    sha256: 39404172a70fb93b31d39b498ee6556fb9ce23334d05e23b51b35dafa0eb41f4
+    bytes: 32528
+  - island: "東京都|小笠原村|硫黄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q201633.json?revision=2564285645
+    name: Q201633.json
+    sha256: b582a73213362508dbc4396f4bf62de142347dcbe59b630e46d4e79707cc2d86
+    bytes: 60935
+  - island: "東京都|小笠原村|父島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1072125.json?revision=2563701907
+    name: Q1072125.json
+    sha256: 4858186b39637bd9f3a7a4619c7a75d851b8be8cd1ad43064a9b09b0817bd1c5
+    bytes: 31792
+  - island: "東京都|新島村|新島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1191108.json?revision=2564286008
+    name: Q1191108.json
+    sha256: af81eac4e995d68ee6c680752141c4fdc89f3013c51e0c26b2f822d788e49e8f
+    bytes: 21486
+  - island: "東京都|御蔵島村|御蔵島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1197235.json?revision=2563830613
+    name: Q1197235.json
+    sha256: 9873320fdd2c04e6454d11091b0a87b66e94a146eea4a361dca62f1e632266a8
+    bytes: 22694
+  - island: "東京都|小笠原村|母島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q473472.json?revision=2563730171
+    name: Q473472.json
+    sha256: ff7dac0a18891486e5c278444cc8154fe94348526d456795386d400f4bf069ab
+    bytes: 24671
+  - island: "東京都|神津島村|神津島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q301669.json?revision=2564285664
+    name: Q301669.json
+    sha256: 3f03dac5e5340e7d838bbd12e10ab73b30838381a40da07922d04def3f3f9a7c
+    bytes: 23548
+  - island: "東京都|小笠原村|兄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10889854.json?revision=2487114729
+    name: Q10889854.json
+    sha256: cf9ff460616c73efc7b38745eae15c8f9df7765f16d7b1c595335ad036c1d823
+    bytes: 12294
+  - island: "東京都|青ヶ島村|青ヶ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q615578.json?revision=2564286227
+    name: Q615578.json
+    sha256: a9fef7d1e5fdcd7d523f395e6f0416b204bde19a582e36872703846853cb5049
+    bytes: 28388
+  - island: "東京都|小笠原村|北硫黄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1151821.json?revision=2564285780
+    name: Q1151821.json
+    sha256: de77229217862285ebfc9aa6a4bf81d859cfc0623793d904ccda1bd00a46a440
+    bytes: 30928
+  - island: "東京都|小笠原村|弟島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11487395.json?revision=2456703119
+    name: Q11487395.json
+    sha256: d91409192613b30331b7ff5248b3cea308ba926775afa0624c1be8be5ea0bc98
+    bytes: 13357
+  - island: "東京都||鳥島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q475743.json?revision=2564285323
+    name: Q475743.json
+    sha256: 95b117cbd37acb90da13b8a0b31ce9355b226a04b1258bf3dc15701e7b0216ff
+    bytes: 27964
+  - island: "東京都|利島村|利島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q26721546.json?revision=2487126451
+    name: Q26721546.json
+    sha256: a167e3c00ae9acb5be0082be0c14905edf3e3a530a6f63cb94def97d9710d1dc
+    bytes: 18406
+  - island: "東京都|新島村|式根島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1344326.json?revision=2558406887
+    name: Q1344326.json
+    sha256: db187f525b617b0ebdb8c4f4de7f6167f062241aeddb70aaa5605eaa45e9fccf
+    bytes: 19331
+  - island: "東京都|小笠原村|南硫黄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q980697.json?revision=2563764268
+    name: Q980697.json
+    sha256: ee961fcec8a0bec4c6334cead5470db168972de698c3ca15b5d1ed4515eb5b6c
+    bytes: 20394
+  - island: "東京都|八丈町|小島(八丈小島)"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1039445.json?revision=2504939198
+    name: Q1039445.json
+    sha256: 8ad5a2fdc1a6e6ebed03e5c98a65fbe7eb5ac73788c07c4a7cfb70101112097d
+    bytes: 14219
+  - island: "東京都|小笠原村|西之島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1187278.json?revision=2564285371
+    name: Q1187278.json
+    sha256: c042d4f99ce48c9f565f0ba06465c5e6ab577c16b5b1a2ef51d1c533f4642513
+    bytes: 24809
+  - island: "東京都|小笠原村|聟島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1414691.json?revision=2456702350
+    name: Q1414691.json
+    sha256: f67bad869e92bd1788051e0a6f06eb6c40dcd3c99006d4499b5f94ff19f5a4fc
+    bytes: 19862
+  - island: "東京都|小笠原村|南鳥島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1047492.json?revision=2563838893
+    name: Q1047492.json
+    sha256: 07943bfd7d311526542ea17f3ca9435bb3cfd1c70dc0ec5f85ffc46522a72241
+    bytes: 34847
+  - island: "東京都|小笠原村|姉島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10943140.json?revision=2487114708
+    name: Q10943140.json
+    sha256: 858709cae83999b92db8affe5709de99efc4960ac234a1f7eb948aeb2739f912
+    bytes: 13554
+  - island: "東京都|小笠原村|向島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20207875.json?revision=2456702545
+    name: Q20207875.json
+    sha256: ddde4e25909bb40f9f9c4169dffa6d3f58a21b72a0d27009222d6096ac11ded9
+    bytes: 10838
+  - island: "東京都|小笠原村|媒島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11447744.json?revision=2487114246
+    name: Q11447744.json
+    sha256: ec9484182b93ce733148ef614fe70a904adf87857d9a4d602c639a8dcf07b881
+    bytes: 11548
+  - island: "東京都|小笠原村|妹島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10943106.json?revision=2487119881
+    name: Q10943106.json
+    sha256: fdd606e04283f2704d1059e705decf2444e2959a555bc620ddf9c8d4e50847fd
+    bytes: 12507
+  - island: "新潟県|佐渡市|佐渡島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q998623.json?revision=2555317008
+    name: Q998623.json
+    sha256: f8cb60295d71b38e273a8c85cabb0096fb070721f7f1e0b35778bbed9eea3e89
+    bytes: 34008
+  - island: "新潟県|粟島浦村|粟島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q49511.json?revision=2556452866
+    name: Q49511.json
+    sha256: 4ff5dbceefaf45c12bf9e55efb8b492e4b62ff3e782a0822d2efdac22c1b203d
+    bytes: 15479
+  - island: "石川県|七尾市|能登島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11612025.json?revision=2559722621
+    name: Q11612025.json
+    sha256: 737a7bfdd7932747e1404b21b6316a7b41ac1da315671f5b269e13f3c22a647c
+    bytes: 12196
+  - island: "愛知県|西尾市|佐久島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11382608.json?revision=2456703030
+    name: Q11382608.json
+    sha256: 9e04b3836a9fcbc85730e204bc13d777c9be6808af34abccdfd66d412b43b28c
+    bytes: 14383
+  - island: "三重県|鳥羽市|答志島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q7862729.json?revision=2542046667
+    name: Q7862729.json
+    sha256: baaf79a50dddeb909c1a7f04ddb7ec3f546a9d1bcbc722a4f45782e8cecca47d
+    bytes: 11855
+  - island: "三重県|鳥羽市|菅島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q130120.json?revision=2487126051
+    name: Q130120.json
+    sha256: bcca2f25b65b27985ff74c764243c24f452e6864ff48f7e3d0c4424e02cee751
+    bytes: 10179
+  - island: "兵庫県|南あわじ市・淡路市・洲本市|淡路島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q504373.json?revision=2555315516
+    name: Q504373.json
+    sha256: 8e7b9ef225d2a9ef21cf51e011a239d420e4567af0e288ec95c3c6290570e0c5
+    bytes: 35275
+  - island: "兵庫県|姫路市|西島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20208336.json?revision=2456702564
+    name: Q20208336.json
+    sha256: 06a40811d7a4344e966904d8fe7f930eeea538f1b95bab0d48f836d6fb5932f2
+    bytes: 6791
+  - island: "兵庫県|姫路市|家島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20208605.json?revision=2456702540
+    name: Q20208605.json
+    sha256: bf7a303c591911a6644a0d5a9b87c405f898a31ce0e8a99e1967026b6a027314
+    bytes: 7764
+  - island: "兵庫県|姫路市|男鹿島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11578192.json?revision=2456702918
+    name: Q11578192.json
+    sha256: d2f917ddeab0e112be081596ccdd52ce5a4be1ee980dfc7a4e234a1b663d5a8a
+    bytes: 5858
+  - island: "兵庫県|南あわじ市|沼島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5366609.json?revision=2478895790
+    name: Q5366609.json
+    sha256: 2e7d6684556e5a1746442a7f89db5ac08f7332f82838a34fa0ebc0ae7e92970e
+    bytes: 14779
+  - island: "兵庫県|姫路市|坊勢島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11425641.json?revision=2501287524
+    name: Q11425641.json
+    sha256: a68bdcd30af63f8592208094861fb0ffb55831153a043b76eca09bb10616625e
+    bytes: 7470
+  - island: "和歌山県|串本町|紀伊大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q6406056.json?revision=2456805134
+    name: Q6406056.json
+    sha256: 772050e660ebfdd403f26c0d1a5567cd73bd25a4425987c628f44812c5793a8b
+    bytes: 11170
+  - island: "和歌山県|和歌山市|沖ノ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20669152.json?revision=2456702192
+    name: Q20669152.json
+    sha256: 98cdd545915d8c37ca0704e25d01ac374eb7bfdd2a072e3b52ff536fb83c393e
+    bytes: 9916
+  - island: "和歌山県|和歌山市|地ノ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20669173.json?revision=2456702169
+    name: Q20669173.json
+    sha256: 06e87beb39c27f299d153b738cefd9843a6a032f68314a0a38518325bf34595b
+    bytes: 10069
+  - island: "島根県|隠岐の島町|島後"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3623017.json?revision=2555314699
+    name: Q3623017.json
+    sha256: 091585036a38786b95833ca78cdbf59971d0d8ec73cc5620c0052935405fb1ac
+    bytes: 15773
+  - island: "島根県|西ノ島町|西ノ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5004035.json?revision=2555315458
+    name: Q5004035.json
+    sha256: b82c70916fed47141e276958d6824bc1e21750291cfd775de2c6dcfc5fac58dc
+    bytes: 13630
+  - island: "島根県|海士町|中ノ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11362796.json?revision=2553808078
+    name: Q11362796.json
+    sha256: 9a84991a3b847a80daea2a51c8b68e8c8297b28354ad2e9b93d454924daa08db
+    bytes: 10293
+  - island: "島根県|知夫村|知夫里島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10449219.json?revision=2554216979
+    name: Q10449219.json
+    sha256: ddb3e3edb96393f41429f86ecdaf8b408eef5c89ea8be31012604e4f7bb9f194
+    bytes: 10526
+  - island: "島根県|松江市|大根島・江島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3274310.json?revision=2487117001
+    name: Q3274310.json
+    sha256: b3a8ca27c05c3b724797ae39c4d06611141fc5f6f310a387338adcc65bc814f9
+    bytes: 12791
+  - island: "岡山県|備前市|鹿久居島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11676467.json?revision=2456702759
+    name: Q11676467.json
+    sha256: ee709254166be97ad63d140d5822d82bcf98aef47b5e585fd37704eb6cb960d1
+    bytes: 5391
+  - island: "岡山県|笠岡市|北木島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11401908.json?revision=2456703048
+    name: Q11401908.json
+    sha256: c254f4a40ae5fab9ac08d60dbba81876017234b674bbb7db97c121a003048383
+    bytes: 8296
+  - island: "岡山県|瀬戸内市|長島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11652193.json?revision=2456702733
+    name: Q11652193.json
+    sha256: 23a1c6f6b3e69cf1547b55e6fd267a218af5790cdf178490af579527905d95dd
+    bytes: 8909
+  - island: "岡山県|笠岡市|白石島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q7498240.json?revision=2456805114
+    name: Q7498240.json
+    sha256: cd284f363bdc7853ca68dd6a17a6bc157661842475af0f764f267d326776b5f6
+    bytes: 8958
+  - island: "岡山県|玉野市・直島町|井島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11373491.json?revision=2456703146
+    name: Q11373491.json
+    sha256: 3c523af3d11cc118258645ca77580e6be94f0846e99a857e2bc5bf362feb5570
+    bytes: 11233
+  - island: "岡山県|瀬戸内市|前島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11397118.json?revision=2456703040
+    name: Q11397118.json
+    sha256: 4ddad49a5a8e113037c9de8334de7320f4662dd22c4a64416966922767f1994f
+    bytes: 8527
+  - island: "岡山県|備前市|鴻島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11675635.json?revision=2456702701
+    name: Q11675635.json
+    sha256: 5491e48214a2f26347bc25de7d62c4232c3d92ac3439a02ca4d59b3f606a0338
+    bytes: 9300
+  - island: "岡山県|笠岡市|真鍋島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3285144.json?revision=2515534441
+    name: Q3285144.json
+    sha256: 5c2d3cf8c48cc1c5efa8a0177b9ebb9a3b8d6344d518f1e4351671bb04d7339c
+    bytes: 12970
+  - island: "岡山県|笠岡市|高島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11669595.json?revision=2456702674
+    name: Q11669595.json
+    sha256: f0cc68c2431196aa3eb00e7cd306f6987b960d91fc9cf23bd2a84545a724581b
+    bytes: 7505
+  - island: "岡山県|倉敷市|六口島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20251315.json?revision=2456702535
+    name: Q20251315.json
+    sha256: 568e89cc3c7a0fccf7707fa200ce1147fb6d2bdf3a81ef1287bd527f4b363d22
+    bytes: 4646
+  - island: "広島県|江田島市|江田島・能美島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q169589.json?revision=2545427233
+    name: Q169589.json
+    sha256: fc77637cc43efb5ace26522f51cdd8c26f622b0dbec1fdaf4b5f1e5e670b6d84
+    bytes: 13300
+  - island: "広島県|呉市|倉橋島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11386818.json?revision=2520564122
+    name: Q11386818.json
+    sha256: e9d0fbc5878695e54ae6f0e2e01274bd202c9039fb5ac72e2da55c86e6d66bac
+    bytes: 7448
+  - island: "広島県|大崎上島町|大崎上島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11435005.json?revision=2550234666
+    name: Q11435005.json
+    sha256: 58ee1b3ac2510ca5b02d16e73e2b8d4c71c6c9bc038295fbf7eb4cf4355ce9f3
+    bytes: 11383
+  - island: "広島県|尾道市|因島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11420237.json?revision=2461192405
+    name: Q11420237.json
+    sha256: d445259b21bb4c7444b543d770cfb413ac7efe8b35a717072b0cd65ac90ab58f
+    bytes: 11695
+  - island: "広島県|尾道市|生口島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11574434.json?revision=2461192393
+    name: Q11574434.json
+    sha256: c61422faadb6e992fa90083457da957609b62192999fb85dde6737289b5a6536
+    bytes: 13043
+  - island: "広島県|廿日市市|厳島(宮島)"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q875301.json?revision=2559782158
+    name: Q875301.json
+    sha256: e0ebd214d07e371d05d92de572ffa9b35bf0f73340b7472b8f614785c16a6f93
+    bytes: 47275
+  - island: "広島県|尾道市|向島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11415952.json?revision=2461192426
+    name: Q11415952.json
+    sha256: 5ee2dd19e6460abc35f97eee3b2e7d3816cdab10226620cec75b6e030a5f68f0
+    bytes: 10114
+  - island: "広島県|呉市|上蒲刈島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11360086.json?revision=2456703577
+    name: Q11360086.json
+    sha256: a59c2b184aaa4acef554a960d569771dd33b8d392f7e60c76a5851b57f684bff
+    bytes: 6873
+  - island: "広島県|呉市|大崎下島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11435006.json?revision=2456703063
+    name: Q11435006.json
+    sha256: 886a542692220bc32ca5b3c4856fbbcb63feecd735fac0962a5574d284ad6cea
+    bytes: 7886
+  - island: "広島県|三原市|佐木島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11383201.json?revision=2456703026
+    name: Q11383201.json
+    sha256: f048a12386d0c77ad437888072014f345399773d56e7fa9cd856f3745234a6a1
+    bytes: 11198
+  - island: "広島県|福山市|田島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11576597.json?revision=2456702915
+    name: Q11576597.json
+    sha256: 8ec627d504fc1cef99d645819a0ef3c7e778a24b562394d709819db91e8464d2
+    bytes: 8875
+  - island: "広島県|呉市|下蒲刈島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4419675.json?revision=2456701707
+    name: Q4419675.json
+    sha256: eae0d8399a33afbfa1c36c353b82e99f2837101d8f21345e9d7a6a7f64449242
+    bytes: 12417
+  - island: "広島県|江田島市|大黒神島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11442082.json?revision=2456703079
+    name: Q11442082.json
+    sha256: 9d676c75d52a3c4fd22b63efb243fe749e12361c1f2c479ed8ab477b9a7dff3e
+    bytes: 6201
+  - island: "広島県|呉市|豊島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11633492.json?revision=2456702835
+    name: Q11633492.json
+    sha256: 61bf5e5f6bad8fd88ff3e192620e1b16af764813ccb75dfa943797dc833a0631
+    bytes: 5745
+  - island: "広島県|尾道市|高根島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11670635.json?revision=2456702719
+    name: Q11670635.json
+    sha256: 5ee2567585b726a6ba81fe84e357da52c01a64823cbc2a21a3000934b7d87748
+    bytes: 9551
+  - island: "広島県|福山市|横島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20441672.json?revision=2456702214
+    name: Q20441672.json
+    sha256: 32357f2065c0c2165cf53774af88376f98221f9f4e5bba0ca6bc01e115b2819a
+    bytes: 9155
+  - island: "広島県|広島市南区|似島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5361563.json?revision=2549830824
+    name: Q5361563.json
+    sha256: edd3d1f7212a7ffa6530893a40b419d66cc8691dff22fa653659e940942ab8b1
+    bytes: 11925
+  - island: "広島県|尾道市|百島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11580729.json?revision=2456702899
+    name: Q11580729.json
+    sha256: 839c0e71a6a646998badb524786914e0247c72bd976eace81e5703ddac27eca6
+    bytes: 8235
+  - island: "広島県|呉市|鹿島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20441538.json?revision=2520563871
+    name: Q20441538.json
+    sha256: fe6d0bbdd9547d7cbef523bb0ef92cd4aad1a25d7d74164a82da91d74ea4b5a5
+    bytes: 8928
+  - island: "広島県|尾道市|岩子島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11474346.json?revision=2456703143
+    name: Q11474346.json
+    sha256: f5837dc75f8c54c9039f253983de70c6cc540900c58fd0a8272ed79d0e24babf
+    bytes: 10347
+  - island: "広島県|大竹市|阿多田島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11657359.json?revision=2456702743
+    name: Q11657359.json
+    sha256: da854f1c3d885b7749ffee14c917d1fcf8c8e177c559714052a4d7e070ae7108
+    bytes: 5949
+  - island: "広島県|大崎上島町|生野島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11574873.json?revision=2456703134
+    name: Q11574873.json
+    sha256: 0146128e51a98c038c2a32d3b3c2f6ca2de0af2f183c2e9020ae4c56d3d6d799
+    bytes: 9113
+  - island: "広島県|福山市|走島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11636071.json?revision=2456702941
+    name: Q11636071.json
+    sha256: 49ee95757fe009a9777bfaebee7bcbaaefc28a1c5e8c1cbcc4dbc86df4f5a7e7
+    bytes: 8622
+  - island: "広島県|東広島市|大芝島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20441459.json?revision=2456702279
+    name: Q20441459.json
+    sha256: 8be48af1dc78de915ba7b665d93592a1854ecf59992e3f028db84c6b9338ccef
+    bytes: 8512
+  - island: "広島県|広島市南区|金輪島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11647939.json?revision=2456702730
+    name: Q11647939.json
+    sha256: bf243687e63f1815a2ddcbe18446a08207e5c80b23d5d3c2bfbd59d92000776f
+    bytes: 8869
+  - island: "広島県|大崎上島町|長島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11652198.json?revision=2456702732
+    name: Q11652198.json
+    sha256: 8597357fea391c51f349a3f711d55373e9cd005afea4ed75bf4085ce17e90acc
+    bytes: 9202
+  - island: "山口県|周防大島町|屋代島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1083890.json?revision=2553391756
+    name: Q1083890.json
+    sha256: ac22a7aa46882bb3ab4d15a75b53ed944cc700ce59d8675a77ebfe7ad173dce9
+    bytes: 13904
+  - island: "山口県|柳井市|平郡島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11483589.json?revision=2456703074
+    name: Q11483589.json
+    sha256: 7a349206456fb736af140ec79f2a24db21e9da00c3bc12395c4b678c93ad83ed
+    bytes: 7731
+  - island: "山口県|長門市|青海島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11662600.json?revision=2555022721
+    name: Q11662600.json
+    sha256: 20e087535882a051cf78dd56b69e372ef0aff1912a651e8407e31a8341fee318
+    bytes: 8552
+  - island: "山口県|上関町|長島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q19927913.json?revision=2456702253
+    name: Q19927913.json
+    sha256: 495cfeb68b02792fd750d35eabc5a2e196a90b49b89d4f4bd31ea025ba3e7a13
+    bytes: 9066
+  - island: "山口県|下松市|笠戸島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11599897.json?revision=2456702909
+    name: Q11599897.json
+    sha256: 3f4562f74bd2686be915d6d190a319b7a346dc196b36b884319e9a5b34a5bd25
+    bytes: 5381
+  - island: "山口県|下関市|彦島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11288918.json?revision=2555305269
+    name: Q11288918.json
+    sha256: fdd2d77dccc32bf8e14006b3d24757702a74be1286d6378d4d7914a20601cf93
+    bytes: 10734
+  - island: "山口県|防府市|向島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11415951.json?revision=2456703012
+    name: Q11415951.json
+    sha256: 77a0c20799b667c3ac9f66b4a15f7682997b64c5cbd35444a61d45d2e1f5832f
+    bytes: 6700
+  - island: "山口県|萩市|見島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q49513.json?revision=2456703377
+    name: Q49513.json
+    sha256: 3960f7c637489c5d92906736b417be3bb93533aa60dbd53d987a6a931d7faf4e
+    bytes: 13599
+  - island: "山口県|上関町|祝島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q6100326.json?revision=2456805277
+    name: Q6100326.json
+    sha256: f41fc156c25818c4834eb96c50379611e118ad9a9c04e4cf82b6067854869801
+    bytes: 11626
+  - island: "山口県|周南市|黒髪島・仙島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11678919.json?revision=2456702728
+    name: Q11678919.json
+    sha256: d012bb80f742f7280a425710984efe3b7ea3c3daed04f149b1128d517e4f238e
+    bytes: 8693
+  - island: "山口県|周南市|大津島・馬島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11437275.json?revision=2456703071
+    name: Q11437275.json
+    sha256: 141989bc04c2b6e716c2abd3899b6074a418df11391b5f1afb6d2a370d4e20eb
+    bytes: 8555
+  - island: "山口県|上関町|八島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11390868.json?revision=2456703006
+    name: Q11390868.json
+    sha256: 2911214418051210268b875b033dc62725fb33fd4a880e6d1287f2ffac3f8c7f
+    bytes: 5966
+  - island: "山口県|下関市|角島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q7850236.json?revision=2555369906
+    name: Q7850236.json
+    sha256: 47c6e3e91c7b26132288e96f867aacee5b55fbaf3dd45a852ffd4a4e9d142c88
+    bytes: 11492
+  - island: "山口県|岩国市|柱島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q2407298.json?revision=2512267982
+    name: Q2407298.json
+    sha256: 7147649793d50183c7a6addde9d41232c65288b2d576e2a4c4021fc2390f51b2
+    bytes: 9192
+  - island: "山口県|萩市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434807.json?revision=2456702943
+    name: Q11434807.json
+    sha256: 63281240bfb6725b18eda64d6579ebbc3f9c3cadba3552e9ac29a0be7c474edd
+    bytes: 7462
+  - island: "山口県|萩市|相島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11581974.json?revision=2456702892
+    name: Q11581974.json
+    sha256: 14e05bf7d6599809a041f9ee8ddff547e3b02cd14158287fb30aed53b54b63a8
+    bytes: 5269
+  - island: "山口県|下関市|蓋井島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1475428.json?revision=2456702379
+    name: Q1475428.json
+    sha256: 538b838a6c9c23618e5f80597c14fb6ce47d46159ed3913c319a4e7fe38d4cd1
+    bytes: 7747
+  - island: "山口県|周防大島町|浮島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11558503.json?revision=2456702696
+    name: Q11558503.json
+    sha256: bdd818fb76aaf0dab0ea6bda0c39aa849d846f219ff5e98a51cbd53ccc156a24
+    bytes: 5405
+  - island: "山口県|光市|牛島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20441835.json?revision=2456702100
+    name: Q20441835.json
+    sha256: 24de645febe29a1898c881e33d235b8699307d8f8807c763d0153c510757c308
+    bytes: 4589
+  - island: "山口県|平生町|佐合島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q19928028.json?revision=2456702179
+    name: Q19928028.json
+    sha256: 980bee9b188914db886693a1138d952c2e950e79f37e0ebaf19a7892d3b1e1dd
+    bytes: 9138
+  - island: "山口県|周防大島町|前島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q19927579.json?revision=2456702188
+    name: Q19927579.json
+    sha256: 99fe9f3d6ef532c064ecb932640afafe023ddb3359ee5c7d49d6825dc01f9864
+    bytes: 8570
+  - island: "山口県|周防大島町|情島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11492884.json?revision=2456702856
+    name: Q11492884.json
+    sha256: bbb83f33d5f48e8f0a778ced86c65549a347e8d06ef346cbe7f1c78d2a73efc9
+    bytes: 5577
+  - island: "徳島県|鳴門市|大毛島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11436765.json?revision=2456703058
+    name: Q11436765.json
+    sha256: 21a537949f11606ee2f4f6297cbfa8093ef724c6530c400b844d48da09a584b3
+    bytes: 12190
+  - island: "徳島県|鳴門市|島田島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11476897.json?revision=2456703106
+    name: Q11476897.json
+    sha256: a61c86ae2d69ece0402f256da47c22c0c06a3caae47608f71415fabc78d9918d
+    bytes: 11671
+  - island: "徳島県|鳴門市|高島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11669599.json?revision=2456702669
+    name: Q11669599.json
+    sha256: 9e409031b54da586b16bbd90172735144d610e320699ecc24cfffcf1db16be6e
+    bytes: 7835
+  - island: "徳島県|牟岐町|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434809.json?revision=2456702944
+    name: Q11434809.json
+    sha256: 7cdafbc92935b95dd5913c8772d9fe8ee4ae0cc0279673eff4ca0bf02b43847b
+    bytes: 6712
+  - island: "徳島県|阿南市|小勝島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17219919.json?revision=2456702502
+    name: Q17219919.json
+    sha256: 3b7feb9c852c4115702acadc8be03a618479bfc8275e9f68fcbb874384befbdc
+    bytes: 7432
+  - island: "徳島県|阿南市|伊島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11379335.json?revision=2456703150
+    name: Q11379335.json
+    sha256: 93a27b8d3ecd23edc76316ea96605ca2db4f6ade0598ce3d84c39ff608b820b2
+    bytes: 12179
+  - island: "香川県|小豆島町・土庄町|小豆島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q2166413.json?revision=2550120245
+    name: Q2166413.json
+    sha256: 1dbba5a689e157e3fc7d7994cb92a9f7e0f0815a9d482f32de82ef660644c675
+    bytes: 25581
+  - island: "香川県|土庄町|豊島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q7705474.json?revision=2550085912
+    name: Q7705474.json
+    sha256: 817a17b3268b69f30a66034b5e9cb31ebe86f8193cae6201db4e1902d81b93b6
+    bytes: 21014
+  - island: "香川県|丸亀市|広島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11484404.json?revision=2487119396
+    name: Q11484404.json
+    sha256: 809b7808bb9efbda3fe7f7883163793f96c02b9bc1699a4ad278dfd3701be46d
+    bytes: 6825
+  - island: "香川県|直島町|直島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20267482.json?revision=2462043170
+    name: Q20267482.json
+    sha256: 6c2d4e581da57d65fd387e7aa9366d1e973049ebe03dbe7ab92cbd0ab710139e
+    bytes: 20515
+  - island: "香川県|丸亀市|本島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11520216.json?revision=2509336967
+    name: Q11520216.json
+    sha256: 5af64f24d94abb5bd3ad61c32dc2c2097bda46b50ed835253a4d6dd4dabc2a88
+    bytes: 10066
+  - island: "香川県|三豊市|粟島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11604580.json?revision=2456702912
+    name: Q11604580.json
+    sha256: 94405d6edfa5e496620244fd8ffd3e0a9bd4b5c4a01e2d3bde817ea710b3bd19
+    bytes: 7433
+  - island: "香川県|丸亀市|手島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20442833.json?revision=2456702294
+    name: Q20442833.json
+    sha256: 440c26b091c9f85255b1c8a085c4ca91fce2ccf7521cb263f21897c9c37b062e
+    bytes: 7782
+  - island: "香川県|高松市|女木島(鬼ヶ島)"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q339004.json?revision=2456701903
+    name: Q339004.json
+    sha256: d9ce4480cbceef2a1f17e33c1c544f0b7a8cb93c422fef10b7963c514db9ede3
+    bytes: 13982
+  - island: "香川県|多度津町|高見島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20442886.json?revision=2487126163
+    name: Q20442886.json
+    sha256: 27483c3d9a7f1a5fe5dce35c4e73f629bd4e3e02e1f8585d237250af3411ba7d
+    bytes: 8951
+  - island: "香川県|多度津町|佐柳島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11383217.json?revision=2513788909
+    name: Q11383217.json
+    sha256: cd9df01cc620f0875cc3914ab3758a9206f83184e141684ae794e23a5705e685
+    bytes: 9713
+  - island: "香川県|高松市|男木島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3349795.json?revision=2555314026
+    name: Q3349795.json
+    sha256: a105dffdcf9ff5458bdd71be8df4012db79e91ef96f0b2bf89ab53470206670f
+    bytes: 12256
+  - island: "香川県|坂出市|与島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11361905.json?revision=2487127098
+    name: Q11361905.json
+    sha256: 0a37eca12c995e0052021d5d1ca06381683e9ed8eaad1bd67003adc7aab4fb7d
+    bytes: 8321
+  - island: "香川県|土庄町|小豊島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20454159.json?revision=2456702216
+    name: Q20454159.json
+    sha256: e13dd5c996d4cfe8b9846b9b6c36af64a23ea45c2eaed7cfc3681c58763201b1
+    bytes: 16827
+  - island: "香川県|観音寺市|伊吹島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11379228.json?revision=2555795728
+    name: Q11379228.json
+    sha256: 3820628745d88d62fd76af7fbcfb8ef7224bcf3deecf210c46e383469c9cca44
+    bytes: 8613
+  - island: "愛媛県|今治市|大三島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q9009869.json?revision=2461192367
+    name: Q9009869.json
+    sha256: e8aaa4edfce4a5cc62847bbee19aad4f66645747b6d063e2d62e635a5cd6dd41
+    bytes: 13095
+  - island: "愛媛県|今治市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q997301.json?revision=2463938368
+    name: Q997301.json
+    sha256: c16cbc3b28037ac24c9c962b8571ef31b3a1e8f63dadd97918bbc41b35b6b3f9
+    bytes: 10401
+  - island: "愛媛県|松山市|中島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5817606.json?revision=2456805256
+    name: Q5817606.json
+    sha256: c1ad5a5fd6ef488183b63bd52baa8bb9784e11f89c4ef7d767849f9816854a98
+    bytes: 6753
+  - island: "愛媛県|今治市|伯方島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q9009569.json?revision=2544997292
+    name: Q9009569.json
+    sha256: 93804e6265b5c81928b577e2d15295402d4c145c610e069ba0564e388ae88e55
+    bytes: 9377
+  - island: "愛媛県|上島町|岩城島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11474307.json?revision=2456703101
+    name: Q11474307.json
+    sha256: f6aed38d641eab2e93184d5c4584bff0406cfe5d54ef443c5362c3f5074abd12
+    bytes: 10732
+  - island: "愛媛県|上島町|弓削島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11487067.json?revision=2456703118
+    name: Q11487067.json
+    sha256: 1dc93d4b25da12ccde2b99053bca5da647523f38d6c760c17107f3b1cb5b3f2b
+    bytes: 8617
+  - island: "愛媛県|松山市|興居島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11613384.json?revision=2560968698
+    name: Q11613384.json
+    sha256: 30fa791284dc8f43d1fecb2b49efbc3e394cbac9c111d58b72dacec9fcc27178
+    bytes: 9813
+  - island: "愛媛県|松山市|怒和島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11491460.json?revision=2456703121
+    name: Q11491460.json
+    sha256: cca5f7392def8a9297bc2bbd11a711f4f236a5830cd51fd21b9d824a5ff24cf5
+    bytes: 7413
+  - island: "愛媛県|松山市|睦月島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11583780.json?revision=2456702922
+    name: Q11583780.json
+    sha256: 81108eeff04ae6fd88f6e9135829379a45fadc6a0c79213b5c58cc7bc52f6b64
+    bytes: 6817
+  - island: "愛媛県|宇和島市|日振島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11505343.json?revision=2456702888
+    name: Q11505343.json
+    sha256: f730b7f2eaa5dc1ca66aa9943c0698291a4b89bf1f07b93ecd092a3f27d01dec
+    bytes: 5641
+  - island: "愛媛県|上島町|生名島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11574442.json?revision=2456703137
+    name: Q11574442.json
+    sha256: f9ba10a418d2af2af79ce4ea4017a6822770f103b9c2988ae644cc44889890d8
+    bytes: 6425
+  - island: "愛媛県|宇和島市|九島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11370104.json?revision=2456703564
+    name: Q11370104.json
+    sha256: 0e8f2b63ebedb52f68ed88d9a692fb92f087c8f3015a7440b2152cff33524441
+    bytes: 5826
+  - island: "愛媛県|今治市|岡村島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q7081764.json?revision=2456805311
+    name: Q7081764.json
+    sha256: 2462a9a96da980b09b175789c0310a452163e5cdd3717cc8b8f5f81706705dbd
+    bytes: 9356
+  - island: "愛媛県|松山市|津和地島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11555966.json?revision=2456702704
+    name: Q11555966.json
+    sha256: 3ccba9520419bff09430ab4c3d2a7fb1d4c596d958cfa5bd7a6ad2960bf1bc64
+    bytes: 4823
+  - island: "愛媛県|宇和島市|戸島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11496324.json?revision=2456702876
+    name: Q11496324.json
+    sha256: 3b98b87f756d0bc3583e35fefb43ee20053e312ac40aa06196246ae82dbef545
+    bytes: 4238
+  - island: "愛媛県|上島町|佐島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q768768.json?revision=2456794803
+    name: Q768768.json
+    sha256: 656aa1944fcca185997856b2fc6f7a587c5dae66c4468a548781255e7b35ad48
+    bytes: 10858
+  - island: "愛媛県|新居浜市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11501924.json?revision=2564916999
+    name: Q11501924.json
+    sha256: e4fe516425fe5d5840231ac792d974d1d245127c948cd5b7ab807d39f3f456e0
+    bytes: 10985
+  - island: "愛媛県|松山市|二神島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11371742.json?revision=2456703010
+    name: Q11371742.json
+    sha256: 18c00a247ee2652a2470da97f50060abfb4f94ced92e547e9aeec1fc7fe993fa
+    bytes: 6979
+  - island: "愛媛県|上島町|赤穂根島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11635889.json?revision=2456702940
+    name: Q11635889.json
+    sha256: 215087287e338f2b812c1a18014c52e674ad261dc6062f95251c682a86bb3f42
+    bytes: 6141
+  - island: "愛媛県|今治市|大下島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11431830.json?revision=2456702850
+    name: Q11431830.json
+    sha256: b30f668b69c8040a3a8a030ea8765fc45c30f846429ce83295b976f08a886c71
+    bytes: 7354
+  - island: "愛媛県|今治市|津島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11556058.json?revision=2456702706
+    name: Q11556058.json
+    sha256: f11114bee5ef16461556872434b867b4700387488a2eb6b2181d0b4d168db034
+    bytes: 5011
+  - island: "愛媛県|上島町|魚島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11673959.json?revision=2456702757
+    name: Q11673959.json
+    sha256: 9bf7b642ee459206a9c89338213cd8439a8ee0299151ce8a46e9a48a41249270
+    bytes: 4998
+  - island: "愛媛県|上島町|高井神島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11668718.json?revision=2456702755
+    name: Q11668718.json
+    sha256: 39f6f021165c746b3794425de1372b0d310d798e8648607fa100bfe24b44cda6
+    bytes: 5193
+  - island: "愛媛県|愛南町|鹿島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11677072.json?revision=2456702688
+    name: Q11677072.json
+    sha256: 3575cfccd8baeff08fef0cac0bbd0d4abfd19105d0f11ef061db5a0496fac242
+    bytes: 7193
+  - island: "高知県|宿毛市|沖の島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11552466.json?revision=2456702654
+    name: Q11552466.json
+    sha256: 92a5c81e02e68fc25a199e35a92e4ec611bfbe7ab59cf597dbaf9f5ca7bde959
+    bytes: 6119
+  - island: "高知県|宿毛市|鵜来島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11675721.json?revision=2513791579
+    name: Q11675721.json
+    sha256: 35abc766779e945f81abda9146ab067cdbfb47cc658082513bd5a78437c8616c
+    bytes: 5817
+  - island: "高知県|宿毛市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20652984.json?revision=2456702114
+    name: Q20652984.json
+    sha256: 6ae26b40c3d2ae3dfc9eddcb636d464b802a34b3fed2876f9b3b7aff872748a6
+    bytes: 8078
+  - island: "福岡県|宗像市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434813.json?revision=2559943131
+    name: Q11434813.json
+    sha256: 8507d1803f0164dc4af61615370449f0611099ecff0a3bb2812e77ada92930bf
+    bytes: 13184
+  - island: "福岡県|福岡市東区|志賀島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3077260.json?revision=2241909021
+    name: Q3077260.json
+    sha256: e0f5046e6c96582fc96fb1be224c63f2fd9d32b5dceb8f855de3cf1e295f01c3
+    bytes: 10101
+  - island: "福岡県|福岡市西区|能古島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10859834.json?revision=2456702552
+    name: Q10859834.json
+    sha256: a5fa8302c0d48cc6e763b2eff69a2f6d6412d3fca0c1109a27d675e67805e060
+    bytes: 21645
+  - island: "福岡県|宗像市|地島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17992764.json?revision=2544526484
+    name: Q17992764.json
+    sha256: 702f8519b08e5478404254529c02ab638d6690376734a379fe0ac835773bef94
+    bytes: 8291
+  - island: "福岡県|新宮町|相島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11581975.json?revision=2456702920
+    name: Q11581975.json
+    sha256: 7e0cddf0be4baf62b5efd29aa371483c410161aa1ce33416df48787afaf4fd6e
+    bytes: 12283
+  - island: "福岡県|福岡市西区|玄界島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11572311.json?revision=2456703132
+    name: Q11572311.json
+    sha256: 13129492466202f61a04a08396e52e507a006c714b1a9e91e31a78bdf3bec6d7
+    bytes: 15009
+  - island: "佐賀県|唐津市|馬渡島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11668024.json?revision=2456702753
+    name: Q11668024.json
+    sha256: 9f13f0b3416eecdaffa4d6716f2ed58f04ee092451253b98e1fc0f43a0b18eab
+    bytes: 9872
+  - island: "佐賀県|唐津市|加唐島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11398556.json?revision=2544439101
+    name: Q11398556.json
+    sha256: fc018af58a01d92bc8047c208eabbe4e55c2c13859a715b933f95181947c4c47
+    bytes: 10260
+  - island: "佐賀県|唐津市|加部島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11399769.json?revision=2560999042
+    name: Q11399769.json
+    sha256: 6e8feb42a137d7e284374e67fe957acda32f5d117029759b64e42d374ae43e19
+    bytes: 10008
+  - island: "佐賀県|唐津市|神集島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11591024.json?revision=2456702924
+    name: Q11591024.json
+    sha256: fce1f8e6955261db1c1dd6a8b59083b0337eb9857c2ebc3183d9a379d79538ac
+    bytes: 7328
+  - island: "長崎県|対馬市|対馬"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q52051.json?revision=2560021822
+    name: Q52051.json
+    sha256: 84835b83f6d16d430062f4c56f1baad99c26c5e43f1fb849843570195aadbe46
+    bytes: 45902
+  - island: "長崎県|五島市|福江島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q858292.json?revision=2561664476
+    name: Q858292.json
+    sha256: 00ae2ec0839172f1157142dad89d8c90416ebc921fda3602282682221cb1db5a
+    bytes: 13937
+  - island: "長崎県|新上五島町|中通島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5366388.json?revision=2561909344
+    name: Q5366388.json
+    sha256: 38445f43ab37d24ceb77f4ced27b51c5adc0483b345a0d75900214ae9c2ddeea
+    bytes: 9954
+  - island: "長崎県|平戸市|平戸島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1019313.json?revision=2564609863
+    name: Q1019313.json
+    sha256: 0e4be66386122395148b0ec82199581ba7a62dbd503707bcdfc56a31c4b7dcea
+    bytes: 16484
+  - island: "長崎県|壱岐市|壱岐島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q494914.json?revision=2562096614
+    name: Q494914.json
+    sha256: 6e820e1dd00ae54385b63ea86a1328e83d00229134b6278912719043c1ff2ccf
+    bytes: 27835
+  - island: "長崎県|五島市|久賀島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5366860.json?revision=2561904178
+    name: Q5366860.json
+    sha256: ecb91ba1241d7ce6d422d3c8387abe482abd01b0745861754e96b04047e83c8b
+    bytes: 15161
+  - island: "長崎県|佐世保市|針尾島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11648162.json?revision=2456702738
+    name: Q11648162.json
+    sha256: 7df30c72090104416de48107db233e8014ee1807ae319a98c1044e1481d7c409
+    bytes: 8249
+  - island: "長崎県|新上五島町|若松島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q858061.json?revision=2561908303
+    name: Q858061.json
+    sha256: 9b10bd04bbeb865e67d4ce6ead7faf008fe7d87433be36adabfda7fc12017264
+    bytes: 9169
+  - island: "長崎県|佐世保市|宇久島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11449014.json?revision=2561962919
+    name: Q11449014.json
+    sha256: af325b068f3b4b972c99121aad4e69c3e394194b4681089c50c1b1d13c1bfd8b
+    bytes: 8176
+  - island: "長崎県|五島市|奈留島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q5366335.json?revision=2561905607
+    name: Q5366335.json
+    sha256: a5499ee3f0165597bd703a1b45d16ba11742f6cfea4681b3f6d5b348d08ae1c6
+    bytes: 9638
+  - island: "長崎県|松浦市|福島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11592984.json?revision=2456702890
+    name: Q11592984.json
+    sha256: 8e377d04d1f6e0b86454a7ff9f5973106c06e5e2bdd490ac30fe50adac0506f4
+    bytes: 4720
+  - island: "長崎県|平戸市|生月島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11574566.json?revision=2456703126
+    name: Q11574566.json
+    sha256: 88b444a0cd56e14b41303ad0106511d4235ac41ca9dcb3324809e2014b06d8cd
+    bytes: 7889
+  - island: "長崎県|松浦市|鷹島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10860535.json?revision=2550480510
+    name: Q10860535.json
+    sha256: e8da2119463ffc435af60ff0af64f72d9010e4a8ac3bf409b3fc8b3285b02c70
+    bytes: 7208
+  - island: "長崎県|平戸市|的山大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11580911.json?revision=2456702884
+    name: Q11580911.json
+    sha256: 5b0c5304dd5b495d965f56ee915441739baa0344e5b69dc7f8118d8865ee9a0c
+    bytes: 6822
+  - island: "長崎県|西海市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434819.json?revision=2456703153
+    name: Q11434819.json
+    sha256: 1f65e778a29bb1643a5c67526f00e96a2931272c595c9ae0776d7a01c76ab4e7
+    bytes: 4710
+  - island: "長崎県|小値賀町|小値賀島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11261668.json?revision=2456702834
+    name: Q11261668.json
+    sha256: 205e5dcaacd58e4020210507134c71dae31ba41723c8f22f92ed225908abb1f3
+    bytes: 7126
+  - island: "長崎県|五島市|椛島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q15231937.json?revision=2456702504
+    name: Q15231937.json
+    sha256: dca5b3383c94171e99bddd77f0c3a5a74c510ee2bb0a35e3cb9e672bac973d16
+    bytes: 9060
+  - island: "長崎県|小値賀町|野崎島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q10856210.json?revision=2478532467
+    name: Q10856210.json
+    sha256: c61d74c6e0e812fd7529919c070c6e26047172670a8a75ff7820193106b2e1a9
+    bytes: 13530
+  - island: "長崎県|西海市|松島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11530093.json?revision=2456702699
+    name: Q11530093.json
+    sha256: 6241c72ff2fb30fc0cc7285ae5c1215ad7167c6048abe44efd7f40da02e56fea
+    bytes: 7400
+  - island: "長崎県|五島市|島山島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20665543.json?revision=2456702328
+    name: Q20665543.json
+    sha256: 96c040bff2b0117a72ba3a388936a1a793208d97460ed43965a6b234a4582d88
+    bytes: 10331
+  - island: "長崎県|西海市|平島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11482669.json?revision=2456703117
+    name: Q11482669.json
+    sha256: 38be78ed768b3cd3c1b1dc9808fee95bf3ca3638bf0c64472f75b016425fb621
+    bytes: 8867
+  - island: "長崎県|西海市|蛎浦島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11625567.json?revision=2456702937
+    name: Q11625567.json
+    sha256: eb4f814ef4d89d4f255c397657d641f519619a693221eb8c7847aa776560fa0e
+    bytes: 7543
+  - island: "長崎県|対馬市|島山島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20656218.json?revision=2456702219
+    name: Q20656218.json
+    sha256: c2253395bc84a1677d46974ff9b6e49be4e29f3b82a10901fbf789d05c756845
+    bytes: 8067
+  - island: "長崎県|佐世保市|黒島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11678145.json?revision=2456702690
+    name: Q11678145.json
+    sha256: 56251a5bd0e210d3e444e7d4ed359f5cd6705aad6f69a38a504f94e5204b9831
+    bytes: 14601
+  - island: "長崎県|平戸市|度島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11486132.json?revision=2456703052
+    name: Q11486132.json
+    sha256: 064c14d822538383d1c6bdd0dedb00696fb2b4fc969f032c359fc8106a454f2f
+    bytes: 6660
+  - island: "長崎県|五島市|嵯峨ノ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11477305.json?revision=2456703112
+    name: Q11477305.json
+    sha256: 568537b83b82f0f3c83018612e648652c02491ed2f72acbceee4c7cfb7565e15
+    bytes: 9845
+  - island: "長崎県|新上五島町|有福島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17192049.json?revision=2456702509
+    name: Q17192049.json
+    sha256: 43f3eb7ad99545961d0412f8042e2b58aa1922548f19bdbaad570ddd5402ba5a
+    bytes: 5430
+  - island: "長崎県|佐世保市|高島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11669603.json?revision=2456702679
+    name: Q11669603.json
+    sha256: 355738c7bf822e2ad7b5e3506c88df02103e00b1fa3e54b133b4d6f77fb52774
+    bytes: 4997
+  - island: "長崎県|対馬市|沖ノ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q49665667.json?revision=2456794650
+    name: Q49665667.json
+    sha256: 0f673355619c7fbd3e68bd9f9363583a0eca5abc8f99304614e66e3fc77ed9e4
+    bytes: 7940
+  - island: "長崎県|西海市|江島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11550845.json?revision=2456702703
+    name: Q11550845.json
+    sha256: bafb9fc6b104d00a8f5ad1deffb2af56fcd2641cd5ef7f73c04a6d3e0dc1fb3a
+    bytes: 7986
+  - island: "長崎県|五島市|男島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17225029.json?revision=2456702195
+    name: Q17225029.json
+    sha256: f7e850a55d1e85c4b3a042f3706a5136a2192c2f0c12ec37ff5827b90858391f
+    bytes: 6722
+  - island: "長崎県|長崎市|樺島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11543672.json?revision=2456702843
+    name: Q11543672.json
+    sha256: 81c8004c4aacfa184ac33a151c3c29b7f59d16e5c79363011db6f190944d97c3
+    bytes: 9314
+  - island: "長崎県|新上五島町|串島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20670802.json?revision=2456702231
+    name: Q20670802.json
+    sha256: 57ba1d23a8ee40a70951139f28779f68bd511936f5850969f88b883e6a66f434
+    bytes: 7858
+  - island: "長崎県|新上五島町|頭ヶ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11664922.json?revision=2513807594
+    name: Q11664922.json
+    sha256: 2ead5bc6b3be5001a8e6755fb3f52a22ed05707069c5f7d6492c3d433278be46
+    bytes: 19764
+  - island: "長崎県|長崎市|牧島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q49656216.json?revision=2456703324
+    name: Q49656216.json
+    sha256: c686f22d55b3b36a55523be399a1b15bda0676b7c39c038e4ce064029130ac0d
+    bytes: 6796
+  - island: "長崎県|小値賀町|斑島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q18339362.json?revision=2456702152
+    name: Q18339362.json
+    sha256: 2af75168d8a044e6800d63b54143932e507451c19bbf13e542c1bc963173f34f
+    bytes: 7704
+  - island: "長崎県|五島市|ツブラ島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q18337391.json?revision=2370968149
+    name: Q18337391.json
+    sha256: 4eb60a5b9e185db3723a7d3b4a9dc0dcf85b9250d153a0f2d92a5044231cb23c
+    bytes: 4589
+  - island: "長崎県|五島市|黄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20669474.json?revision=2456702343
+    name: Q20669474.json
+    sha256: abe74b469ff5f40220bdd39eb1449460f4941794bd00584a7d6239fb730c62f7
+    bytes: 7969
+  - island: "長崎県|新上五島町|日島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11505281.json?revision=2456702853
+    name: Q11505281.json
+    sha256: 7f57e2c868afcd02737218b56279c4daf6b9b539e6d3927d00250600775c8f40
+    bytes: 6961
+  - island: "長崎県|佐世保市|寺島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q28682901.json?revision=2456701958
+    name: Q28682901.json
+    sha256: 2cbe1656315e950cbf9e4d2a2f4894cc81a0c474feb888125657b7efe23bf5b5
+    bytes: 3958
+  - island: "長崎県|新上五島町|祝言島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20670818.json?revision=2456702235
+    name: Q20670818.json
+    sha256: 80ac944e790f86380e054138f37f8cf67e6b742f7e19a8bb46cdcf46988710c6
+    bytes: 8673
+  - island: "長崎県|五島市|女島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20670842.json?revision=2456702234
+    name: Q20670842.json
+    sha256: 2bf97a4805e66cf9d25da8e6807e5766d8cbc9ce1980a29a28b8974f4d288dfb
+    bytes: 5042
+  - island: "長崎県|長崎市|伊王島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20681784.json?revision=2456702241
+    name: Q20681784.json
+    sha256: 4ac7590dea6236018bba7e90921865087b84aee47a9374b188bc9c1a0eedbfa3
+    bytes: 5292
+  - island: "長崎県|長崎市|高島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11669605.json?revision=2479339737
+    name: Q11669605.json
+    sha256: 393a8258ac29106f3ae477c7165dd19d4c6ec4e455638d7e25459a739553d0d3
+    bytes: 8276
+  - island: "長崎県|壱岐市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434815.json?revision=2456703151
+    name: Q11434815.json
+    sha256: 274188d9de27b2c0dd499b3e1147ec312ad485e2f3318eb81c854ec7603e5304
+    bytes: 6227
+  - island: "長崎県|五島市|黒島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q49649610.json?revision=2456703594
+    name: Q49649610.json
+    sha256: d0f7167c139badc36d68bf64fc9e93549bdf7d4b98b60f974febc4e19ba7b207
+    bytes: 8375
+  - island: "長崎県|五島市|蠑螺島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20706579.json?revision=2456702247
+    name: Q20706579.json
+    sha256: 47b9ffbc5a77f513ded948e0c78395f2ce1d248c33f31484e8130f64c512bb0f
+    bytes: 7948
+  - island: "長崎県|長崎市|池島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11551591.json?revision=2456702628
+    name: Q11551591.json
+    sha256: 1b0fa127d5d6f61ff3bde33e547fcc597a5fdcec0da2a6d82843472a4e38d1ce
+    bytes: 12933
+  - island: "長崎県|西海市|寺島・横島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20680346.json?revision=2456702239
+    name: Q20680346.json
+    sha256: 6a23df9593b4b09d95a11551b1971f4d8fa7e901b0a85845e693f866d0c8c392
+    bytes: 8357
+  - island: "熊本県|天草市・苓北町|下島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11360847.json?revision=2564454898
+    name: Q11360847.json
+    sha256: 7c5c2ab15ef9bf6080cc712670f7364801b4cacd8022d081c14aa262eed2ac2d
+    bytes: 8068
+  - island: "熊本県|天草市・上天草市|上島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11358913.json?revision=2561008844
+    name: Q11358913.json
+    sha256: 407d54a08e6153fbd659c5ba6c6fc516a481c81e1a50a8ec0242b805808bfcce
+    bytes: 7074
+  - island: "熊本県|上天草市|大矢野島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11438136.json?revision=2456703067
+    name: Q11438136.json
+    sha256: 255e7775f3b6b85a8e4a4decdb5ee4d24d4211ec51fc4686b8edfff6bee2a7d9
+    bytes: 7346
+  - island: "熊本県|天草市|御所浦島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11489067.json?revision=2456703127
+    name: Q11489067.json
+    sha256: b2d75901c95134843fa46e8d0734bf43cd3c9df47944cf5e94a42fec6ba19d75
+    bytes: 5893
+  - island: "熊本県|宇城市|戸馳島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11496670.json?revision=2456702878
+    name: Q11496670.json
+    sha256: f6a7961f930428162ab6e9dcd1c8188c2801b22d26d0b332cd1be0de86a9d9a5
+    bytes: 6019
+  - island: "熊本県|上天草市|維和島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17193690.json?revision=2456702515
+    name: Q17193690.json
+    sha256: b27c119f73159691f96798dbe099fc238fc26fce5756c92be1eb193d62f42e9f
+    bytes: 6759
+  - island: "熊本県|天草市|牧島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q24898648.json?revision=2456702045
+    name: Q24898648.json
+    sha256: 4e3c42f6eba3daf3ce6b4c11218ec4f0920a1ea36d37fbe5c72942c2ec165333
+    bytes: 8449
+  - island: "熊本県|天草市|下須島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20706699.json?revision=2456702281
+    name: Q20706699.json
+    sha256: ed70e09445eeb397cc9cac8a19b3283527d8c7b91cbb71e54b47c63f3a51b182
+    bytes: 8537
+  - island: "熊本県|上天草市|樋島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20709285.json?revision=2456702284
+    name: Q20709285.json
+    sha256: 45399d96c88f7a41e6a5fa84eba47abf1f92920d819d7cf0b53a549fad2069eb
+    bytes: 9468
+  - island: "熊本県|天草市|産島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q91615400.json?revision=2456805126
+    name: Q91615400.json
+    sha256: baa552d4171ac5a5a24c836ec49a8c0b1403be4c5745acfbbe1e8af3cc8be7db
+    bytes: 7648
+  - island: "熊本県|天草市|横浦島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20662421.json?revision=2456702273
+    name: Q20662421.json
+    sha256: ed1c953bc39bef9f6e2065b744a918b8613514adbd9433cd7a48b73b38941134
+    bytes: 8115
+  - island: "大分県|姫島村|姫島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3785700.json?revision=2456701774
+    name: Q3785700.json
+    sha256: 98885f6192c4d65c8766875b75894b64104be837b48cd883c67494eb905889b0
+    bytes: 12320
+  - island: "大分県|佐伯市|大入島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11432478.json?revision=2456702855
+    name: Q11432478.json
+    sha256: bf28b61a145eab7743cb3c96217f4723c7b5da50cc3e3d4ca10477618b9415cb
+    bytes: 7091
+  - island: "大分県|佐伯市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434805.json?revision=2456702947
+    name: Q11434805.json
+    sha256: 5e1d982d4ac37cc44369ce7f7faa99f7173e21b4cce1c2e38d9bb42717dcbba1
+    bytes: 7359
+  - island: "大分県|佐伯市|屋形島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11465691.json?revision=2456703100
+    name: Q11465691.json
+    sha256: b31adb2ffbba3591b62bbe71ce754d2d722c5bc40a1b0d92ad264ec7c172f364
+    bytes: 8029
+  - island: "宮崎県|延岡市|島浦島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11476827.json?revision=2456703110
+    name: Q11476827.json
+    sha256: c33a87d023dd61c3096382730b7e9092a01b483516a7c042ab39fa3a6f6cb8b6
+    bytes: 5564
+  - island: "宮崎県|日南市|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11434806.json?revision=2512231900
+    name: Q11434806.json
+    sha256: c71c3426596453e7f2719e22605fd927fabec5ca5feb3a5e6bde1fdd69e14e34
+    bytes: 5910
+  - island: "鹿児島県|奄美市・瀬戸内町・宇検村・大和村・龍郷町|大島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q697278.json?revision=2555316192
+    name: Q697278.json
+    sha256: 4ae57dc9c2ea6caf6515cd9a2c5d5f92a2ebe2a0d1c9352f0ae69dd43cdb194d
+    bytes: 40117
+  - island: "鹿児島県|屋久島町|屋久島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q242176.json?revision=2564993450
+    name: Q242176.json
+    sha256: 049347d7de2ccce4eeb9c54bfb0bcc247b6d51d340e161dc95a10183ca38421c
+    bytes: 54406
+  - island: "鹿児島県|西之表市・中種子町・南種子町|種子島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q696228.json?revision=2506215278
+    name: Q696228.json
+    sha256: 99cd93ed131a05afdee567e7cdfce2b01b129953b29ea64a45e46cec4703d1f2
+    bytes: 28082
+  - island: "鹿児島県|徳之島町・天城町・伊仙町|徳之島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q701847.json?revision=2506137057
+    name: Q701847.json
+    sha256: d2d759f69ff5f6bf80c8b72b8628247d2930acb3cd9b2362d4bec0845f14dc3a
+    bytes: 33956
+  - island: "鹿児島県|知名町・和泊町|沖永良部島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94736.json?revision=2495839426
+    name: Q94736.json
+    sha256: e1e535beaadb1a30d41ac5e28425da59afe6a3ee79be08314740416b1fa4d135
+    bytes: 26358
+  - island: "鹿児島県|長島町|長島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11652207.json?revision=2560985013
+    name: Q11652207.json
+    sha256: a5ad16e74f2526eced31e7b592b4052c578d13d671e79f6340025f97dd9bb90d
+    bytes: 6662
+  - island: "鹿児島県|瀬戸内町|加計呂麻島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q711584.json?revision=2487120572
+    name: Q711584.json
+    sha256: 553c65e3a6cb74f938ec470909b89efa91dbbe38b364047c5bbf17a6d7919fa3
+    bytes: 12359
+  - island: "鹿児島県|薩摩川内市|下甑島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q14948406.json?revision=2562067639
+    name: Q14948406.json
+    sha256: 22ec1262ab4e5670d3f2ba1f4f6c4d8dfff09c15a7e4427b8b9eccdd57893295
+    bytes: 8619
+  - island: "鹿児島県|喜界町|喜界島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q711507.json?revision=2456805025
+    name: Q711507.json
+    sha256: def0c98ff881288acf0befba5ddca257d45e32620248acffb9cb22dc37d17738
+    bytes: 19691
+  - island: "鹿児島県|薩摩川内市|上甑島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q14948405.json?revision=2562075517
+    name: Q14948405.json
+    sha256: ec692c073495402848310beea240e05eefae0c0def9111ce1ffee6b4d2e42c6a
+    bytes: 7502
+  - island: "鹿児島県|屋久島町|口永良部島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q718472.json?revision=2564285967
+    name: Q718472.json
+    sha256: 88374a30f2cf223d3bcdcf79fd296297914859bdaac383a0fc78ee2489605ad8
+    bytes: 29050
+  - island: "鹿児島県|十島村|中之島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94740.json?revision=2260336580
+    name: Q94740.json
+    sha256: 70673fac5995a5115c3c0666b9608082c81e0f0340a2f70c396349a2e376cae0
+    bytes: 21906
+  - island: "鹿児島県|十島村|諏訪之瀬島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94730.json?revision=2564286041
+    name: Q94730.json
+    sha256: 531e06d7e3d988f6633f52e512b68e3917d9f98e8106ee495fc803211af46bba
+    bytes: 17152
+  - island: "鹿児島県|与論町|与論島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94762.json?revision=2487127094
+    name: Q94762.json
+    sha256: 3ce60148eae10ed69f039342df2038a2278c95128c399c9459c816c79910bc42
+    bytes: 18713
+  - island: "鹿児島県|長島町|獅子島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11572200.json?revision=2534136690
+    name: Q11572200.json
+    sha256: a781aabd3922d2000bb06ee1104488bccae8f40835d47b65b8b9d2541fb9d531
+    bytes: 8734
+  - island: "鹿児島県|三島村|黒島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4520676.json?revision=2557548361
+    name: Q4520676.json
+    sha256: 17946d5e6eb2e636f5445ec3211af3b54b619f0b87aa304c005e64be59d5befb
+    bytes: 13712
+  - island: "鹿児島県|瀬戸内町|請島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q702676.json?revision=2487126625
+    name: Q702676.json
+    sha256: 19a0d836ba05908fd9d5c84bc61b99f98dc509319f864e9453e7191e986d3ac4
+    bytes: 10776
+  - island: "鹿児島県|十島村|口之島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94738.json?revision=2487121030
+    name: Q94738.json
+    sha256: 5ca31d8d4124f9b57097fbdf600430a48a4329faedd05c4bed6a73087ac8f260
+    bytes: 22704
+  - island: "鹿児島県|三島村|硫黄島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q705894.json?revision=2345550298
+    name: Q705894.json
+    sha256: 605f8d28abecb31ca4841e90d42de0495b1eca890a6c0ec36e78d10078b2e046
+    bytes: 15747
+  - island: "鹿児島県|瀬戸内町|与路島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q702660.json?revision=2456805257
+    name: Q702660.json
+    sha256: 1817701d0b87f4a7c672d602889b8f1109a407478d6e823f9ebe3ece68b1ea99
+    bytes: 13102
+  - island: "鹿児島県|西之表市|馬毛島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11667995.json?revision=2534136901
+    name: Q11667995.json
+    sha256: 5d9c82fda40b0e5475d9044f85a1c9b8e06fe683f64c8cc763e19e7b5faa23d5
+    bytes: 14303
+  - island: "鹿児島県|十島村|悪石島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94781.json?revision=2534137593
+    name: Q94781.json
+    sha256: 8af2720ff530042354dafb0fa144e706a8c48c77444304792f2fcc5203e3820d
+    bytes: 20037
+  - island: "鹿児島県|薩摩川内市|中甑島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20655854.json?revision=2456702274
+    name: Q20655854.json
+    sha256: 9f33c1c5f8997d2b8a89a4500badb8d99c301293ec6371e3ed6e09d9acf159cf
+    bytes: 9012
+  - island: "鹿児島県|十島村|宝島"
+    within: 0.02
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q94734.json?revision=2534137588
+    name: Q94734.json
+    sha256: 354e7d028fbdf2060a5dd1e6aaafe9adcffbf32c357498682870b5dce6536f46
+    bytes: 13221
+  - island: "鹿児島県|宇検村|枝手久島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q18002786.json?revision=2388093666
+    name: Q18002786.json
+    sha256: d0d5a7ee8a6d23eba4334e24a714710ec508c9e2e73423013a5a8034c1441170
+    bytes: 8183
+  - island: "鹿児島県|三島村|竹島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4520623.json?revision=2456703378
+    name: Q4520623.json
+    sha256: 706941197f78120a3be042ab0b50601a8518f590d6c8886ab69cddf2b61b2b01
+    bytes: 12078
+  - island: "鹿児島県|十島村|臥蛇島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4520552.json?revision=2534137262
+    name: Q4520552.json
+    sha256: 3907ffca21231d731f125e5c4d167beeb422984aa6e501206e9903a906e96dbb
+    bytes: 10650
+  - island: "鹿児島県|長島町|諸浦島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17216064.json?revision=2456702516
+    name: Q17216064.json
+    sha256: 464b5976088624bea61f5aee1a20457d07b514f2c6e6f8f4f896c5056707a292
+    bytes: 6648
+  - island: "鹿児島県|長島町|伊唐島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17192826.json?revision=2456702511
+    name: Q17192826.json
+    sha256: bee690f9d8106dd835adfe2a231f60a2ab48e102ca4fb6d53774c8d1d152242d
+    bytes: 8210
+  - island: "鹿児島県|十島村|横当島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4176126.json?revision=2515534703
+    name: Q4176126.json
+    sha256: 883d128dc58d347924c7891da4e5d9ff2f60d1f573228bf838fc50f13900ffce
+    bytes: 14076
+  - island: "鹿児島県|十島村|平島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4520501.json?revision=2534137256
+    name: Q4520501.json
+    sha256: daa39c3b9041aee5f612f42f0c0776774bf5458f429b2e3542bc104647cfc3dc
+    bytes: 12737
+  - island: "鹿児島県|南さつま市|宇治向島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20655767.json?revision=2456702324
+    name: Q20655767.json
+    sha256: 86b7bfdfeda4f7934f0a14d6820298204e39befd9e6d467ba009b30884aca7e8
+    bytes: 7280
+  - island: "沖縄県|竹富町|西表島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q432124.json?revision=2555315042
+    name: Q432124.json
+    sha256: 9b5fb9ef9bb6ec9f36488ec0b05b7229bb6b51218627cbf6ad38a27095bec51a
+    bytes: 28978
+  - island: "沖縄県|石垣市|石垣島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q714339.json?revision=2555316225
+    name: Q714339.json
+    sha256: 25dccd75d11379d3751ab711261667f39422ad1395212a75c565dea003e6fff2
+    bytes: 32860
+  - island: "沖縄県|宮古島市|宮古島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q700946.json?revision=2539744576
+    name: Q700946.json
+    sha256: 06c6a0db7621b9449dfe282cf45e23d73113340c3c6eb1dd9470aa0f953d4da4
+    bytes: 27713
+  - island: "沖縄県|久米島町|久米島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q247515.json?revision=2564079308
+    name: Q247515.json
+    sha256: 2c6408c9c7a7fdf5d0af8eaf076ab18e073056532b1f37fa0625351c7b6691a3
+    bytes: 24197
+  - island: "沖縄県|南大東村|南大東島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1204188.json?revision=2555305504
+    name: Q1204188.json
+    sha256: bee40552d8adabfd2c5a06dde0b6b115d44699c0da64e13f006d21b51dc7cc3e
+    bytes: 21542
+  - island: "沖縄県|宮古島市|伊良部島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q187366.json?revision=2509282978
+    name: Q187366.json
+    sha256: 10c5b5d290d050a7521798b19440d371aff021e7bd1e3751e0ff6a9304b5921f
+    bytes: 17351
+  - island: "沖縄県|与那国町|与那国島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q220701.json?revision=2558709888
+    name: Q220701.json
+    sha256: 83ba30add98f56abef1c91f535ebd158dc4753322544f78548dd9a7e9d36c9d3
+    bytes: 28206
+  - island: "沖縄県|伊江村|伊江島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q328533.json?revision=2558554372
+    name: Q328533.json
+    sha256: d7bd5f675f4a734327722378eec6bf55650483df3e464314a309d324f69086ac
+    bytes: 19053
+  - island: "沖縄県|伊平屋村|伊平屋島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518946.json?revision=2558549966
+    name: Q4518946.json
+    sha256: d5febc7bf763d67000a0fb59c7dd86670d42234a6029f892112c1c95072bbc75
+    bytes: 12562
+  - island: "沖縄県|多良間村|多良間島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q700885.json?revision=2482370257
+    name: Q700885.json
+    sha256: ae21364669ef3366a8bf76c334bba69459ef8d696ee9ae3c88df059a92657a4f
+    bytes: 15487
+  - island: "沖縄県|渡嘉敷村|渡嘉敷島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q922266.json?revision=2555316833
+    name: Q922266.json
+    sha256: 6a6bf321f3829cb34338805a89c2a8f629fdcbcce398f0bf62acd23c5ae8b78d
+    bytes: 13114
+  - island: "沖縄県|伊是名村|伊是名島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1676132.json?revision=2487120343
+    name: Q1676132.json
+    sha256: 745097f5e156133b31833b77bc86454923a72eff8118e741a88beaec676055a0
+    bytes: 14457
+  - island: "沖縄県|竹富町|波照間島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q697600.json?revision=2555316193
+    name: Q697600.json
+    sha256: bac90b14e4c43e8eb669cefaafc5da87bdfbe2e8f60a7a347beed77d1ffebaff
+    bytes: 22816
+  - island: "沖縄県|北大東村|北大東島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1111504.json?revision=2555305225
+    name: Q1111504.json
+    sha256: e15780b9da6207dc5b0452da32bd9fced8ca926916703c1e8fd241c2e495fc9a
+    bytes: 21745
+  - island: "沖縄県|竹富町|黒島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q701089.json?revision=2555316211
+    name: Q701089.json
+    sha256: ba5bfcdeaf478c028e7a3c52666652ee0ac2a519981a633b3fe7cac958433206
+    bytes: 17005
+  - island: "沖縄県|宮古島市|下地島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q705012.json?revision=2456805226
+    name: Q705012.json
+    sha256: ae127bc2b49055f1829bfaec2b00cda62a6c222b53372b66cb87559b5a5def73
+    bytes: 16671
+  - island: "沖縄県|名護市|屋我地島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518632.json?revision=2555315155
+    name: Q4518632.json
+    sha256: c79c381f0988dd99633d64e05c961a04996c0b87f1e576d79d13d54ff4378300
+    bytes: 15342
+  - island: "沖縄県|竹富町|小浜島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q702603.json?revision=2559160084
+    name: Q702603.json
+    sha256: c86b38947c8a4dd702059b73c70bfb6e1eb8b7726967c10a8ce0af511516f178
+    bytes: 21210
+  - island: "沖縄県|粟国村|粟国島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q398636.json?revision=2555314912
+    name: Q398636.json
+    sha256: ae1c6001dff6389bd90f87b5036b084c3f03b18296cfd156f940dc63da3f56ba
+    bytes: 14125
+  - island: "沖縄県|座間味村|座間味島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q145371.json?revision=2555306267
+    name: Q145371.json
+    sha256: 652d466a9fc49118df628fffab89efc41d7ed88c9592f03fd076ac324d7bd743
+    bytes: 17664
+  - island: "沖縄県|うるま市|宮城島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518698.json?revision=2456703411
+    name: Q4518698.json
+    sha256: 8122f7d7b2bf614fd86c4e666e3b468b6310d92406ee6471fbca6a7c919f11fa
+    bytes: 12002
+  - island: "沖縄県|うるま市|平安座島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518728.json?revision=2456703390
+    name: Q4518728.json
+    sha256: 4f700031e501f7769c861f1f52ba95ee72b287e7fcafc7b82502f2991cac2890
+    bytes: 12012
+  - island: "沖縄県|竹富町|竹富島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q474560.json?revision=2555315203
+    name: Q474560.json
+    sha256: ee78354057498ab75c279c163779439ff31507cee5e24b61d45a530833147db0
+    bytes: 23933
+  - island: "沖縄県|石垣市|魚釣島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q719187.json?revision=2560717672
+    name: Q719187.json
+    sha256: a1d1f542f542062b2450c5a8157625b04f53b96c8d4e927ea8b1451361d2bd36
+    bytes: 24711
+  - island: "沖縄県|座間味村|阿嘉島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q3579074.json?revision=2555314424
+    name: Q3579074.json
+    sha256: d97ceeb18e994e41e7a7b2659d2bac7bf7f2c322a973a0df1bee9cd1b405a9da
+    bytes: 15717
+  - island: "沖縄県|渡名喜村|渡名喜島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1803811.json?revision=2558550707
+    name: Q1803811.json
+    sha256: be74bdab585f940b6a95ae5c0c2f76f005b0d8396385817814619ad06dc94549
+    bytes: 12019
+  - island: "沖縄県|今帰仁村|古宇利島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518163.json?revision=2555315135
+    name: Q4518163.json
+    sha256: 3e31741df517a76c7f9f7b4b6de569199d14783aa0fd32ae2a037e7bd6c0aa97
+    bytes: 13546
+  - island: "沖縄県|本部町|瀬底島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q137962.json?revision=2561284999
+    name: Q137962.json
+    sha256: b1410bfe298327c5a0c2f3ee06ed8b9e9954ec24f83caf587a2129341351ccf0
+    bytes: 13373
+  - island: "沖縄県|宮古島市|来間島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q709253.json?revision=2498147853
+    name: Q709253.json
+    sha256: 86ee842526269b3d81027480f810f46538a741803fa9682b18f27df096f77a62
+    bytes: 18050
+  - island: "沖縄県|宮古島市|池間島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q702436.json?revision=2487119696
+    name: Q702436.json
+    sha256: 5c59c6b2cc884b42a667c9bb9b7b4064f16c9e1d7aaf715e42145519d461c172
+    bytes: 18953
+  - island: "沖縄県|久米島町|硫黄鳥島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q250462.json?revision=2555310495
+    name: Q250462.json
+    sha256: 46db40cdc943f921ed49ed699e98d1f46b238d1dae1328d44ad80f4105281378
+    bytes: 16960
+  - island: "沖縄県|多良間村|水納島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q709813.json?revision=2559511936
+    name: Q709813.json
+    sha256: 5e6346bc9442dc152a8505a26fc17d553c3cb357263661aaff53199d669fb8c7
+    bytes: 12983
+  - island: "沖縄県|竹富町|内離島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4478859.json?revision=2456701325
+    name: Q4478859.json
+    sha256: 705d1b8b821977848f084361e391fc57e3cee12884acd12ed5f78b757e64a9f5
+    bytes: 12218
+  - island: "沖縄県|うるま市|浜比嘉島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518764.json?revision=2456703391
+    name: Q4518764.json
+    sha256: 4ec5c3312add8ca7156b47bc5cbeba624d19313f38ec786ff830f0e8e9ce311d
+    bytes: 11183
+  - island: "沖縄県|うるま市|津堅島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518364.json?revision=2558550175
+    name: Q4518364.json
+    sha256: 57059596d066b089f2af51662ac1ec9e1df305785c85566c5339dab72f34be19
+    bytes: 10514
+  - island: "沖縄県|竹富町|新城島<上地>"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20662194.json?revision=2456702258
+    name: Q20662194.json
+    sha256: c1b80acbff8832ccd96b61bc77dfb85645e8d32f37874433a661ce1a24b8f5d2
+    bytes: 13021
+  - island: "沖縄県|うるま市|伊計島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518662.json?revision=2552475994
+    name: Q4518662.json
+    sha256: 1a3ad6265ece3c25db7dde922d05604a7faa193157105f09d1804be0225665fb
+    bytes: 10061
+  - island: "沖縄県|渡嘉敷村|前島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4519202.json?revision=2555315158
+    name: Q4519202.json
+    sha256: 296cf724509b0e629907459252b456cf7aad1b8e29aa7cbbcf64d38a477954cf
+    bytes: 11996
+  - island: "沖縄県|竹富町|新城島<下地>"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4419682.json?revision=2456701706
+    name: Q4419682.json
+    sha256: 76ae8599e3dc61642face3bb44b52ebcff0d8657aa7ceccb5b830aafb7f7f8a8
+    bytes: 9140
+  - island: "沖縄県|座間味村|久場島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q11369263.json?revision=2456703560
+    name: Q11369263.json
+    sha256: edcaff59890fac78dffc93fe205d5dc63602df31165c5b1fbe881d0172101a38
+    bytes: 11792
+  - island: "沖縄県|南城市|久高島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q4518835.json?revision=2558552278
+    name: Q4518835.json
+    sha256: f476763531155466db8c0de0670c7daae6d92a2f143239c35cc5c5f777f43dd0
+    bytes: 11210
+  - island: "沖縄県|竹富町|外離島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q2118388.json?revision=2456702251
+    name: Q2118388.json
+    sha256: 4bda7f2e9fa88436648f49817d5973437ed8758570b30de95ef6a7d7f78420ec
+    bytes: 17220
+  - island: "沖縄県|座間味村|屋嘉比島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q17221048.json?revision=2456702501
+    name: Q17221048.json
+    sha256: 4813977bfe1d166d4c0768e044095b3f1bc0f8b5a3772399fb9c79f080c981cd
+    bytes: 10570
+  - island: "沖縄県|座間味村|慶留間島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q65067.json?revision=2555316085
+    name: Q65067.json
+    sha256: 676469744e0cf1d2f37bbb4abc779bd7ce692f2f965cb6b15e3cc081dc500e28
+    bytes: 14351
+  - island: "沖縄県|北大東村|沖大東島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q139502.json?revision=2555306127
+    name: Q139502.json
+    sha256: a1416c7cf531702652041285dd63d68ed88f518a6465b7039400d9d58860c83f
+    bytes: 15022
+  - island: "沖縄県|伊平屋村|野甫島"
+    within: 0.003
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q1995509.json?revision=2558550003
+    name: Q1995509.json
+    sha256: 4ffe78ebddcc5b237832d0b8cf7879f472222d860d4d7fb429bba3cd121400b2
+    bytes: 11599
+  - island: "島根県|隠岐の島町|竹島"
+    within: 0.02
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q20317.json?revision=2554306728
+    name: Q20317.json
+    sha256: 9c8636f90f1cedb4a007077f978030c8cedcb851b8d27a1f329fe30b9d16a7f4
+    bytes: 66638
+  - island: "東京都|小笠原村|沖ノ鳥島"
+    within: 0.02
+    url: https://www.wikidata.org/wiki/Special:EntityData/Q908529.json?revision=2564103169
+    name: Q908529.json
+    sha256: e4896e57b55c18b15c5015211cf1f120a339992880f99ef49c4d027cd0f16e3c
+    bytes: 33006

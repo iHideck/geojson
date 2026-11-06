@@ -70,6 +70,7 @@ class Layer:
     title_en: str
     geometry: Geometry
     sources: tuple[str, ...]
+    checks_with: tuple[str, ...]
     resolutions: tuple[Resolution, ...]
     attributes: tuple[Attribute, ...]
     license: str
@@ -104,7 +105,13 @@ class Registry:
         return [layer for layer in self.layers if layer.enabled]
 
     def sources_for(self, layers: list[Layer]) -> list[Source]:
+        """配布物の出典になる元データ。"""
         ids = dict.fromkeys(sid for layer in layers for sid in layer.sources)
+        return [self.sources[sid] for sid in ids]
+
+    def inputs_for(self, layers: list[Layer]) -> list[Source]:
+        """作るのに要る元データ。出典に加えて、確かめるためだけに使うもの（checks_with）も含む。"""
+        ids = dict.fromkeys(sid for layer in layers for sid in (*layer.sources, *layer.checks_with))
         return [self.sources[sid] for sid in ids]
 
 
@@ -150,7 +157,7 @@ def _parse_source(path: Path) -> Source:
 def _parse_layer(data: dict, sources: dict[str, Source]) -> Layer:
     lid = _require(data, "id", "layers.yml")
     where = f"layers.yml {lid}"
-    for sid in _require(data, "sources", where):
+    for sid in [*_require(data, "sources", where), *data.get("checks_with", [])]:
         if sid not in sources:
             raise RegistryError(f"{where}: sources/{sid}.yml がない")
     attributes = []
@@ -175,6 +182,7 @@ def _parse_layer(data: dict, sources: dict[str, Source]) -> Layer:
         title_en=title["en"],
         geometry=_require(data, "geometry", where),
         sources=tuple(data["sources"]),
+        checks_with=tuple(data.get("checks_with", [])),
         resolutions=tuple(Resolution(r["id"], int(r["precision"])) for r in _require(data, "resolutions", where)),
         attributes=tuple(attributes),
         license=license_,

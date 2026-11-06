@@ -13,7 +13,7 @@ import sys
 from collections.abc import Callable
 from pathlib import Path
 
-from boundaries import countries, japan_admin, metadata, registry
+from boundaries import countries, islands, japan_admin, metadata, registry
 from boundaries.layer_build import Built
 
 DIST = registry.ROOT / "dist"
@@ -22,6 +22,7 @@ BUILDERS: dict[str, Builder] = {
     "world/countries": countries.build,
     "japan/prefectures": japan_admin.build_prefectures,
     "japan/municipalities": japan_admin.build_municipalities,
+    "japan/islands": islands.build,
 }
 
 
@@ -37,7 +38,7 @@ def main(argv: list[str] | None = None) -> int:
         if builder is None:
             print(f"まだ作り方が無い: {layer.id}", file=sys.stderr)
             continue
-        sources = {s.id: [cache / "sources" / s.id / f.name for f in s.files] for s in reg.sources_for([layer])}
+        sources = {s.id: [cache / "sources" / s.id / f.name for f in s.files] for s in reg.inputs_for([layer])}
         built = builder(layer, sources, cache / "work" / layer.slug, DIST)
         metadata.write(built, reg, DIST)
         reports = DIST / "reports"

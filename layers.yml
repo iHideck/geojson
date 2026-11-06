@@ -68,7 +68,9 @@ layers:
   - id: japan/islands
     title: { ja: 主な島, en: Islands }
     geometry: point
-    sources: [gsi-mencho-2026, ksj-n03-2026]
+    sources: [gsi-mencho-2026, wikidata-islands, soumu-dantai-code-2024]
+    # 座標が所属市区町村の中にあるかを確かめるためだけに使う。配布物には入れない
+    checks_with: [ksj-n03-2026]
     resolutions:
       - { id: medium, precision: 5 }
     attributes:
@@ -76,15 +78,14 @@ layers:
       - { name: name_kana, type: string, nullable: true, description: 島名の読み }
       - { name: name_en, type: string, nullable: true, description: 英語の名称 }
       - { name: area_km2, type: number, nullable: true, description: 面積（km²、面積調の値） }
-      - { name: pref_code, type: string, description: 都道府県コード（JIS X 0401） }
+      - { name: pref_code, type: string, nullable: true, description: 都道府県コード（JIS X 0401）。本州など複数の都道府県にまたがる島は空 }
       - { name: lg_codes, type: string, nullable: true, description: 所属する市区町村の全国地方公共団体コード（複数はカンマ区切り） }
     license: CC-BY-4.0
     credit:
-      ja: "国土地理院「全国都道府県市区町村別面積調」（https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm）、「国土数値情報（行政区域データ）」（国土交通省）を加工して作成"
-      en: "Derived from the GSI Area Survey of Prefectures and Municipalities (https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm) and the National Land Numerical Information, MLIT, Japan"
+      ja: "国土地理院「全国都道府県市区町村別面積調」（https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm）を加工して作成。位置は Wikidata（CC0）、所属の団体コードは総務省「都道府県コード及び市区町村コード」（https://www.soumu.go.jp/denshijiti/code.html）による"
+      en: "Derived from the GSI Area Survey of Prefectures and Municipalities (https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm). Positions from Wikidata (CC0). Local government codes from MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
     enabled: true
-    publish: false
-    hold: 位置を国土数値情報から求めるので、行政区域と同じ確認を待つ
+    publish: true
 
   - id: world/eez
     title: { ja: 排他的経済水域, en: Exclusive Economic Zones }

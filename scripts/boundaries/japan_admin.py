@@ -28,7 +28,8 @@ SOUMU = "soumu-dantai-code-2024"
 SHP = "N03-20260101"
 # 簡略化の間隔（メートル）。medium は全国の市区町村を1ファイルにして GeoJSON の目標 5MB に収まる
 INTERVAL_M = {"medium": 200, "low": 1000}
-MIN_KM2 = {"medium": 0.01, "low": 1.0}
+# low は 0.8km² 以上を残す。面積調の 1km² 以上の島が、国土数値情報では少し小さく測られても消えないようにする
+MIN_KM2 = {"medium": 0.01, "low": 0.8}
 PROTECTED = (*PROTECTED_ISLANDS, ("沖ノ鳥島", 136.0819, 20.4227), ("波照間島", 123.7856, 24.0565))
 NEAR_DEGREES = 0.05
 GEOD = Geod(ellps="WGS84")

@@ -44,10 +44,11 @@ def render(reg: registry.Registry, dist: Path = DIST) -> str:
             continue
         published = "する" if layer.publish else f"保留（{layer.hold}）"
         for m in json.loads(path.read_text())["metrics"]:
-            change = (m["area_after_km2"] - m["area_before_km2"]) / m["area_before_km2"] * 100
+            before = m["area_before_km2"]
+            change = f"{(m['area_after_km2'] - before) / before * 100:+.3f}%" if before else "—"
             lines.append(
                 f"| `{layer.id}` | {m['resolution']} | {m['features_before']:,}→{m['features_after']:,} "
-                f"| {m['vertices_before']:,}→{m['vertices_after']:,} | {change:+.3f}% "
+                f"| {m['vertices_before']:,}→{m['vertices_after']:,} | {change} "
                 f"| {m['features_area_over_10pct']:,} | {published} |"
             )
         meta = dist / layer.id / "metadata.json"
