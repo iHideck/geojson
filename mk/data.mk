@@ -14,3 +14,7 @@ build-formats: # 公開するレイヤーの配布形式を、dist/release（リ
 package-data: # 公開するレイヤーを data/ に詰め、styles/ の QML と SLD と docs/size-report.md を書き直す
 	PYTHONPATH=scripts $(PY_RUN) python -m boundaries.package
 	PYTHONPATH=scripts $(PY_RUN) python -m boundaries.report
+
+.PHONY: build-npm
+build-npm: # npm パッケージ japan-world-boundaries の中身を dist/npm に組む（公開はしない）。package-data の後に動かす
+	PYTHONPATH=scripts $(PY_RUN) python -m boundaries.npm_package

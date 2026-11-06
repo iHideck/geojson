@@ -1,0 +1,108 @@
+name: リリース
+
+# v で始まるタグ（例: v0.1.0）を main の上に打って push すると、データを作り直して GitHub Release を作り、
+# GitHub Pages に出す。手順は docs/release-checklist.md
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+# GitHub Pages に出すものは、1つずつ順に出す
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: タグが main の上にあり、CHANGELOG に版の節があるか確かめる
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - run: git merge-base --is-ancestor HEAD origin/main
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - run: PYTHONPATH=scripts uv run --frozen python -m boundaries.release_notes "$GITHUB_REF_NAME" > /dev/null
+
+  data:
+    needs: check
+    uses: ./.github/workflows/data.yml
+    with:
+      upload: true
+
+  release:
+    name: GitHub Release を作る
+    needs: data
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release
+          path: dist/release
+      - name: SHA256SUMS と合うか確かめる
+        working-directory: dist/release
+        run: sha256sum -c SHA256SUMS
+      - run: PYTHONPATH=scripts uv run --frozen python -m boundaries.release_notes "$GITHUB_REF_NAME" > notes.md
+      - name: 全形式と SHA256SUMS を載せる
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/release/* --title "$GITHUB_REF_NAME" --notes-file notes.md --verify-tag
+
+  pages:
+    needs: release
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml
+
+  # デプロイの成否を Slack の #geojson-deploy に知らせる（ほかのリポジトリの CD と同じ形）。
+  # Webhook の URL はシークレット SLACK_WEBHOOK_URL_DEPLOY。置くまでは送らずに飛ばす（失敗にしない）
+  notify-success:
+    name: Slack に知らせる（成功）
+    needs: pages
+    if: success()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }}
+    steps:
+      - name: Slack Notification (Deploy Success)
+        if: env.SLACK_WEBHOOK != ''
+        uses: rtCamp/action-slack-notify@33ca3be66c6f378fe1610fd1d5258632dbed5e58 # v2.4.0
+        env:
+          SLACK_COLOR: good
+          SLACK_MESSAGE: "Env: `prd`\nMsg: geojson の deploy に成功しました:rocket: (`${{ github.ref_name }}`)"
+      - name: Webhook の URL がないときは知らせない
+        if: env.SLACK_WEBHOOK == ''
+        run: echo "SLACK_WEBHOOK_URL_DEPLOY が設定されていないため、通知を送りません"
+
+  # データの検査やリリースで落ちて出さなかったときも、失敗として知らせる
+  notify-failure:
+    name: Slack に知らせる（失敗）
+    needs: [check, data, release, pages]
+    if: always() && contains(needs.*.result, 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEPLOY }}
+    steps:
+      - name: Slack Notification (Deploy Failed)
+        if: env.SLACK_WEBHOOK != ''
+        uses: rtCamp/action-slack-notify@33ca3be66c6f378fe1610fd1d5258632dbed5e58 # v2.4.0
+        env:
+          SLACK_COLOR: danger
+          SLACK_MESSAGE: "<!channel>\nEnv: `prd`\nMsg: geojson の deploy に失敗しました:cry: (`${{ github.ref_name }}`)"
+      - name: Webhook の URL がないときは知らせない
+        if: env.SLACK_WEBHOOK == ''
+        run: echo "SLACK_WEBHOOK_URL_DEPLOY が設定されていないため、通知を送りません"
