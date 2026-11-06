@@ -192,6 +192,7 @@ def test_pmtiles_follow_the_registered_zooms_and_keep_every_feature():
             assert counts.pop(name) == features, f"{layer.id} {res.id}"
             if layer.geometry == "polygon":
                 assert counts.pop("borders") > 0, f"{layer.id} {res.id}: 境界の線が無い"
+                assert counts.pop("labels") == features, f"{layer.id} {res.id}: 名前を置く点が地物と同じ数でない"
             assert counts == {}
 
 
@@ -292,3 +293,29 @@ def test_search_entries_line_up_with_the_features_of_every_resolution():
             assert [{k: v for k, v in e.items() if k != "bbox"} for e in index[layer.id]] == props, (
                 f"{layer.id} {res.id}"
             )
+
+
+def test_a_label_point_sits_inside_the_largest_part(tmp_path):
+    from boundaries import formats
+
+    honshu = [[[135, 34], [140, 34], [140, 38], [135, 38], [135, 34]]]
+    small = [[[129, 33], [129.5, 33], [129.5, 33.5], [129, 33.5], [129, 33]]]
+    source = tmp_path / "in.geojson"
+    source.write_text(
+        json.dumps(
+            {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {"name_ja": "日本"},
+                        "geometry": {"type": "MultiPolygon", "coordinates": [small, honshu]},
+                    }
+                ],
+            }
+        )
+    )
+    [label] = json.loads(formats.label_points(source, tmp_path / "out.geojson").read_text())["features"]
+    x, y = label["geometry"]["coordinates"]
+    assert 135 < x < 140 and 34 < y < 38
+    assert label["properties"] == {"name_ja": "日本"}

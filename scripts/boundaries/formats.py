@@ -17,7 +17,10 @@ import subprocess
 import zipfile
 from pathlib import Path
 
-from boundaries import distribution, qgis_project, registry, site_index, stac, styles, tools
+import shapely.geometry
+import shapely.ops
+
+from boundaries import distribution, geo, qgis_project, registry, site_index, stac, styles, tools
 from boundaries.limits import CSV_LIMIT
 from boundaries.package import attributes_csv
 from boundaries.registry import Layer, Registry, Resolution
@@ -81,8 +84,26 @@ def shapefile_zip(layer: Layer, resolution: str, geojson: Path, work: Path, lice
     return _zip([*parts, license_file], geojson.with_name(f"{resolution}.shp.zip"))
 
 
+def label_points(geojson: Path, out: Path) -> Path:
+    """地物ごとに、名前を置く点を1つ作る。いくつもの面からなる地物は、いちばん大きな面の、縁から最も遠い点にする。"""
+    features = []
+    for f in geo.load(geojson)["features"]:
+        geometry = shapely.geometry.shape(f["geometry"])
+        largest = max(getattr(geometry, "geoms", [geometry]), key=lambda part: part.area)
+        point = shapely.ops.polylabel(largest, tolerance=0.01)
+        features.append(
+            {
+                "type": "Feature",
+                "properties": f["properties"],
+                "geometry": {"type": "Point", "coordinates": [round(point.x, 4), round(point.y, 4)]},
+            }
+        )
+    out.write_text(json.dumps({"type": "FeatureCollection", "features": features}, ensure_ascii=False))
+    return out
+
+
 def pmtiles(layer: Layer, res: Resolution, geojson: Path, work: Path) -> Path:
-    """面のレイヤーは、塗りの面と、隣と接する境界の線（borders）の2つのタイルレイヤーにする。
+    """面のレイヤーは、塗りの面・隣と接する境界の線（borders）・名前を置く点（labels）の3つのタイルレイヤーにする。
 
     ズームは登録表の範囲で作り、上限より先はビューアが拡大して描く。
     """
@@ -93,9 +114,10 @@ def pmtiles(layer: Layer, res: Resolution, geojson: Path, work: Path) -> Path:
         lines = work / f"{distribution.table_name(layer, res.id)}-borders.geojson"
         # 属性の無い線は GeometryCollection で書かれ、tippecanoe が地物として読まないので、FeatureCollection にする
         tools.mapshaper("-i", geojson, "-innerlines", "-o", "format=geojson", "geojson-type=FeatureCollection", lines)
-        inputs += ["-L", f"borders:{lines}"]
+        labels = label_points(geojson, work / f"{distribution.table_name(layer, res.id)}-labels.geojson")
+        inputs += ["-L", f"borders:{lines}", "-L", f"labels:{labels}"]
     # 点は、低いズームでも間引かない（-r1）。面は、小さな島を四角に置き換えない
-    shape = ["-r1"] if layer.geometry == "point" else ["--no-tiny-polygon-reduction", "--detect-shared-borders"]
+    shape = ["-r1"] if layer.geometry == "point" else ["-r1", "--no-tiny-polygon-reduction", "--detect-shared-borders"]
     subprocess.run(
         [
             "tippecanoe", "-o", str(out), "-q", "-Z", str(res.minzoom), "-z", str(res.maxzoom),

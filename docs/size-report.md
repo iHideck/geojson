@@ -27,13 +27,13 @@ GeoJSON と TopoJSON は、目標が 5MB で、上限が 10MB です。
 | `world/countries` | 50m | fgb | 1.76 MB | 100.00 MB | OK |
 | `world/countries` | 50m | parquet | 793 KB | 100.00 MB | OK |
 | `world/countries` | 50m | shp | 995 KB | 100.00 MB | OK |
-| `world/countries` | 50m | pmtiles | 1.56 MB | 50.00 MB | OK |
+| `world/countries` | 50m | pmtiles | 1.61 MB | 50.00 MB | OK |
 | `world/countries` | 110m | geojson | 407 KB | 10.00 MB | OK |
 | `world/countries` | 110m | topojson | 278 KB | 10.00 MB | OK |
 | `world/countries` | 110m | fgb | 386 KB | 100.00 MB | OK |
 | `world/countries` | 110m | parquet | 152 KB | 100.00 MB | OK |
 | `world/countries` | 110m | shp | 162 KB | 100.00 MB | OK |
-| `world/countries` | 110m | pmtiles | 238 KB | 50.00 MB | OK |
+| `world/countries` | 110m | pmtiles | 267 KB | 50.00 MB | OK |
 | `japan/prefectures` | medium | geojson | 1.18 MB | 10.00 MB | OK |
 | `japan/prefectures` | medium | topojson | 568 KB | 10.00 MB | OK |
 | `japan/prefectures` | low | geojson | 218 KB | 10.00 MB | OK |
