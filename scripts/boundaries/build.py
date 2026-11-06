@@ -13,13 +13,15 @@ import sys
 from collections.abc import Callable
 from pathlib import Path
 
-from boundaries import countries, metadata, registry
+from boundaries import countries, japan_admin, metadata, registry
 from boundaries.layer_build import Built
 
 DIST = registry.ROOT / "dist"
 Builder = Callable[[registry.Layer, dict[str, list[Path]], Path, Path], Built]
 BUILDERS: dict[str, Builder] = {
     "world/countries": countries.build,
+    "japan/prefectures": japan_admin.build_prefectures,
+    "japan/municipalities": japan_admin.build_municipalities,
 }
 
 
