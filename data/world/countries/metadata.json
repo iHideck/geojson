@@ -1,0 +1,114 @@
+{
+  "id": "world/countries",
+  "title": {
+    "ja": "国境",
+    "en": "Countries"
+  },
+  "geometry": "polygon",
+  "crs": "EPSG:4326",
+  "license": "CC0-1.0",
+  "credit": {
+    "ja": "Made with Natural Earth.",
+    "en": "Made with Natural Earth."
+  },
+  "disclaimer": {
+    "ja": "境界は法的な境界を示しません。航海など、安全に関わる用途には使えません。",
+    "en": "The boundaries have no legal status and must not be used for navigation or other safety-critical purposes."
+  },
+  "sources": [
+    {
+      "id": "natural-earth-admin0-jpn-10m",
+      "title": "Natural Earth Admin 0 Countries, point of view of Japan, 1:10m",
+      "publisher": "Natural Earth",
+      "version": "5.1.2",
+      "retrieved": "2026-11-06",
+      "urls": [
+        "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries_jpn.zip"
+      ],
+      "page_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+      "license": "PDM-1.0",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/"
+    }
+  ],
+  "processing": [
+    "Natural Earth 10m の日本の視点版（ne_10m_admin_0_countries_jpn）を使った",
+    "ISO 3166-1 のコードは ISO_*_EH を使い、本国と同じコードを持つ属領などには付けなかった",
+    "XK（コソボ）は ISO 3166-1 に無いので、コードを付けなかった",
+    "日本語名と英語名を直した: 南沙諸島（元は「ウェーク島」）、台湾（元は「中華民国」）",
+    "属性を iso_a2・iso_a3・iso_n3・name_ja・name_en に絞った",
+    "50m: mapshaper -simplify interval=2500 keep-shapes で簡略化し、座標を小数点以下 5 桁に丸めた",
+    "50m: 島ごとに分けて簡略化し、1km² 以上の島、各地物で一番大きな島、次の島を残した: 択捉島・国後島・色丹島・歯舞群島・竹島・尖閣諸島（魚釣島）・与那国島・南鳥島",
+    "110m: mapshaper -simplify interval=15000 keep-shapes で簡略化し、座標を小数点以下 4 桁に丸めた",
+    "110m: 島ごとに分けて簡略化し、100km² 以上の島、各地物で一番大きな島、次の島を残した: 択捉島・国後島・色丹島・歯舞群島・竹島・尖閣諸島（魚釣島）・与那国島・南鳥島"
+  ],
+  "attributes": [
+    {
+      "name": "iso_a2",
+      "type": "string",
+      "nullable": true,
+      "description": "ISO 3166-1 alpha-2"
+    },
+    {
+      "name": "iso_a3",
+      "type": "string",
+      "nullable": true,
+      "description": "ISO 3166-1 alpha-3"
+    },
+    {
+      "name": "iso_n3",
+      "type": "string",
+      "nullable": true,
+      "description": "ISO 3166-1 numeric"
+    },
+    {
+      "name": "name_ja",
+      "type": "string",
+      "nullable": false,
+      "description": "日本語の名称"
+    },
+    {
+      "name": "name_en",
+      "type": "string",
+      "nullable": false,
+      "description": "英語の名称"
+    }
+  ],
+  "resolutions": [
+    {
+      "id": "50m",
+      "precision": 5,
+      "features": 250,
+      "vertices": 107693,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "50m.geojson",
+          "bytes": 2268785
+        },
+        {
+          "format": "topojson",
+          "name": "50m.topojson",
+          "bytes": 1358208
+        }
+      ]
+    },
+    {
+      "id": "110m",
+      "precision": 4,
+      "features": 250,
+      "vertices": 19852,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "110m.geojson",
+          "bytes": 416495
+        },
+        {
+          "format": "topojson",
+          "name": "110m.topojson",
+          "bytes": 285022
+        }
+      ]
+    }
+  ]
+}
