@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+import hashlib
 import shutil
 import subprocess
 import zipfile
 from pathlib import Path
 
 from boundaries.registry import ROOT
+
+
+def cache_key(*settings: object) -> str:
+    """途中のファイルの名前に付ける短いハッシュ。作り方の設定が変われば、別のファイルになる。"""
+    return hashlib.sha256(repr(settings).encode()).hexdigest()[:12]
 
 
 def mapshaper(*args: str | Path) -> None:

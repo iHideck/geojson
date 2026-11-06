@@ -16,6 +16,8 @@ Lightweight GeoJSON boundaries for Japan and the world. Work in progress.
 | `make lint` | Python のコードの書き方を検査する |
 | `make test` | 単体テストと、リポジトリの決まりの検査を動かす |
 
+`data/` と `docs/size-report.md` は、`make build` で作ったものをコミットします。簡略化の結果は CPU の種類で少し変わるので、`make build` は linux/amd64 のイメージで動きます。CI は、作り直した結果がコミットしたものと同じかを確かめます。
+
 ## ライセンス
 
 - コード: [MIT](LICENSE)

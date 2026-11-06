@@ -72,7 +72,7 @@ def _measure_source(shp: Path, work: Path) -> Before:
 
 def _keep_flags(shp: Path, work: Path) -> Path:
     """島（ポリゴン）ごとに、解像度ごとに残すかを決めた CSV を作る。"""
-    keep = work / "keep.csv"
+    keep = work / f"keep-{tools.cache_key(MIN_KM2, PROTECTED, NEAR_DEGREES)}.csv"
     if keep.exists():
         return keep
     records = work / "records.csv"
@@ -216,13 +216,17 @@ def _build(layer: Layer, sources: dict[str, list[Path]], work: Path, dist: Path,
         before_areas = before.area_km2
     for res in layer.resolutions:
         precision = f"precision={10**-res.precision:.{res.precision}f}"
-        raw = shared / f"municipalities-{res.id}.geojson"
-        if not raw.exists():
-            simplified = _simplify(shp, keep, res.id, res.precision, shared / f"municipalities-{res.id}-raw.geojson")
+        key = tools.cache_key(keep.name, res.id, res.precision, INTERVAL_M[res.id])
+        raw = shared / f"municipalities-{res.id}-{key}.geojson"
+        repaired_list = shared / f"repaired-{res.id}-{key}.json"
+        if not (raw.exists() and repaired_list.exists()):
+            simplified = _simplify(
+                shp, keep, res.id, res.precision, shared / f"municipalities-{res.id}-{key}-raw.geojson"
+            )
             cleaned, fixed = geo.repaired(geo.load(_clean_rounded(simplified, res.precision, raw)), res.precision)
             _write(cleaned, raw)
-            (shared / f"repaired-{res.id}.json").write_text(json.dumps(fixed, ensure_ascii=False))
-        repaired_names = json.loads((shared / f"repaired-{res.id}.json").read_text())
+            repaired_list.write_text(json.dumps(fixed, ensure_ascii=False))
+        repaired_names = json.loads(repaired_list.read_text())
         if kind == "municipalities":
             fc = geo.load(raw)
             for f in fc["features"]:
@@ -231,7 +235,7 @@ def _build(layer: Layer, sources: dict[str, list[Path]], work: Path, dist: Path,
             fc["features"].sort(key=lambda f: f["id_n03"])
             ids = [f.pop("id_n03") for f in fc["features"]]
         else:
-            dissolved = shared / f"prefectures-{res.id}.geojson"
+            dissolved = shared / f"prefectures-{res.id}-{key}.geojson"
             tools.mapshaper(
                 "-i", raw, "-each", "pref=N03_007.slice(0, 2)", "-dissolve", "pref",
                 "-o", "format=geojson", "rfc7946", precision, dissolved,
