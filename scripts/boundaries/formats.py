@@ -17,7 +17,7 @@ import subprocess
 import zipfile
 from pathlib import Path
 
-from boundaries import distribution, qgis_project, registry, stac, styles, tools
+from boundaries import distribution, qgis_project, registry, site_index, stac, styles, tools
 from boundaries.limits import CSV_LIMIT
 from boundaries.package import attributes_csv
 from boundaries.registry import Layer, Registry, Resolution
@@ -99,7 +99,7 @@ def pmtiles(layer: Layer, res: Resolution, geojson: Path, work: Path) -> Path:
     subprocess.run(
         [
             "tippecanoe", "-o", str(out), "-q", "-Z", str(res.minzoom), "-z", str(res.maxzoom),
-            "--no-tile-size-limit", "--simplification=2", *shape, "-n", f"{layer.title_ja} {res.id}",
+            "--no-tile-size-limit", "--simplification=2", "--generate-ids", *shape, "-n", f"{layer.title_ja} {res.id}",
             "-N", f"{layer.title_en} {res.id}", "-A", layer.credit_ja, *inputs,
         ],
         check=True,
@@ -215,6 +215,7 @@ def build_all(reg: Registry, dist: Path = DIST) -> list[Path]:
         )
         if len(table.encode()) <= CSV_LIMIT:
             (release / distribution.csv_name(layer)).write_text(table)
+    site_index.write(layers, dist, site)
     gpkg = geopackage(layers, dist, release / distribution.GPKG)
     qgz = qgis_project.write_qgz(layers, gpkg, work / "geojson-boundaries.qgz", ZIP_DATE)
     _zip([qgz, gpkg, license_file], release / distribution.QGIS_ZIP)

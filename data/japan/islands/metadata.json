@@ -481,7 +481,7 @@
         {
           "format": "pmtiles",
           "name": "japan-islands-medium.pmtiles",
-          "bytes": 122145,
+          "bytes": 128115,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.pmtiles",
           "pages_url": "https://ihideck.github.io/geojson/latest/japan/islands/medium.pmtiles"
         }

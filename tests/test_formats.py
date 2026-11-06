@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from boundaries import distribution, geo, qgis_project, registry, styles
+from boundaries import distribution, geo, qgis_project, registry, site_index, styles
 from boundaries.distribution import FORMATS
 from boundaries.limits import FILE_LIMITS, SITE_TOTAL_LIMIT
 from range_server import serve
@@ -96,6 +96,7 @@ def test_the_site_holds_exactly_the_published_files():
     expected |= {distribution.metadata_path(layer) for layer in PUBLISHED}
     expected |= {f"stac/{layer.slug}/{res.id}.json" for layer in PUBLISHED for res in layer.resolutions}
     expected |= {f"stac/{layer.slug}/collection.json" for layer in PUBLISHED} | {"stac/catalog.json"}
+    expected |= {site_index.CATALOG, site_index.SEARCH}
     assert {str(p.relative_to(SITE)) for p in SITE.rglob("*") if p.is_file()} == expected
     assert sum(p.stat().st_size for p in SITE.rglob("*") if p.is_file()) <= SITE_TOTAL_LIMIT
 
@@ -252,3 +253,42 @@ def test_flatgeobuf_is_read_over_http_with_range_requests():
             assert response.status == 206
             assert response.headers["Access-Control-Allow-Origin"] == "*"
         assert "Feature Count" in ogrinfo("-so", "-al", f"/vsicurl/{url}")
+
+
+def test_a_bbox_across_the_antimeridian_extends_east_past_180():
+    fiji = {
+        "type": "MultiPolygon",
+        "coordinates": [
+            [[[177, -18], [180, -18], [180, -16], [177, -18]]],
+            [[[-180, -17], [-178, -17], [-178, -16], [-180, -17]]],
+        ],
+    }
+    assert site_index.bbox(fiji) == [177, -18, 182, -16]
+    uk = {"type": "Polygon", "coordinates": [[[-8, 50], [2, 50], [2, 59], [-8, 50]]]}
+    assert site_index.bbox(uk) == [-8, 50, 2, 59]
+
+
+def test_the_catalog_points_at_the_tiles_and_the_metadata_on_the_site():
+    built()
+    catalog = json.loads((SITE / site_index.CATALOG).read_text())
+    assert [entry["id"] for entry in catalog["layers"]] == [layer.id for layer in PUBLISHED]
+    for entry, layer in zip(catalog["layers"], PUBLISHED, strict=True):
+        assert (SITE / entry["metadata"]).exists()
+        assert [(r["id"], r["minzoom"], r["maxzoom"]) for r in entry["resolutions"]] == [
+            (r.id, r.minzoom, r.maxzoom) for r in layer.resolutions
+        ]
+        assert all((SITE / r["pmtiles"]).exists() for r in entry["resolutions"])
+
+
+def test_search_entries_line_up_with_the_features_of_every_resolution():
+    """ビューアは、どの解像度の PMTiles の地物の番号からも、同じ索引の行を引く。"""
+    built()
+    index = json.loads((SITE / site_index.SEARCH).read_text())["layers"]
+    assert list(index) == [layer.id for layer in PUBLISHED]
+    for layer in PUBLISHED:
+        for res in layer.resolutions:
+            features = geo.load(DIST / layer.id / f"{res.id}.geojson")["features"]
+            props = [{k: v for k, v in f["properties"].items() if v is not None} for f in features]
+            assert [{k: v for k, v in e.items() if k != "bbox"} for e in index[layer.id]] == props, (
+                f"{layer.id} {res.id}"
+            )
