@@ -12,3 +12,4 @@
 - 元データの台帳（`sources/`）とレイヤーの登録表（`layers.yml`）、取得と SHA256 の照合（`make fetch`）
 - 世界の国境 `world/countries`（50m・110m）。Natural Earth の日本の視点版から作り、北方領土・竹島・尖閣諸島などの島を残す
 - `metadata.json` の JSON Schema、サイズの報告（`docs/size-report.md`）、係争地の扱い（`docs/disputed-areas.md`）
+- 都道府県境 `japan/prefectures` と市区町村境 `japan/municipalities`（medium・low）。国土数値情報から作り、全国地方公共団体コード（検査数字付き）と英語名を付ける。測量法の手続きの確認が済むまで公開しない

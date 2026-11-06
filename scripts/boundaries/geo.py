@@ -7,8 +7,10 @@ from collections.abc import Iterator
 from decimal import Decimal
 from pathlib import Path
 
+import shapely
 from pyproj import Geod
-from shapely.geometry import shape
+from shapely.geometry import MultiPolygon, mapping, shape
+from shapely.geometry.polygon import orient
 
 GEOD = Geod(ellps="WGS84")
 
@@ -144,3 +146,32 @@ def topojson_features(topo: dict) -> list[dict]:
         for g in members:
             features.append({"type": "Feature", "properties": g.get("properties", {}), "geometry": geometry(g)})
     return features
+
+
+def _round_coords(coords, precision: int):
+    if isinstance(coords[0], (int, float)):
+        return [round(c, precision) for c in coords]
+    return [_round_coords(c, precision) for c in coords]
+
+
+def repaired(fc: dict, precision: int) -> tuple[dict, list[str]]:
+    """丸めで妥当でなくなった面を、座標の格子を保ったまま直す。直した地物の説明を返す。
+
+    自分に触れる輪は2つの面に分かれる。外周は反時計回り、穴は時計回りにそろえる（RFC 7946）。
+    """
+    fixed_names = []
+    grid = 10**-precision
+    for i, feature in enumerate(fc["features"]):
+        geometry = shape(feature["geometry"])
+        if geometry.is_valid:
+            continue
+        made = shapely.set_precision(shapely.make_valid(geometry), grid)
+        polygons = [p for p in shapely.get_parts(made) if p.geom_type == "Polygon" and not p.is_empty]
+        polygons = [orient(p, sign=1.0) for p in polygons]
+        result = polygons[0] if len(polygons) == 1 else MultiPolygon(polygons)
+        if not result.is_valid or result.is_empty:
+            raise ValueError(f"地物 {i} の形を直せなかった: {feature['properties']}")
+        out = mapping(result)
+        feature["geometry"] = {"type": out["type"], "coordinates": _round_coords(out["coordinates"], precision)}
+        fixed_names.append(str(feature["properties"].get("name_ja") or i))
+    return fc, fixed_names

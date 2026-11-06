@@ -9,7 +9,9 @@ ARG TIPPECANOE_VERSION=2.79.0
 RUN apt-get update \
   && apt-get install -y --no-install-recommends build-essential ca-certificates curl libsqlite3-dev zlib1g-dev \
   && rm -rf /var/lib/apt/lists/*
-RUN curl -fsSL "https://github.com/felt/tippecanoe/archive/refs/tags/${TIPPECANOE_VERSION}.tar.gz" | tar xz -C /tmp \
+# Apple シリコンの Mac で amd64 をエミュレーションすると、この OS の tar はファイルを開けない。展開は Python で行う
+RUN curl -fsSL -o /tmp/tippecanoe.tar.gz "https://github.com/felt/tippecanoe/archive/refs/tags/${TIPPECANOE_VERSION}.tar.gz" \
+  && python3 -c "import tarfile; tarfile.open('/tmp/tippecanoe.tar.gz').extractall('/tmp', filter='data')" \
   && make -C "/tmp/tippecanoe-${TIPPECANOE_VERSION}" -j"$(nproc)" \
   && make -C "/tmp/tippecanoe-${TIPPECANOE_VERSION}" install PREFIX=/opt/tippecanoe
 
@@ -20,7 +22,10 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 RUN arch="$(dpkg --print-architecture)" \
   && case "$arch" in amd64) node_arch=x64 ;; arm64) node_arch=arm64 ;; *) exit 1 ;; esac \
-  && curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${node_arch}.tar.xz" | tar xJ -C /usr/local --strip-components=1
+  && curl -fsSL -o /tmp/node.tar.xz "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${node_arch}.tar.xz" \
+  && python3 -c "import tarfile, shutil; tarfile.open('/tmp/node.tar.xz').extractall('/tmp/node', filter='tar')" \
+  && cp -a /tmp/node/node-v${NODE_VERSION}-linux-${node_arch}/. /usr/local/ \
+  && rm -rf /tmp/node /tmp/node.tar.xz
 COPY --from=tippecanoe /opt/tippecanoe /usr/local
 COPY --from=uv /uv /uvx /usr/local/bin/
 

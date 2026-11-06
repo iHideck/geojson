@@ -1,0 +1,13 @@
+id: soumu-dantai-code-2024
+title: 都道府県コード及び市区町村コード（令和6年1月1日更新）
+publisher: 総務省
+version: 2024-01-01
+retrieved: 2026-11-06
+license: PDL-1.0
+license_url: https://www.soumu.go.jp/menu_kyotsuu/policy/tyosaku.html
+page_url: https://www.soumu.go.jp/denshijiti/code.html
+files:
+  - url: https://www.soumu.go.jp/main_content/000925835.xlsx
+    name: 000925835.xlsx
+    sha256: 7d04c8a7f6a6e76a7823a0414a8422bf2b26bb6070766971df76eab58ea6ff78
+    bytes: 97186

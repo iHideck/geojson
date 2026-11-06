@@ -92,6 +92,15 @@ def _quantization(fc: dict, precision: int) -> int:
     return math.ceil(extent * 10**precision)
 
 
+def topojson_from(geojson: Path, topojson: Path, name: str, precision: int) -> Path:
+    """GeoJSON と同じ細かさの TopoJSON を作る。量子化の細かさは、範囲を座標の桁で割った数にする。"""
+    quantization = _quantization(geo.load(geojson), precision)
+    tools.mapshaper(
+        "-i", geojson, "-rename-layers", name, "-o", "format=topojson", f"quantization={quantization}", topojson
+    )
+    return topojson
+
+
 def simplify_and_write(
     layer: Layer,
     source: Path,
@@ -123,11 +132,7 @@ def simplify_and_write(
             dissolve = ["-dissolve", "fid", f"copy-fields={','.join(fields)}", "-clean"]
             tools.mapshaper("-i", exploded, "-filter", f"k_{res.id}", *args, *dissolve, *output)
         after = geo.load(geojson)
-        topojson = out_dir / f"{res.id}.topojson"
-        quantization = _quantization(after, res.precision)
-        tools.mapshaper(
-            "-i", geojson, "-rename-layers", name, "-o", "format=topojson", f"quantization={quantization}", topojson
-        )
+        topojson = topojson_from(geojson, out_dir / f"{res.id}.topojson", name, res.precision)
         after_areas = _areas(after)
         same_order = len(after_areas) == len(before_areas)
         changes = [
