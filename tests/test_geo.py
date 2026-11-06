@@ -54,3 +54,15 @@ def test_a_reversed_arc_index_walks_the_arc_backwards():
     topo = {"type": "Topology", "arcs": [[[0, 0], [1, 0]]], "objects": {"x": {"type": "LineString", "arcs": [~0]}}}
     [feature] = geo.topojson_features(topo)
     assert feature["geometry"]["coordinates"] == [[1, 0], [0, 0]]
+
+
+def test_an_edge_along_the_pole_is_not_an_antimeridian_crossing():
+    # 北緯80度より北を覆う面。180度線で分けると、輪は地図の上端（北緯90度）をたどる
+    arctic = {"type": "Polygon", "coordinates": [[[-180, 80], [0, 80], [180, 80], [180, 90], [-180, 90], [-180, 80]]]}
+    crossing = {"type": "Polygon", "coordinates": [[[170, 10], [-170, 10], [-170, 20], [170, 20], [170, 10]]]}
+
+    def feature(geometry):
+        return {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {}, "geometry": geometry}]}
+
+    assert not any("180度線" in p for p in geo.problems(feature(arctic), 5))
+    assert any("180度線" in p for p in geo.problems(feature(crossing), 5))

@@ -233,7 +233,8 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
       opacity: [],
     });
   }
-  if (layer.geometry === "polygon") {
+  // 海域（outlined）には名前を出さない。区域が重なり、どの区域の名前かが分からないため
+  if (layer.geometry === "polygon" && !layer.outlined) {
     // 名前は、データの側が地物ごとに1つ作った点（labels）に置く。面に置くと、タイルや島ごとに何度も出る
     const countries = layer.id === "world/countries";
     parts.push({

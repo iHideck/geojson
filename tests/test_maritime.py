@@ -4,17 +4,23 @@ tests/fixtures/maritime/ のデータは、このテストのために作った�
 Marine Regions のデータは使わない。
 """
 
+import json
 import shutil
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
-from shapely.geometry import shape
+from shapely.geometry import Polygon, shape
+from shapely.strtree import STRtree
 
 from boundaries import geo, maritime, metadata, package, registry
 
 FIXTURES = Path(__file__).parent / "fixtures" / "maritime"
 LAW = registry.cache_dir() / "sources" / "egov-ryokai-sekorei" / "law_data.json"
 HAS_MAPSHAPER = shutil.which("mapshaper") or (registry.ROOT / "node_modules" / ".bin" / "mapshaper").exists()
+# 架空の島。架空の海域の境界の線から、この島の海岸に沿う部分が除かれる
+ISLAND = [[139.9, 29.9], [140.1, 29.9], [140.1, 30.1], [139.9, 30.1], [139.9, 29.9]]
+LAND = STRtree([Polygon(ISLAND)])
 
 
 @pytest.mark.parametrize(
@@ -55,7 +61,7 @@ def test_a_polygon_away_from_the_antimeridian_is_unchanged():
 def test_synthetic_eez_is_simplified_with_registry_attributes(tmp_path, monkeypatch):
     monkeypatch.setenv("GEOJSON_ENABLE_MARITIME", "1")
     layer = registry.load().layer("world/eez")
-    built = maritime.build_from_geojson(layer, FIXTURES / "eez.geojson", tmp_path, tmp_path / "dist")
+    built = maritime.build_from_geojson(layer, FIXTURES / "eez.geojson", LAND, tmp_path, tmp_path / "dist")
     for res in layer.resolutions:
         fc = geo.load(tmp_path / "dist" / "world" / "eez" / f"{res.id}.geojson")
         assert [f["properties"]["mrgid"] for f in fc["features"]] == ["9001", "9002", "9003"]
@@ -64,12 +70,37 @@ def test_synthetic_eez_is_simplified_with_registry_attributes(tmp_path, monkeypa
 
 
 @pytest.mark.skipif(not HAS_MAPSHAPER, reason="mapshaper が無い（make setup で入れる）")
-def test_maritime_layers_built_with_the_flag_still_stay_out_of_data(tmp_path, monkeypatch):
-    monkeypatch.setenv("GEOJSON_ENABLE_MARITIME", "1")
+def test_boundary_lines_keep_the_limits_and_each_shared_edge_once_and_drop_the_coast(tmp_path):
+    def zone(rings):
+        return {"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": rings}}
+
+    # 西の区域は島を囲み、東の区域と経度 140.5 度の辺を共有する
+    west = [[[139.5, 29.5], [140.5, 29.5], [140.5, 30.5], [139.5, 30.5], [139.5, 29.5]], ISLAND[::-1]]
+    east = [[[140.5, 29.5], [141.5, 29.5], [141.5, 30.5], [140.5, 30.5], [140.5, 29.5]]]
+    # 180度線で分けた切り口（経度 180 度の辺）と、極の上をたどる辺（緯度 90 度の辺）を持つ区域
+    cut = [[[179.5, 10], [180, 10], [180, 11], [179.5, 11], [179.5, 10]]]
+    polar = [[[0, 89], [10, 89], [10, 90], [0, 90], [0, 89]]]
+    zones = tmp_path / "zones.geojson"
+    features = [zone(rings) for rings in (west, east, cut, polar)]
+    zones.write_text(json.dumps({"type": "FeatureCollection", "features": features}))
+    maritime.boundary_lines(zones, LAND, tmp_path / "lines.geojson")
+    lines = [shape(f["geometry"]) for f in geo.load(tmp_path / "lines.geojson")["features"]]
+    # 西と東の外側の限界（6 度）と共有する辺（1 度）を1本ずつ、切り口の区域の 3 辺（2 度）、極の区域の 3 辺（12 度）。
+    # 島の海岸、経度 180 度の辺、緯度 90 度の辺は含まない
+    assert sum(line.length for line in lines) == pytest.approx(21)
+    assert all(line.distance(Polygon(ISLAND)) > 0.3 for line in lines)
+    assert not any(
+        max(abs(x) for x, _ in line.coords) == 180 and min(abs(x) for x, _ in line.coords) == 180 for line in lines
+    )
+
+
+@pytest.mark.skipif(not HAS_MAPSHAPER, reason="mapshaper が無い（make setup で入れる）")
+def test_a_held_maritime_layer_stays_out_of_data_even_when_built(tmp_path):
+    """公開しないレイヤー（いまは基線）は、作っても data/ に詰めず、古いファイルと空のフォルダーも消す。"""
     reg = registry.load()
-    eez = reg.layer("world/eez")
+    eez = replace(reg.layer("world/eez"), publish=False, hold="検査のために止める")
     dist, data = tmp_path / "dist", tmp_path / "data"
-    metadata.write(maritime.build_from_geojson(eez, FIXTURES / "eez.geojson", tmp_path, dist), reg, dist)
+    metadata.write(maritime.build_from_geojson(eez, FIXTURES / "eez.geojson", LAND, tmp_path, dist), reg, dist)
     stale = data / "world" / "eez" / "50m.topojson"
     stale.parent.mkdir(parents=True)
     stale.write_text("{}")

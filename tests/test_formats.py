@@ -70,7 +70,7 @@ def per_resolution() -> list[tuple[registry.Layer, registry.Resolution, str]]:
 
 
 def test_the_release_holds_exactly_the_published_files():
-    """公開しないレイヤー（海域や、確認を待つレイヤー）のファイルが紛れ込んでも、足りなくても落ちる。"""
+    """公開しないレイヤー（確認を待つレイヤー）のファイルが紛れ込んでも、足りなくても落ちる。"""
     built()
     expected = {distribution.release_name(layer, res.id, fmt) for layer, res, fmt in per_resolution()}
     expected |= {
@@ -238,9 +238,13 @@ def test_gdal_reads_every_format_with_every_feature_and_the_japanese_names():
         target = f"/vsizip/{path}" if fmt == "shp" else str(path)
         features = geo.load(DIST / layer.id / f"{res.id}.geojson")["features"]
         assert f"Feature Count: {len(features)}" in ogrinfo("-so", "-al", target), path.name
-        # FlatGeobuf は空間索引のために地物を並べ替えるので、読めた名前が元のどれかと一致するかを見る
-        first = re.search(r"name_ja \(String\) = (.+)", ogrinfo("-al", "-q", "-limit", "1", target))
-        assert first and first[1] in {f["properties"]["name_ja"] for f in features}, path.name
+        # FlatGeobuf は空間索引のために地物を並べ替えるので、読めた名前が元のどれかと一致するかを見る。
+        # 海域には日本語の名前が無い。日本語の名前があるレイヤーでは、名前のある地物を読む
+        names = {f["properties"]["name_ja"] for f in features}
+        where = ["-where", "name_ja IS NOT NULL"] if names - {None} else []
+        first = re.search(r"name_ja \(String\) = (.+)", ogrinfo("-al", "-q", "-limit", "1", *where, target))
+        read = None if first is None or first[1] == "(null)" else first[1]
+        assert read in names, path.name
     assert "Feature Count" in ogrinfo("-so", "-al", str(RELEASE / distribution.GPKG))
 
 

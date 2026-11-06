@@ -18,7 +18,8 @@ https://ihideck.github.io/geojson/ （ビューア Midnight Chart。公開の準
 | `japan/islands` | 主な島（点） | medium | 国土地理院「面積調」、Wikidata | 配布中 |
 | `japan/prefectures` | 都道府県境 | medium・low | 国土数値情報（行政区域） | 配布中 |
 | `japan/municipalities` | 市区町村境 | medium・low | 国土数値情報（行政区域） | 配布中 |
-| `world/eez` ほか | 排他的経済水域・領海・接続水域・基線・公海 | 50m・110m | Marine Regions、領海法施行令 | 準備中（利用の許可を確認中） |
+| `world/eez`・`world/territorial-seas`・`world/contiguous-zones`・`world/high-seas` | 排他的経済水域・領海・接続水域・公海 | 50m・110m | Marine Regions（VLIZ。許可を得て簡略化） | 配布中 |
+| `world/baselines` | 日本の直線基線 | 50m・110m | 領海法施行令 | 準備中（基点の測地系を確認中） |
 
 係争地の扱いは [docs/disputed-areas.md](docs/disputed-areas.md)、ファイルの大きさと簡略化の前後の値は [docs/size-report.md](docs/size-report.md) にあります。
 
@@ -42,7 +43,7 @@ GDAL では、GitHub Pages の FlatGeobuf を、ダウンロードせずに読�
 ogrinfo -so -al /vsicurl/https://ihideck.github.io/geojson/latest/world/countries/110m.fgb
 ```
 
-MapLibre GL JS では、PMTiles を [pmtiles](https://github.com/protomaps/PMTiles) のプロトコルで読みます。タイルのレイヤーは、面の `countries`、隣と接する境界の線の `borders`、名前を置く点の `labels` です。
+MapLibre GL JS では、PMTiles を [pmtiles](https://github.com/protomaps/PMTiles) のプロトコルで読みます。タイルのレイヤーは、面の `countries`、隣と接する境界の線の `borders`、名前を置く点の `labels` です。海域のレイヤーの `borders` は、隣の区域との境界と外側の限界の線で、海岸に沿う部分を含みません。
 
 ```js
 import maplibregl from "maplibre-gl";
@@ -66,7 +67,7 @@ map.addLayer({ id: "borders", type: "line", source: "countries", "source-layer":
 Lightweight boundaries of Japan and the world, drawn to one standard so the layers line up.
 
 - Viewer: https://ihideck.github.io/geojson/ (not published yet)
-- Published now: `world/countries` (Natural Earth, Japanese point of view), `japan/prefectures`, `japan/municipalities` and `japan/islands`. Maritime zones are coming next.
+- Published now: `world/countries` (Natural Earth, Japanese point of view), `japan/prefectures`, `japan/municipalities` and `japan/islands`. Maritime zones (EEZ, territorial seas, contiguous zones, high seas) are simplified from Marine Regions (VLIZ) with permission.
 - Formats: GeoJSON, TopoJSON, GeoPackage with QGIS styles, a QGIS project, Shapefile (UTF-8), FlatGeobuf, GeoParquet, PMTiles and a STAC catalog. See the table above for URLs.
 - Credits and licenses: [DATA_LICENSE.md](DATA_LICENSE.md). The boundaries have no legal status and must not be used for surveying or navigation.
 

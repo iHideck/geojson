@@ -21,6 +21,7 @@ import shapely.geometry
 import shapely.ops
 
 from boundaries import distribution, geo, qgis_project, registry, site_index, stac, styles, tools
+from boundaries.layer_build import outline_path
 from boundaries.limits import CSV_LIMIT
 from boundaries.package import attributes_csv
 from boundaries.registry import Layer, Registry, Resolution
@@ -103,7 +104,9 @@ def label_points(geojson: Path, out: Path) -> Path:
 
 
 def pmtiles(layer: Layer, res: Resolution, geojson: Path, work: Path) -> Path:
-    """面のレイヤーは、塗りの面・隣と接する境界の線（borders）・名前を置く点（labels）の3つのタイルレイヤーにする。
+    """面のレイヤーは、塗りの面・境界の線（borders）・名前を置く点（labels）の3つのタイルレイヤーにする。
+
+    境界の線は、隣と接する線。outlined のレイヤー（海域）では、builder が書いた、海岸に沿う部分を除いた輪郭の線。
 
     ズームは登録表の範囲で作り、上限より先はビューアが拡大して描く。
     """
@@ -111,9 +114,14 @@ def pmtiles(layer: Layer, res: Resolution, geojson: Path, work: Path) -> Path:
     out.unlink(missing_ok=True)
     inputs = ["-L", f"{layer.id.split('/')[-1]}:{geojson}"]
     if layer.geometry == "polygon":
-        lines = work / f"{distribution.table_name(layer, res.id)}-borders.geojson"
-        # 属性の無い線は GeometryCollection で書かれ、tippecanoe が地物として読まないので、FeatureCollection にする
-        tools.mapshaper("-i", geojson, "-innerlines", "-o", "format=geojson", "geojson-type=FeatureCollection", lines)
+        if layer.outlined:
+            lines = outline_path(geojson)
+        else:
+            lines = work / f"{distribution.table_name(layer, res.id)}-borders.geojson"
+            # 属性の無い線は GeometryCollection で書かれ、tippecanoe が地物として読まないので、FeatureCollection にする
+            tools.mapshaper(
+                "-i", geojson, "-innerlines", "-o", "format=geojson", "geojson-type=FeatureCollection", lines
+            )
         labels = label_points(geojson, work / f"{distribution.table_name(layer, res.id)}-labels.geojson")
         inputs += ["-L", f"borders:{lines}", "-L", f"labels:{labels}"]
     # 点は、低いズームでも間引かない（-r1）。面は、小さな島を四角に置き換えない

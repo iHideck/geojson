@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+### 追加
+
+- 海域の排他的経済水域 `world/eez`・領海 `world/territorial-seas`・接続水域 `world/contiguous-zones`・公海 `world/high-seas`（50m・110m）。VLIZ の許可を得て、Marine Regions の WFS から取得して簡略化する。PMTiles の `borders` は、隣の区域との境界と外側の限界の線で、海岸に沿う部分を含まない。ビューアでは、排他的経済水域を最初から見せる
+
+### 変更
+
+- 日本の直線基線 `world/baselines` は、施行令の基点の測地系を確かめるまで、既定は無効のままにする
+
 ## [0.1.0] - 2026-11-07
 
 ### 追加

@@ -47,6 +47,8 @@ class Source:
     page_url: str
     manual: bool
     legacy_tls: bool
+    # GeoServer の WFS の応答。毎回変わる timeStamp を固定してから照合する
+    geoserver: bool
     files: tuple[SourceFile, ...]
 
 
@@ -72,6 +74,7 @@ class Layer:
     title_ja: str
     title_en: str
     geometry: Geometry
+    outlined: bool
     sources: tuple[str, ...]
     checks_with: tuple[str, ...]
     resolutions: tuple[Resolution, ...]
@@ -153,6 +156,7 @@ def _parse_source(path: Path) -> Source:
         page_url=_require(data, "page_url", where),
         manual=manual,
         legacy_tls=bool(data.get("legacy_tls", False)),
+        geoserver=bool(data.get("geoserver", False)),
         files=tuple(files),
     )
 
@@ -192,13 +196,18 @@ def _parse_layer(data: dict, sources: dict[str, Source]) -> Layer:
     hold = data.get("hold")
     if not publish and not hold:
         raise RegistryError(f"{where}: publish: false には hold（理由）が要る")
+    geometry = _require(data, "geometry", where)
+    outlined = bool(data.get("outlined", False))
+    if outlined and geometry != "polygon":
+        raise RegistryError(f"{where}: outlined は面のレイヤーにだけ付ける")
     title = _require(data, "title", where)
     credit = _require(data, "credit", where)
     return Layer(
         id=lid,
         title_ja=title["ja"],
         title_en=title["en"],
-        geometry=_require(data, "geometry", where),
+        geometry=geometry,
+        outlined=outlined,
         sources=tuple(data["sources"]),
         checks_with=tuple(data.get("checks_with", [])),
         resolutions=_parse_resolutions(_require(data, "resolutions", where), where),

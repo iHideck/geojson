@@ -9,8 +9,8 @@
 | `world/countries` | Natural Earth v5.1.2 | パブリックドメイン | できる | 不要（任意） | 有効 |
 | `japan/prefectures`, `japan/municipalities` | 国土数値情報「行政区域」2026年版（N03） | オープンデータ（CC BY 4.0） | できる。測量法の承認申請は要らない（国土地理院に確認済み） | 必要 | 有効 |
 | `japan/islands` | 国土地理院「全国都道府県市区町村別面積調」付3「島面積」、Wikidata、総務省の団体コードの一覧 | 国土地理院コンテンツ利用規約（PDL1.0）、CC0、PDL1.0 | できる | 国土地理院と総務省の出典が必要 | 有効 |
-| `world/eez`, `world/territorial-seas`, `world/contiguous-zones`, `world/high-seas` | Marine Regions（VLIZ） | CC BY 4.0。ほかの場所でダウンロードできるようにしないよう依頼あり | VLIZ の許可を得るまで含めない | 必要 | 無効 |
-| `world/baselines` | Marine Regions に基線のデータは無い | 出典が未定 | 含めない | 未定 | 無効 |
+| `world/eez`, `world/territorial-seas`, `world/contiguous-zones`, `world/high-seas` | Marine Regions（VLIZ） | CC BY 4.0。ほかの場所でダウンロードできるようにしないよう依頼あり | できる（VLIZ の許可を得た） | 必要 | 有効 |
+| `world/baselines` | 領海法施行令の別表第一（日本の直線基線） | 権利の目的にならない（法令） | 基点の測地系を確かめるまで含めない | 出典を書く | 無効 |
 
 ## Natural Earth
 
@@ -120,9 +120,16 @@ N03 は「複製」の承認を得て作られていて、簡略化した境界�
   - 「We kindly request our users not to make our products available for download elsewhere and to always refer to marineregions.org for the most up-to-date products and services.」
 - 利用条件には、法的・経済的・航海の用途を想定しないこと、科学・教育・研究のためのものであることが書かれています。CC ライセンスと食い違う場合は CC ライセンスが優先するとも書かれています。
 - 刊行物や製品に使ったら info@marineregions.org に知らせてほしいとあります。
-- CC BY 4.0 だけを見れば再配布できますが、ダウンロードを他所に置かないでほしいという依頼があります。VLIZ の許可を得るまで、海域のレイヤーは `data/`・配布物・GitHub Pages に含めません。取得と変換の処理は作り、feature flag で既定を無効にします。
-- ダウンロードはページ上の申込みの画面を通ります。ビルドで自動取得してよいかも VLIZ に確かめます。
-- 依頼文は `docs/vliz-permission-request.md` にあります。
+- CC BY 4.0 だけを見れば再配布できますが、ダウンロードを他所に置かないでほしいという依頼があります。そこで VLIZ に、`docs/vliz-permission-request.md` の使い方を依頼し、すべて問題ないとの返事を得ました。
+  - 簡略化版を、リポジトリ・GitHub Release・GitHub Pages・npm で配る
+  - ビューアで、PMTiles にして見せる
+  - QGIS のプロジェクトとスタイルに入れる
+  - ビルドのときに自動で取得する
+- 取得は、VLIZ の WFS（`geo.vliz.be/geoserver/MarineRegions/wfs`）から GeoJSON で行います。VLIZ から取得の方法の指定はありませんでした。応答の `timeStamp` だけが毎回変わるので、固定してから SHA256 で照合します。
+- 依頼に書いたとおり、次のようにします。
+  - ファイルのメタデータ・README・ビューア・`DATA_LICENSE.md` に、製品ごとの引用（DOI）・CC BY 4.0・marineregions.org へのリンク・簡略化したことを書く
+  - 法的な境界ではなく、航海などに使えないことを書く
+  - 細かい形は配らず、細かい形が要る人を marineregions.org に案内する
 
 | データ | 版 | 引用（DOI） |
 | --- | --- | --- |
@@ -149,8 +156,8 @@ Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Maritime Boun
 
 - Marine Regions のダウンロード一覧と出典のページには、基線のデータがありません。内水（Internal Waters）は直線基線の陸側、群島水域（Archipelagic Waters）は群島基線の陸側の水域として説明されています。
 - 日本の直線基線は、「領海及び接続水域に関する法律施行令」（昭和52年政令第210号）別表第一の基点から作ります。別表には基点の緯度経度が 208 点あります。法令は著作権法第13条第1号により権利の目的になりません。基点の測地系は条文に書かれていないため要確認です。
-- 世界の基線は、VLIZ が内水と群島水域の外縁から導くことを認めた場合だけ作ります。
-- どちらも海域のレイヤーと同じく既定は無効で、管理者が有効にするまで含めません。
+- 世界の基線は、内水と群島水域の外縁から導くことを VLIZ が認めました。作るかは、これから決めます。
+- 日本の直線基線は、基点の測地系（日本測地系か世界測地系か）を一次資料で確かめるまで、既定は無効にして含めません。施行令は平成13年政令第434号で改められ（2002年4月1日施行）、同じ日に測量法と水路業務法の改正（平成13年法律第53号）で世界測地系に移りましたが、別表の座標がどちらに従うかを書いた資料を見つけていません。
 
 出典:
 
@@ -163,7 +170,7 @@ Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Maritime Boun
 | --- | --- | --- |
 | MapLibre GL JS 6.16.0 | BSD-3-Clause | npm の `license` |
 | PMTiles 4.5.0 | BSD-3-Clause | npm の `license` |
-| フォント | 未定（SIL OFL 1.1 の書体から選ぶ） | 採用時に OFL の本文と予約フォント名を確かめる |
+| フォント | 配らない（端末のフォントを使う） | — |
 
 OGP 画像やスクリーンショットに国土数値情報の境界を描くときは、画像の中にも出典を入れます。
 
@@ -171,10 +178,7 @@ OGP 画像やスクリーンショットに国土数値情報の境界を描く�
 
 | 事項 | 影響する公開物 | 次にやること |
 | --- | --- | --- |
-| 海域データの再配布・表示・変換の許可 | 海域の5レイヤー | VLIZ に依頼する（`docs/vliz-permission-request.md`） |
-| 世界の基線を導いてよいか | `world/baselines` | VLIZ への依頼に含める |
 | 施行令の基点の測地系 | `world/baselines`（施行令を使う場合） | 海上保安庁の資料で確かめる |
-| ビューアのフォント | GitHub Pages | 採用時に確かめる |
 
 ## 国土地理院への問い合わせ文の案
 

@@ -5,10 +5,11 @@ import { initialState, STAGES, type ViewState } from "./state.ts";
 import { buildStyle, DRAW_FROM } from "./style.ts";
 
 const BASE = new URL("https://example.test/geojson/");
-const layer = (id: string, geometry: CatalogLayer["geometry"], resolutions: [string, number, number][]): CatalogLayer => ({
+const layer = (id: string, geometry: CatalogLayer["geometry"], resolutions: [string, number, number][], outlined = false): CatalogLayer => ({
   id,
   title: { ja: id, en: id },
   geometry,
+  outlined,
   credit: { ja: "", en: "" },
   license: "CC0-1.0",
   metadata: `latest/${id}/metadata.json`,
@@ -20,8 +21,11 @@ const CATALOG: Catalog = {
     layer("world/countries", "polygon", [["50m", 2, 6], ["110m", 0, 3]]),
     layer("japan/municipalities", "polygon", [["medium", 7, 10], ["low", 5, 8]]),
     layer("japan/islands", "point", [["medium", 2, 8]]),
+    layer("world/eez", "polygon", [["50m", 2, 6], ["110m", 0, 3]], true),
   ],
 };
+const sourceLayer = (style: ReturnType<typeof buildStyle>, id: string): unknown =>
+  (style.layers.find((l) => l.id === id) as { "source-layer"?: string } | undefined)?.["source-layer"];
 
 test("外部の背景地図タイルや字形を読まず、データはサイトの PMTiles だけを読む", () => {
   const style = buildStyle(CATALOG, BASE, shown());
@@ -68,4 +72,12 @@ test("選んだ地物だけを強調し、英語ではラベルに英語名を�
   assert.deepEqual((other as { filter?: unknown }).filter, ["==", ["id"], -1]);
   const label = style.layers.find((l) => l.id === "japan/islands@medium:label");
   assert.deepEqual((label?.layout as Record<string, unknown>)["text-field"], ["coalesce", ["get", "name_en"], ["get", "name_ja"]]);
+});
+
+test("面のレイヤーは境界の線を borders で引き、海域（outlined）には名前を出さない", () => {
+  const style = buildStyle(CATALOG, BASE, shown());
+  assert.equal(sourceLayer(style, "world/countries@50m:line"), "borders");
+  assert.equal(sourceLayer(style, "world/eez@50m:line"), "borders");
+  assert.ok(style.layers.some((l) => l.id === "world/countries@50m:label"));
+  assert.ok(!style.layers.some((l) => l.id.startsWith("world/eez@") && l.id.endsWith(":label")));
 });

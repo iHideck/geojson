@@ -9,7 +9,7 @@ from pathlib import Path
 
 import shapely
 from pyproj import Geod
-from shapely.geometry import MultiPolygon, mapping, shape
+from shapely.geometry import MultiPolygon, Polygon, mapping, shape
 from shapely.geometry.polygon import orient
 
 GEOD = Geod(ellps="WGS84")
@@ -77,7 +77,12 @@ def problems(fc: dict, precision: int) -> list[str]:
                 if _decimals(lon) > precision or _decimals(lat) > precision:
                     found.append(f"{where}: 小数点以下が {precision} 桁を超える {lon},{lat}")
                     break
-            if any(abs(b[0] - a[0]) > 180 for a, b in zip(ring, ring[1:], strict=False)):
+            # 極（緯度 ±90）の上を通る辺は、地図の上端と下端をたどる線で、180度線をまたがない（北極海を含む公海など）
+            crossing = (
+                abs(b[0] - a[0]) > 180 and not (abs(a[1]) == 90 and a[1] == b[1])
+                for a, b in zip(ring, ring[1:], strict=False)
+            )
+            if any(crossing):
                 found.append(f"{where}: 180度線をまたぐ線分がある")
         if geometry["type"] in ("Polygon", "MultiPolygon"):
             polygons = [geometry["coordinates"]] if geometry["type"] == "Polygon" else geometry["coordinates"]
@@ -154,6 +159,14 @@ def _round_coords(coords, precision: int):
     return [_round_coords(c, precision) for c in coords]
 
 
+def _polygons(geometry):
+    """面だけを取り出し、外周を反時計回りにそろえて、1つの面か複数の面にする。"""
+    polygons = [orient(p, sign=1.0) for p in shapely.get_parts(geometry) if p.geom_type == "Polygon" and not p.is_empty]
+    if not polygons:
+        return Polygon()
+    return polygons[0] if len(polygons) == 1 else MultiPolygon(polygons)
+
+
 def repaired(fc: dict, precision: int) -> tuple[dict, list[str]]:
     """丸めで妥当でなくなった面を、座標の格子を保ったまま直す。直した地物の説明を返す。
 
@@ -165,10 +178,14 @@ def repaired(fc: dict, precision: int) -> tuple[dict, list[str]]:
         geometry = shape(feature["geometry"])
         if geometry.is_valid:
             continue
-        made = shapely.set_precision(shapely.make_valid(geometry), grid)
-        polygons = [p for p in shapely.get_parts(made) if p.geom_type == "Polygon" and not p.is_empty]
-        polygons = [orient(p, sign=1.0) for p in polygons]
-        result = polygons[0] if len(polygons) == 1 else MultiPolygon(polygons)
+        result = _polygons(shapely.set_precision(shapely.make_valid(geometry), grid))
+        if not result.is_valid or result.is_empty:
+            # 直した面どうしが辺を共有して、まとめると妥当でないとき（海域の大きな地物など）は、
+            # 結合してから格子に合わせる
+            parts = [
+                p for p in shapely.get_parts(shapely.make_valid(geometry)) if p.geom_type in ("Polygon", "MultiPolygon")
+            ]
+            result = _polygons(shapely.set_precision(shapely.unary_union(parts), grid))
         if not result.is_valid or result.is_empty:
             raise ValueError(f"地物 {i} の形を直せなかった: {feature['properties']}")
         out = mapping(result)

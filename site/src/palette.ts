@@ -22,7 +22,7 @@ export type LineLook = {
   glow?: number;
 };
 
-// レイヤーごとの線の描き方。境界の線は、PMTiles の borders（隣と接する線）を使う
+// レイヤーごとの線の描き方。境界の線は、PMTiles の borders を使う
 export const LINES: Record<string, LineLook> = {
   "world/countries": { color: "#f4b35e", width: [1, 1.8, 2.4], glow: 0.34 },
   "japan/prefectures": { color: "#86d6f7", width: [0.7, 1.3, 1.8], dash: [4, 2], glow: 0.16 },

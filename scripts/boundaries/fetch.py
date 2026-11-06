@@ -15,6 +15,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import zlib
 from datetime import date
 from pathlib import Path
 
@@ -60,10 +61,10 @@ def retry_after(error: urllib.error.HTTPError, attempt: int) -> float:
     return min(2.0 ** (attempt + 1), 60.0)
 
 
-def download(url: str, dest: Path, legacy_tls: bool = False) -> str:
+def download(url: str, dest: Path, legacy_tls: bool = False, gzip: bool = False) -> str:
     for attempt in range(ATTEMPTS):
         try:
-            return _download_once(url, dest, legacy_tls)
+            return _download_once(url, dest, legacy_tls, gzip)
         except urllib.error.HTTPError as e:
             if e.code not in RETRY_STATUSES or attempt == ATTEMPTS - 1:
                 raise
@@ -73,18 +74,55 @@ def download(url: str, dest: Path, legacy_tls: bool = False) -> str:
     raise AssertionError("ここには来ない")
 
 
-def _download_once(url: str, dest: Path, legacy_tls: bool) -> str:
-    """dest.part に書いてから名前を変え、途中で止まっても壊れたファイルを残さない。"""
+def _download_once(url: str, dest: Path, legacy_tls: bool, gzip: bool = False) -> str:
+    """dest.part に書いてから名前を変え、途中で止まっても壊れたファイルを残さない。
+
+    gzip のときは、圧縮して送ってもらい、ほどきながら書く（GeoServer の JSON は、圧縮すると 3 分の 1 ほどになる）。
+    """
     part = dest.with_name(dest.name + ".part")
     digest = hashlib.sha256()
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    headers = {"User-Agent": USER_AGENT, **({"Accept-Encoding": "gzip"} if gzip else {})}
+    request = urllib.request.Request(url, headers=headers)
     context = tls_context(legacy_tls) if url.startswith("https:") else None
     with urllib.request.urlopen(request, timeout=120, context=context) as response, part.open("wb") as out:
+        inflate = (
+            zlib.decompressobj(16 + zlib.MAX_WBITS) if response.headers.get("Content-Encoding") == "gzip" else None
+        )
         while chunk := response.read(CHUNK):
-            digest.update(chunk)
-            out.write(chunk)
+            data = inflate.decompress(chunk) if inflate else chunk
+            digest.update(data)
+            out.write(data)
+        if inflate:
+            rest = inflate.flush()
+            digest.update(rest)
+            out.write(rest)
     part.replace(dest)
     return digest.hexdigest()
+
+
+GEOSERVER_TIMESTAMP = re.compile(rb'"timeStamp":"[0-9T:.Z-]+"')
+TAIL = 4096
+
+
+def fix_geoserver_timestamp(path: Path) -> None:
+    """GeoServer の JSON の終わりにある、応答を作った時刻（timeStamp）を、同じ長さのゼロにする。"""
+    size = path.stat().st_size
+    with path.open("r+b") as f:
+        start = max(0, size - TAIL)
+        f.seek(start)
+        tail = f.read()
+        fixed = GEOSERVER_TIMESTAMP.sub(lambda m: re.sub(rb"[0-9]", b"0", m.group(0)), tail)
+        if fixed != tail:
+            f.seek(start)
+            f.write(fixed)
+
+
+def fetch_file(source: registry.Source, url: str, dest: Path) -> str:
+    got = download(url, dest, source.legacy_tls, gzip=source.geoserver)
+    if source.geoserver:
+        fix_geoserver_timestamp(dest)
+        got = sha256_of(dest)
+    return got
 
 
 def ensure(source: registry.Source, cache: Path) -> list[Path]:
@@ -100,7 +138,7 @@ def ensure(source: registry.Source, cache: Path) -> list[Path]:
             )
         dest.parent.mkdir(parents=True, exist_ok=True)
         print(f"取得: {f.url}", file=sys.stderr)
-        got = download(f.url, dest, source.legacy_tls)
+        got = fetch_file(source, f.url, dest)
         time.sleep(PACE)
         if got != f.sha256:
             dest.unlink()
@@ -114,7 +152,7 @@ def update(source: registry.Source, cache: Path, ledger: Path) -> None:
     for f in source.files:
         dest = cache / source.id / f.name
         dest.parent.mkdir(parents=True, exist_ok=True)
-        got = download(f.url, dest, source.legacy_tls)
+        got = fetch_file(source, f.url, dest)
         size = dest.stat().st_size
         block = re.compile(rf"(- url: {re.escape(f.url)}\n(?:    .*\n)*?    sha256: )\S+(\n    bytes: )\S+")
         text, n = block.subn(rf"\g<1>{got}\g<2>{size}", text)

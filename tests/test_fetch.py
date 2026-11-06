@@ -22,6 +22,7 @@ def make_source(tmp_path: Path, payload: bytes, sha256: str | None, manual: bool
         page_url="https://example.org/",
         manual=manual,
         legacy_tls=False,
+        geoserver=False,
         files=(file,),
     )
 
@@ -146,3 +147,50 @@ def test_a_missing_file_is_not_retried(tmp_path, monkeypatch):
         server.close()
     assert server.calls == 1
     assert not (tmp_path / "data.bin").exists()
+
+
+def test_the_geoserver_timestamp_is_fixed_so_the_checksum_stays_the_same(tmp_path):
+    def response(stamp: str) -> bytes:
+        return (
+            b'{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"mrgid":1}}],'
+            b'"totalFeatures":1,"timeStamp":"' + stamp.encode() + b'","crs":null}'
+        )
+
+    first, second = tmp_path / "a.json", tmp_path / "b.json"
+    first.write_bytes(response("2026-11-06T16:58:07.079Z"))
+    second.write_bytes(response("2026-11-07T01:02:03.456Z"))
+    for path in (first, second):
+        fetch.fix_geoserver_timestamp(path)
+    assert first.read_bytes() == second.read_bytes()
+    assert b'"timeStamp":"0000-00-00T00:00:00.000Z"' in first.read_bytes()
+    assert first.stat().st_size == len(response("2026-11-06T16:58:07.079Z"))
+
+
+def test_a_gzip_response_is_written_uncompressed(tmp_path):
+    import gzip
+    import http.server
+    import threading
+
+    payload = b'{"type":"FeatureCollection","features":[]}' * 100
+
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def log_message(self, *args):
+            pass
+
+        def do_GET(self):
+            body = gzip.compress(payload) if "gzip" in self.headers.get("Accept-Encoding", "") else payload
+            self.send_response(200)
+            if body is not payload:
+                self.send_header("Content-Encoding", "gzip")
+            self.end_headers()
+            self.wfile.write(body)
+
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        got = fetch.download(f"http://127.0.0.1:{server.server_address[1]}/x.json", tmp_path / "x.json", gzip=True)
+    finally:
+        server.shutdown()
+        server.server_close()
+    assert (tmp_path / "x.json").read_bytes() == payload
+    assert got == hashlib.sha256(payload).hexdigest()

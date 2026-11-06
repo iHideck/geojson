@@ -50,7 +50,7 @@ def package(reg: registry.Registry, dist: Path = DIST, data: Path = DATA) -> lis
 
 
 def write_styles(reg: registry.Registry, out: Path = registry.ROOT / "styles") -> list[Path]:
-    """全レイヤーの QML と SLD を styles/ に書く。海域のように公開していないレイヤーの分も、スタイルは置く。"""
+    """全レイヤーの QML と SLD を styles/ に書く。基線のように公開していないレイヤーの分も、スタイルは置く。"""
     return [path for layer_id, style in styles.load().items() for path in styles.write(reg.layer(layer_id), style, out)]
 
 

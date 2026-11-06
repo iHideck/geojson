@@ -6,7 +6,8 @@ import pytest
 from boundaries import registry
 
 MARITIME = {"world/eez", "world/territorial-seas", "world/contiguous-zones", "world/baselines", "world/high-seas"}
-PUBLISHED_NOW = {"world/countries", "japan/prefectures", "japan/municipalities", "japan/islands"}
+MARINE_REGIONS = {"world/eez", "world/territorial-seas", "world/contiguous-zones", "world/high-seas"}
+PUBLISHED_NOW = {"world/countries", "japan/prefectures", "japan/municipalities", "japan/islands"} | MARINE_REGIONS
 
 
 def copy_registry(tmp_path: Path) -> Path:
@@ -20,10 +21,12 @@ def test_the_committed_registry_loads():
     assert {layer.id for layer in reg.layers} >= MARITIME | PUBLISHED_NOW
 
 
-def test_maritime_layers_are_off_unless_the_flag_is_set(monkeypatch):
+def test_baselines_are_off_unless_the_flag_is_set(monkeypatch):
+    """基線は、施行令の基点の測地系を確かめるまで作らない。Marine Regions の海域は、いつも作る。"""
     monkeypatch.delenv("GEOJSON_ENABLE_MARITIME", raising=False)
     enabled = {layer.id for layer in registry.load().enabled_layers()}
-    assert enabled.isdisjoint(MARITIME)
+    assert "world/baselines" not in enabled
+    assert enabled >= MARINE_REGIONS
     monkeypatch.setenv("GEOJSON_ENABLE_MARITIME", "1")
     enabled = {layer.id for layer in registry.load().enabled_layers()}
     assert enabled >= MARITIME
@@ -34,11 +37,15 @@ def test_only_cleared_layers_are_published():
     assert published == PUBLISHED_NOW
 
 
-def test_marine_regions_is_never_fetched_automatically():
-    reg = registry.load()
-    for source in reg.sources.values():
-        if "marineregions" in source.license_url:
-            assert source.manual
+def test_marine_regions_is_fetched_from_the_vliz_wfs_with_the_timestamp_fixed():
+    """VLIZ が認めた取り方（VLIZ の WFS）だけで取り、応答の時刻を固定してから SHA256 で照合する。"""
+    sources = [s for s in registry.load().sources.values() if "marineregions" in s.license_url]
+    assert len(sources) == 4
+    for source in sources:
+        assert not source.manual and source.geoserver, source.id
+        assert all(f.url.startswith("https://geo.vliz.be/geoserver/MarineRegions/wfs?") for f in source.files), (
+            source.id
+        )
 
 
 def test_resolutions_use_the_agreed_precision():
@@ -62,6 +69,7 @@ def test_resolutions_use_the_agreed_precision():
         ("{ id: 110m, precision: 4, zoom: [0, 3] }", "{ id: 110m, precision: 4, zoom: [0, 1] }", "隙間がある"),
         ("{ id: 110m, precision: 4, zoom: [0, 3] }", "{ id: 110m, precision: 6, zoom: [0, 3] }", "細かい順"),
         ("{ id: 50m, precision: 5, zoom: [2, 6] }", "{ id: 50m, precision: 5, zoom: [6, 2] }", "0 以上 14 以下"),
+        ("    geometry: point\n", "    geometry: point\n    outlined: true\n", "面のレイヤーにだけ"),
     ],
 )
 def test_a_broken_registry_is_rejected(tmp_path, before, after, message):

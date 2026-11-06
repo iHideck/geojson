@@ -2,7 +2,7 @@ import shutil
 
 import pytest
 
-from boundaries import registry, verify_pages
+from boundaries import distribution, registry, verify_pages
 from range_server import serve
 
 PAGES = registry.ROOT / "dist" / "pages"
@@ -23,12 +23,14 @@ def test_the_built_site_passes_the_checks_after_deploy(site):
 
 
 def test_a_file_of_an_unpublished_layer_is_reported(site):
-    leaked = site / "latest" / "world" / "eez" / "50m.pmtiles"
+    held = next(layer for layer in registry.load().layers if not layer.publish)
+    path = distribution.pages_path(held, held.resolutions[0].id, "pmtiles")
+    leaked = site / path
     leaked.parent.mkdir(parents=True)
     leaked.write_bytes(b"x" * 32)
     with serve(site) as base:
         problems = verify_pages.check(base)
-    assert any("latest/world/eez/50m.pmtiles" in p for p in problems)
+    assert any(path in p for p in problems)
 
 
 def test_a_server_that_ignores_range_requests_is_reported(site, monkeypatch):

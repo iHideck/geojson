@@ -1,6 +1,6 @@
 import type { CatalogLayer } from "./catalog.ts";
 import type { Strings } from "./i18n.ts";
-import type { Entry } from "./search.ts";
+import { type Entry, entryName } from "./search.ts";
 import type { Lang } from "./state.ts";
 
 export type CardHandlers = {
@@ -23,8 +23,10 @@ export function createCard(root: HTMLElement, handlers: CardHandlers): {
   });
   return {
     show(layer, entry, lang, t) {
-      const name = lang === "en" ? (text(entry.name_en) ?? text(entry.name_ja)) : text(entry.name_ja);
-      const other = lang === "en" ? text(entry.name_ja) : text(entry.name_en);
+      const name = entryName(entry, lang);
+      // もう一方の言葉の名前。片方の言葉の名前しか無い地物（海域）では、見出しと同じになるので出さない
+      const otherName = entryName(entry, lang === "en" ? "ja" : "en");
+      const other = otherName === name ? null : otherName;
       const rows = Object.entries(t.field)
         .map(([field, label]) => [label, text(entry[field])] as const)
         .filter((row): row is readonly [string, string] => row[1] !== null);

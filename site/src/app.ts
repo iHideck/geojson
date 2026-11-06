@@ -10,7 +10,7 @@ import { applyTexts, type Strings, strings } from "./i18n.ts";
 import { homeView, type Intro, playIntro } from "./intro.ts";
 import { createPanel } from "./panel.ts";
 import { attachReadout } from "./readout.ts";
-import { type Hit, loadSearch, search } from "./search.ts";
+import { entryName, type Hit, loadSearch, search } from "./search.ts";
 import { initialState, type Lang, readHash, STAGES, type ViewState, writeHash } from "./state.ts";
 import { buildStyle, PICK_PARTS } from "./style.ts";
 
@@ -45,8 +45,7 @@ function attachSearch(catalog: Catalog, t: () => Strings, lang: () => Lang, pick
         item.id = `search-${i}`;
         item.setAttribute("role", "option");
         item.setAttribute("aria-selected", String(i === active));
-        const name = lang() === "en" ? (hit.entry.name_en ?? hit.entry.name_ja) : hit.entry.name_ja;
-        item.append(String(name ?? ""), Object.assign(document.createElement("small"), { textContent: titles.get(hit.layer)?.[lang()] ?? "" }));
+        item.append(entryName(hit.entry, lang()) ?? "", Object.assign(document.createElement("small"), { textContent: titles.get(hit.layer)?.[lang()] ?? "" }));
         item.addEventListener("mousedown", (e) => {
           e.preventDefault();
           choose(i);

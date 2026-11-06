@@ -1,3 +1,5 @@
+import type { Lang } from "./state.ts";
+
 // GitHub Pages の latest/search.json。行の並びは PMTiles の地物の番号と同じ
 export type Entry = { [field: string]: string | number | [number, number, number, number] } & {
   bbox: [number, number, number, number];
@@ -6,6 +8,13 @@ export type SearchIndex = { layers: Record<string, Entry[]> };
 export type Hit = { layer: string; index: number; entry: Entry };
 
 const NAMES = ["name_ja", "name_en", "name_kana", "pref_ja"];
+
+/** 画面の言葉での名前。無いときは、もう一方の言葉の名前を使う（海域には日本語の名前が無い）。 */
+export function entryName(entry: Entry, lang: Lang): string | null {
+  const [first, second] = lang === "en" ? [entry.name_en, entry.name_ja] : [entry.name_ja, entry.name_en];
+  const name = first ?? second;
+  return typeof name === "string" ? name : null;
+}
 const CODES = ["iso_a2", "iso_a3", "iso_n3", "pref_code", "iso_3166_2", "lg_code", "lg_codes"];
 
 /** 全角と半角、大文字と小文字、カタカナとひらがなの違いを無くす。 */
