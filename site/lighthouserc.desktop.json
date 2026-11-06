@@ -8,7 +8,7 @@
       ],
       "numberOfRuns": 3,
       "settings": {
-        "chromeFlags": "--headless=new --use-angle=swiftshader --enable-unsafe-swiftshader --disable-gpu-compositing",
+        "chromeFlags": "--headless=new --use-angle=swiftshader --enable-unsafe-swiftshader --disable-gpu-compositing --no-sandbox",
         "onlyCategories": [
           "performance",
           "accessibility",
