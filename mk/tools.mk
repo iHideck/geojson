@@ -25,7 +25,7 @@ build: build-image # 取得から検証・パッケージ化までを、イメ�
 	$(IN_IMAGE) make build-in-image
 
 .PHONY: build-in-image
-build-in-image: check-tools fetch build-layers build-formats package-data test # make build の中身。イメージの中で動かす
+build-in-image: check-tools fetch build-layers build-formats package-data build-npm test # make build の中身。イメージの中で動かす
 
 .PHONY: check-tools
 check-tools: # 道具がそろっているかを、版を表示して確かめる
