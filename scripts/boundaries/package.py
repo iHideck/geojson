@@ -43,9 +43,9 @@ def package(reg: registry.Registry, dist: Path = DIST, data: Path = DATA) -> lis
             path = target / "attributes.csv"
             path.write_text(table)
             written.append(path)
-    for parent in sorted({p.parent for p in data.rglob("*") if p.is_dir()}, reverse=True):
-        if parent != data and not any(parent.iterdir()):
-            parent.rmdir()
+    for folder in sorted((p for p in data.rglob("*") if p.is_dir()), reverse=True):
+        if not any(folder.iterdir()):
+            folder.rmdir()
     return written
 
 

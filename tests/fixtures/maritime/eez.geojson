@@ -1,0 +1,6 @@
+{"type": "FeatureCollection", "features": [
+{"type": "Feature", "properties": {"MRGID": 9001, "GEONAME": "Synthetic A EEZ", "POL_TYPE": "200NM", "ISO_SOV1": "AAA"}, "geometry": {"type": "Polygon", "coordinates": [[[140, 30], [141, 30], [141, 31], [140, 31], [140, 30]]]}},
+{"type": "Feature", "properties": {"MRGID": 9002, "GEONAME": "Synthetic B EEZ", "POL_TYPE": "200NM", "ISO_SOV1": "BBB"}, "geometry": {"type": "Polygon", "coordinates": [[[141, 30], [142, 30], [142, 31], [141, 31], [141, 30]]]}},
+{"type": "Feature", "properties": {"MRGID": 9003, "GEONAME": "Synthetic C EEZ", "POL_TYPE": "Joint regime", "ISO_SOV1": "CCC"}, "geometry": {"type": "Polygon", "coordinates": [[[179, -16], [-179, -16], [-179, -15], [179, -15], [179, -16]]]}},
+{"type": "Feature", "properties": {"MRGID": 9004, "GEONAME": "Synthetic D EEZ", "POL_TYPE": "200NM", "ISO_SOV1": "DDD"}, "geometry": null}
+]}
