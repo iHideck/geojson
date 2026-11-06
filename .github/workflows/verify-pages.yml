@@ -1,0 +1,31 @@
+name: 公開した GitHub Pages を確かめる
+
+# デプロイの後（pages.yml）と、手で動かしたときに、公開したファイルを確かめる
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Range 要求・CORS・公開していないレイヤーを確かめる
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      - name: GitHub Pages の PMTiles と FlatGeobuf を、ブラウザと同じ形で読む
+        run: PYTHONPATH=scripts uv run --frozen python -m boundaries.verify_pages https://ihideck.github.io/geojson/
+      # GitHub Release の URL は CORS を許さないが、GDAL の /vsicurl/ はリダイレクトの先を Range で読める
+      - name: GDAL で、最新のリリースの FlatGeobuf をダウンロードせずに読む
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "リリースがまだ無いので、確かめない"
+            exit 0
+          fi
+          image=$(sed -n 's/^FROM \(ghcr\.io\/osgeo\/gdal[^ ]*\).*/\1/p' Dockerfile | tail -1)
+          docker run --rm "$image" ogrinfo -ro -so -al /vsicurl/https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.fgb

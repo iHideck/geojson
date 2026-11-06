@@ -23,13 +23,19 @@ on:
   schedule:
     - cron: '0 18 * * 0'
   workflow_dispatch:
+  # リリースとデプロイのワークフローが呼ぶ。upload のときは、作った配布物を artifact で渡す
   workflow_call:
+    inputs:
+      upload:
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: data-${{ github.ref }}
+  # 配布物を渡すときは、ほかの実行に止められないよう、実行ごとの組にする
+  group: ${{ inputs.upload && format('data-upload-{0}', github.run_id) || format('data-{0}', github.ref) }}
   cancel-in-progress: true
 
 jobs:
@@ -64,3 +70,18 @@ jobs:
           git status --porcelain -- data docs/size-report.md styles
           git diff --exit-code -- data docs/size-report.md styles
           test -z "$(git status --porcelain -- data docs/size-report.md styles)"
+      # 公開するレイヤーのファイルだけが入る（tests/test_formats.py と tests/test_leaks.py で確かめている）
+      - name: リリースのファイルを渡す
+        if: inputs.upload
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release
+          path: dist/release
+          retention-days: 1
+      - name: GitHub Pages のデータを渡す
+        if: inputs.upload
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pages
+          path: dist/pages
+          retention-days: 1
