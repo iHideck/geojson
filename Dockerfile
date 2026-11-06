@@ -16,7 +16,7 @@ RUN curl -fsSL "https://github.com/felt/tippecanoe/archive/refs/tags/${TIPPECANO
 FROM ghcr.io/osgeo/gdal:ubuntu-full-3.13.3@sha256:2dd0f81ef927ff4c3d4dbe4f73c029dc86d4073974c0564f8e196f6e1412e2e0
 ARG NODE_VERSION=24.22.2
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends ca-certificates curl make xz-utils \
+  && apt-get install -y --no-install-recommends ca-certificates curl git make xz-utils \
   && rm -rf /var/lib/apt/lists/*
 RUN arch="$(dpkg --print-architecture)" \
   && case "$arch" in amd64) node_arch=x64 ;; arm64) node_arch=arm64 ;; *) exit 1 ;; esac \

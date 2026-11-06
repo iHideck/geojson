@@ -2,6 +2,8 @@ import re
 import subprocess
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 MAX_TRACKED_BYTES = 10 * 1024 * 1024
 MAKEFILES = [ROOT / "Makefile", *sorted((ROOT / "mk").glob("*.mk"))]
@@ -26,7 +28,10 @@ VERBS = {
 
 
 def tracked_files() -> list[Path]:
-    out = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, check=True).stdout
+    try:
+        out = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, check=True).stdout
+    except FileNotFoundError, subprocess.CalledProcessError:
+        pytest.skip("git が使えない（worktree をイメージの中で開いたときなど）")
     return [ROOT / p for p in out.decode().split("\0") if p]
 
 
