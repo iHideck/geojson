@@ -6,7 +6,7 @@
 
 ### 追加
 
-- 海域の排他的経済水域 `world/eez`・領海 `world/territorial-seas`・接続水域 `world/contiguous-zones`・公海 `world/high-seas`（50m・110m）。VLIZ の許可を得て、Marine Regions の WFS から取得して簡略化する。ビューアでは、排他的経済水域を最初から見せる
+- 海域の排他的経済水域 `world/eez`・領海 `world/territorial-seas`・接続水域 `world/contiguous-zones`・公海 `world/high-seas`（50m・110m）。VLIZ の許可を得て、Marine Regions の WFS から取得して簡略化する。PMTiles の `borders` は、隣の区域との境界と外側の限界の線で、海岸に沿う部分を含まない。ビューアでは、排他的経済水域を最初から見せる
 
 ### 変更
 
