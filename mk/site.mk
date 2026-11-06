@@ -14,3 +14,7 @@ build-site: # ビューアを site/dist に作る。make build で作った dist
 check-site: # ビューアの型と単体テストを確かめる
 	npm run check --prefix site
 	npm test --prefix site
+
+.PHONY: capture-site
+capture-site: # OGP と静止画（site/public/og.jpg）を、ビルドしたビューアから撮り直す。make build と make build-site の後に動かす
+	npm run capture --prefix site

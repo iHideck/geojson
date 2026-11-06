@@ -20,3 +20,4 @@
 - ビューア Midnight Chart の地図。MapLibre GL JS と PMTiles で、GitHub Pages の上だけで動く。ズームに応じて解像度を切り替え、手動でも選べる
 - リリースと GitHub Pages のデプロイのワークフロー。v で始まるタグで GitHub Release を作って GitHub Pages に出し、公開した後に Range 要求と CORS を確かめる。リリース前の確認の手順（`docs/release-checklist.md`）
 - npm パッケージ `japan-world-boundaries` の構成（軽い GeoJSON・TopoJSON・`metadata.json`）。`make build` が `dist/npm` に組む。まだ公開しない
+- ビューアの演出と画面。地球全体から日本へ移る演出、凡例（表示・不透明度・解像度）、位置・ズーム・縮尺の読み取り、経緯度の目盛り、コンパス、地物の詳細、検索、URL への保持、データ・使い方・ライセンスの画面、日本語と英語、スマートフォンのボトムシート、WebGL が無いときの静止画、OGP

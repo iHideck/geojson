@@ -30,3 +30,7 @@ export async function loadCatalog(base: string): Promise<Catalog> {
   }
   return (await response.json()) as Catalog;
 }
+
+// PMTiles の地物の番号は、tippecanoe の --generate-ids が入力の順に 1 から振る。検索の索引の行は 0 から数える
+export const featureIndex = (id: number | string): number => Number(id) - 1;
+export const featureId = (index: number): number => index + 1;

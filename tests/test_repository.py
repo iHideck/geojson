@@ -10,6 +10,7 @@ MAKEFILES = [ROOT / "Makefile", *sorted((ROOT / "mk").glob("*.mk"))]
 TARGET = re.compile(r"^([a-z][a-z0-9-]*):(?!=)")
 VERBS = {
     "build",
+    "capture",
     "check",
     "clean",
     "deploy",
