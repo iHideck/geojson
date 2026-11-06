@@ -11,6 +11,7 @@ __pycache__/
 
 # ビューア
 /site/dist/
+/site/node_modules/
 /test-results/
 /playwright-report/
 /.lighthouseci/

@@ -8,6 +8,14 @@ updates:
     groups:
       npm:
         patterns: ['*']
+  # ビューア（MapLibre・PMTiles・Vite）
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+    groups:
+      site:
+        patterns: ['*']
   - package-ecosystem: uv
     directory: /
     schedule:
