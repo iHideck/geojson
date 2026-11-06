@@ -1,0 +1,13 @@
+{
+  "name": "geojson-boundaries-workspace",
+  "private": true,
+  "description": "日本と世界の境界データとビューア Midnight Chart",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "mapshaper": "0.7.101"
+  }
+}
