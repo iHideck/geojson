@@ -1,6 +1,6 @@
-name: データ
+name: データとビューア
 
-# 道具のイメージやデータを作る処理が変わったときと、週1回、データを作り直して検査する
+# 道具のイメージ・データを作る処理・ビューアが変わったときと、週1回、データを作り直して、データとビューアを検査する
 on:
   pull_request:
     paths:
@@ -13,6 +13,7 @@ on:
       - data/**
       - docs/size-report.md
       - styles/**
+      - site/**
       - tests/**
       - mk/**
       - package.json
@@ -78,10 +79,51 @@ jobs:
           name: release
           path: dist/release
           retention-days: 1
+      # ビューアの検査（下の site）と、デプロイ（pages.yml）が使う
       - name: GitHub Pages のデータを渡す
-        if: inputs.upload
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: pages
           path: dist/pages
           retention-days: 1
+
+  site:
+    name: ビューアを、作ったデータで確かめる（ブラウザ・見た目・Lighthouse・大きさ）
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # 見た目の比べる元の画面（site/tests/*-snapshots）を撮ったのと同じイメージで動かす
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
+    env:
+      CI: "1"
+      HOME: /root
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: pages
+          path: dist/pages
+      - run: npm ci --prefix site
+      - run: npm run build --prefix site
+      - name: 初めに読む JS と CSS の大きさを、予算と比べる
+        run: npm run budget --prefix site
+      - name: ブラウザで、PMTiles の表示・操作・見た目を確かめる（PC とスマートフォンの幅）
+        run: npx playwright test
+        working-directory: site
+      - name: Lighthouse で、LCP（PC 2.5 秒、スマートフォン 4 秒）とアクセシビリティを確かめる
+        working-directory: site
+        run: |
+          CHROME_PATH=$(node -e 'console.log(require("@playwright/test").chromium.executablePath())') npm run lighthouse
+      - name: 落ちたときの画面と報告を残す
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-report
+          # 見た目の元の画面が無いときや変わったときは、site/tests の下に実際の画面が書かれる
+          path: |
+            playwright-report
+            test-results
+            .lighthouseci
+            site/tests/*-snapshots
+          retention-days: 7

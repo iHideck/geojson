@@ -15,5 +15,6 @@ __pycache__/
 /test-results/
 /playwright-report/
 /.lighthouseci/
+/site/.lighthouseci/
 
 .DS_Store
