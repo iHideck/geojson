@@ -88,7 +88,8 @@ export function createPanel(root: HTMLElement, catalog: Catalog, handlers: Panel
     const credits = root.querySelector<HTMLElement>(".credits") as HTMLElement;
     credits.replaceChildren(
       el("span", { className: "credits-head" }, t.credits),
-      ...catalog.layers.map((layer) => el("span", {}, layer.credit[state.lang])),
+      // 同じ出典のレイヤー（都道府県境と市区町村境など）は、1回だけ書く
+      ...[...new Set(catalog.layers.map((layer) => layer.credit[state.lang]))].map((credit) => el("span", {}, credit)),
     );
   }
 

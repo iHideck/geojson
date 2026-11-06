@@ -10,10 +10,10 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | `world/countries` | 50m | 250→250 | 547,478→107,693 | +0.012% | 47 | する |
 | `world/countries` | 110m | 250→250 | 547,478→19,852 | -0.101% | 81 | する |
-| `japan/prefectures` | medium | 47→47 | 15,722,602→58,788 | -0.041% | 0 | 保留（測量法の承認申請の要否を、国土地理院に確かめている） |
-| `japan/prefectures` | low | 47→47 | 15,722,602→11,368 | -0.282% | 0 | 保留（測量法の承認申請の要否を、国土地理院に確かめている） |
-| `japan/municipalities` | medium | 1,905→1,905 | 15,722,602→184,741 | -0.041% | 5 | 保留（測量法の承認申請の要否を、国土地理院に確かめている） |
-| `japan/municipalities` | low | 1,905→1,905 | 15,722,602→38,412 | -0.282% | 212 | 保留（測量法の承認申請の要否を、国土地理院に確かめている） |
+| `japan/prefectures` | medium | 47→47 | 15,722,602→58,788 | -0.041% | 0 | する |
+| `japan/prefectures` | low | 47→47 | 15,722,602→11,368 | -0.282% | 0 | する |
+| `japan/municipalities` | medium | 1,905→1,905 | 15,722,602→184,741 | -0.041% | 5 | する |
+| `japan/municipalities` | low | 1,905→1,905 | 15,722,602→38,412 | -0.282% | 212 | する |
 | `japan/islands` | medium | 340→337 | 340→337 | — | 0 | する |
 
 ## ファイルの大きさ
@@ -36,12 +36,28 @@ GeoJSON と TopoJSON は、目標が 5MB で、上限が 10MB です。
 | `world/countries` | 110m | pmtiles | 267 KB | 50.00 MB | OK |
 | `japan/prefectures` | medium | geojson | 1.18 MB | 10.00 MB | OK |
 | `japan/prefectures` | medium | topojson | 568 KB | 10.00 MB | OK |
+| `japan/prefectures` | medium | fgb | 983 KB | 100.00 MB | OK |
+| `japan/prefectures` | medium | parquet | 385 KB | 100.00 MB | OK |
+| `japan/prefectures` | medium | shp | 452 KB | 100.00 MB | OK |
+| `japan/prefectures` | medium | pmtiles | 772 KB | 50.00 MB | OK |
 | `japan/prefectures` | low | geojson | 218 KB | 10.00 MB | OK |
 | `japan/prefectures` | low | topojson | 109 KB | 10.00 MB | OK |
+| `japan/prefectures` | low | fgb | 201 KB | 100.00 MB | OK |
+| `japan/prefectures` | low | parquet | 75 KB | 100.00 MB | OK |
+| `japan/prefectures` | low | shp | 71 KB | 100.00 MB | OK |
+| `japan/prefectures` | low | pmtiles | 114 KB | 50.00 MB | OK |
 | `japan/municipalities` | medium | geojson | 4.02 MB | 10.00 MB | OK |
 | `japan/municipalities` | medium | topojson | 1.65 MB | 10.00 MB | OK |
+| `japan/municipalities` | medium | fgb | 3.23 MB | 100.00 MB | OK |
+| `japan/municipalities` | medium | parquet | 1.04 MB | 100.00 MB | OK |
+| `japan/municipalities` | medium | shp | 1.32 MB | 100.00 MB | OK |
+| `japan/municipalities` | medium | pmtiles | 2.81 MB | 50.00 MB | OK |
 | `japan/municipalities` | low | geojson | 1.03 MB | 10.00 MB | OK |
 | `japan/municipalities` | low | topojson | 665 KB | 10.00 MB | OK |
+| `japan/municipalities` | low | fgb | 962 KB | 100.00 MB | OK |
+| `japan/municipalities` | low | parquet | 252 KB | 100.00 MB | OK |
+| `japan/municipalities` | low | shp | 269 KB | 100.00 MB | OK |
+| `japan/municipalities` | low | pmtiles | 1.08 MB | 50.00 MB | OK |
 | `japan/islands` | medium | geojson | 81 KB | 10.00 MB | OK |
 | `japan/islands` | medium | topojson | 63 KB | 10.00 MB | OK |
 | `japan/islands` | medium | fgb | 66 KB | 100.00 MB | OK |

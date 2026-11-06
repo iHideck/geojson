@@ -18,3 +18,9 @@ def test_relative_links_point_at_files_in_the_repository(doc):
         if not (doc.parent / target.split("#")[0]).exists():
             broken.append(target)
     assert broken == []
+
+
+def test_data_license_carries_the_credit_of_every_published_layer():
+    text = (ROOT / "DATA_LICENSE.md").read_text()
+    missing = [layer.id for layer in registry.load().layers if layer.publish and layer.credit_ja not in text]
+    assert missing == []

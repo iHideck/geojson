@@ -6,7 +6,7 @@ import pytest
 from boundaries import registry
 
 MARITIME = {"world/eez", "world/territorial-seas", "world/contiguous-zones", "world/baselines", "world/high-seas"}
-PUBLISHED_NOW = {"world/countries", "japan/islands"}
+PUBLISHED_NOW = {"world/countries", "japan/prefectures", "japan/municipalities", "japan/islands"}
 
 
 def copy_registry(tmp_path: Path) -> Path:

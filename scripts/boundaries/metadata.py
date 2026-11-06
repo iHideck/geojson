@@ -10,8 +10,8 @@ from boundaries.layer_build import Built
 from boundaries.registry import Registry
 
 DISCLAIMER = {
-    "ja": "境界は法的な境界を示しません。航海など、安全に関わる用途には使えません。",
-    "en": "The boundaries have no legal status and must not be used for navigation or other safety-critical purposes.",
+    "ja": "境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。",
+    "en": "The boundaries have no legal status and must not be used for surveying, navigation or other purposes that need positional accuracy or safety.",
 }
 
 

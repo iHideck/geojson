@@ -39,11 +39,10 @@ layers:
       - { name: name_en, type: string, description: 英語の名称 }
     license: CC-BY-4.0
     credit:
-      ja: "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成。名前と英語名は、総務省「都道府県コード及び市区町村コード」（https://www.soumu.go.jp/denshijiti/code.html）をもとに作成"
-      en: "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html). Names and English names are based on the Local Government Codes, MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
+      ja: "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成（測量法に基づく国土地理院長承認（複製）R 7JHf 351）。名前と英語名は、総務省「都道府県コード及び市区町村コード」（https://www.soumu.go.jp/denshijiti/code.html）をもとに作成"
+      en: "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html), approved by the GSI under the Survey Act (R 7JHf 351). Names and English names are based on the Local Government Codes, MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
     enabled: true
-    publish: false
-    hold: 測量法の承認申請の要否を、国土地理院に確かめている
+    publish: true
 
   - id: japan/municipalities
     title: { ja: 市区町村境, en: Municipalities }
@@ -60,11 +59,10 @@ layers:
       - { name: name_en, type: string, nullable: true, description: 英語の名称 }
     license: CC-BY-4.0
     credit:
-      ja: "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成。名前と英語名は、総務省「都道府県コード及び市区町村コード」（https://www.soumu.go.jp/denshijiti/code.html）をもとに作成"
-      en: "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html). Names and English names are based on the Local Government Codes, MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
+      ja: "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成（測量法に基づく国土地理院長承認（複製）R 7JHf 351）。名前と英語名は、総務省「都道府県コード及び市区町村コード」（https://www.soumu.go.jp/denshijiti/code.html）をもとに作成"
+      en: "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html), approved by the GSI under the Survey Act (R 7JHf 351). Names and English names are based on the Local Government Codes, MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
     enabled: true
-    publish: false
-    hold: 測量法の承認申請の要否を、国土地理院に確かめている
+    publish: true
 
   - id: japan/islands
     title: { ja: 主な島, en: Islands }

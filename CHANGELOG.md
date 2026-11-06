@@ -12,7 +12,7 @@
 - 元データの台帳（`sources/`）とレイヤーの登録表（`layers.yml`）、取得と SHA256 の照合（`make fetch`）
 - 世界の国境 `world/countries`（50m・110m）。Natural Earth の日本の視点版から作り、北方領土・竹島・尖閣諸島などの島を残す
 - `metadata.json` の JSON Schema、サイズの報告（`docs/size-report.md`）、係争地の扱い（`docs/disputed-areas.md`）
-- 都道府県境 `japan/prefectures` と市区町村境 `japan/municipalities`（medium・low）。国土数値情報から作り、全国地方公共団体コード（検査数字付き）と英語名を付ける。測量法の手続きの確認が済むまで公開しない
+- 都道府県境 `japan/prefectures` と市区町村境 `japan/municipalities`（medium・low）。国土数値情報から作り、全国地方公共団体コード（検査数字付き）と英語名を付ける
 - 主な島 `japan/islands`。国土地理院の面積調の 1km² 以上の島と竹島・沖ノ鳥島を、Wikidata の座標で点にする
 - 海域（EEZ・領海・接続水域・公海・基線）の処理。既定は無効で、`GEOJSON_ENABLE_MARITIME=1` のときだけ作る。日本の直線基線は領海法施行令の別表第一から作る
 - 配布形式。リリースには GeoPackage（QGIS のスタイル入り）・QGIS プロジェクト・Shapefile（UTF-8）・FlatGeobuf・GeoParquet・PMTiles・属性の CSV・QML と SLD のスタイル・`SHA256SUMS` を、GitHub Pages には PMTiles・FlatGeobuf・GeoJSON・`metadata.json`・STAC のカタログを置く

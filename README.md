@@ -4,7 +4,7 @@
 
 Lightweight GeoJSON boundaries for Japan and the world, with an interactive map viewer and GIS-ready downloads. [English](#english)
 
-> 境界は法的な境界を示しません。航海など、安全に関わる用途には使えません。
+> 境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。
 
 ## 地図で見る
 
@@ -16,8 +16,8 @@ https://ihideck.github.io/geojson/ （ビューア Midnight Chart。公開の準
 | --- | --- | --- | --- | --- |
 | `world/countries` | 国境 | 50m・110m | Natural Earth（日本の視点の版） | 配布中 |
 | `japan/islands` | 主な島（点） | medium | 国土地理院「面積調」、Wikidata | 配布中 |
-| `japan/prefectures` | 都道府県境 | medium・low | 国土数値情報（行政区域） | 準備中（測量法の手続きを確認中） |
-| `japan/municipalities` | 市区町村境 | medium・low | 国土数値情報（行政区域） | 準備中（同上） |
+| `japan/prefectures` | 都道府県境 | medium・low | 国土数値情報（行政区域） | 配布中 |
+| `japan/municipalities` | 市区町村境 | medium・low | 国土数値情報（行政区域） | 配布中 |
 | `world/eez` ほか | 排他的経済水域・領海・接続水域・基線・公海 | 50m・110m | Marine Regions、領海法施行令 | 準備中（利用の許可を確認中） |
 
 係争地の扱いは [docs/disputed-areas.md](docs/disputed-areas.md)、ファイルの大きさと簡略化の前後の値は [docs/size-report.md](docs/size-report.md) にあります。
@@ -66,9 +66,9 @@ map.addLayer({ id: "borders", type: "line", source: "countries", "source-layer":
 Lightweight boundaries of Japan and the world, drawn to one standard so the layers line up.
 
 - Viewer: https://ihideck.github.io/geojson/ (not published yet)
-- Published now: `world/countries` (Natural Earth, Japanese point of view) and `japan/islands`. Prefectures, municipalities and maritime zones are pending license checks.
+- Published now: `world/countries` (Natural Earth, Japanese point of view), `japan/prefectures`, `japan/municipalities` and `japan/islands`. Maritime zones are coming next.
 - Formats: GeoJSON, TopoJSON, GeoPackage with QGIS styles, a QGIS project, Shapefile (UTF-8), FlatGeobuf, GeoParquet, PMTiles and a STAC catalog. See the table above for URLs.
-- Credits and licenses: [DATA_LICENSE.md](DATA_LICENSE.md). The boundaries have no legal status and must not be used for navigation.
+- Credits and licenses: [DATA_LICENSE.md](DATA_LICENSE.md). The boundaries have no legal status and must not be used for surveying or navigation.
 
 ## 開発
 

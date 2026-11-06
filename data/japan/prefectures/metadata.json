@@ -1,0 +1,185 @@
+{
+  "id": "japan/prefectures",
+  "title": {
+    "ja": "都道府県境",
+    "en": "Prefectures"
+  },
+  "geometry": "polygon",
+  "crs": "EPSG:4326",
+  "license": "CC-BY-4.0",
+  "credit": {
+    "ja": "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成（測量法に基づく国土地理院長承認（複製）R 7JHf 351）。名前と英語名は、総務省「都道府県コード及び市区町村コード」（https://www.soumu.go.jp/denshijiti/code.html）をもとに作成",
+    "en": "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html), approved by the GSI under the Survey Act (R 7JHf 351). Names and English names are based on the Local Government Codes, MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
+  },
+  "disclaimer": {
+    "ja": "境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。",
+    "en": "The boundaries have no legal status and must not be used for surveying, navigation or other purposes that need positional accuracy or safety."
+  },
+  "sources": [
+    {
+      "id": "ksj-n03-2026",
+      "title": "国土数値情報 行政区域データ 2026年（令和8年）版",
+      "publisher": "国土交通省",
+      "version": "N03-20260101",
+      "retrieved": "2026-11-06",
+      "urls": [
+        "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2026/N03-20260101_GML.zip"
+      ],
+      "page_url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html",
+      "license": "CC-BY-4.0",
+      "license_url": "https://nlftp.mlit.go.jp/ksj/other/agreement_01.html"
+    },
+    {
+      "id": "soumu-dantai-code-2024",
+      "title": "都道府県コード及び市区町村コード（令和6年1月1日更新）",
+      "publisher": "総務省",
+      "version": "2024-01-01",
+      "retrieved": "2026-11-06",
+      "urls": [
+        "https://www.soumu.go.jp/main_content/000925835.xlsx"
+      ],
+      "page_url": "https://www.soumu.go.jp/denshijiti/code.html",
+      "license": "PDL-1.0",
+      "license_url": "https://www.soumu.go.jp/menu_kyotsuu/policy/tyosaku.html"
+    }
+  ],
+  "processing": [
+    "国土数値情報 行政区域データ 2026年版（2026年1月1日時点）を使った",
+    "座標系は JGD2011 の経緯度で、WGS84 の経緯度（EPSG:4326）として扱った。この縮尺では差は無視できる",
+    "全国地方公共団体コードの検査数字は、総務省「全国地方公共団体コード」仕様の方式で付け、総務省の一覧と照合した",
+    "名前は総務省の一覧に合わせた。国土数値情報と字体が違うのは、梼原町（国土数値情報では檮原町）だけだった",
+    "どの市区町村にも属さない所属未定地は、団体コードを空にして残した",
+    "英語名は、総務省の一覧の読み（カナ）を、長音記号を使わないヘボン式のローマ字にして作った",
+    "市区町村を簡略化してから都道府県ごとに融合した。都道府県境は市区町村境と重なる",
+    "medium: 島ごとのポリゴンのうち、0.01km² 以上のもの、各市区町村で一番大きなもの、次の島を残した: 択捉島・国後島・色丹島・歯舞群島・竹島・尖閣諸島（魚釣島）・与那国島・南鳥島・沖ノ鳥島・波照間島",
+    "medium: mapshaper -simplify interval=200 keep-shapes でトポロジーを保って簡略化した",
+    "medium: 座標を小数点以下 5 桁に丸め、丸めたあとにもう一度 mapshaper -clean で直した",
+    "medium: 丸めで自分に触れた輪を、座標の格子を保ったまま分けた（1 件の地物）",
+    "low: 島ごとのポリゴンのうち、0.8km² 以上のもの、各市区町村で一番大きなもの、次の島を残した: 択捉島・国後島・色丹島・歯舞群島・竹島・尖閣諸島（魚釣島）・与那国島・南鳥島・沖ノ鳥島・波照間島",
+    "low: mapshaper -simplify interval=1000 keep-shapes でトポロジーを保って簡略化した",
+    "low: 座標を小数点以下 4 桁に丸め、丸めたあとにもう一度 mapshaper -clean で直した",
+    "low: 丸めで自分に触れた輪を、座標の格子を保ったまま分けた（1 件の地物）"
+  ],
+  "attributes": [
+    {
+      "name": "pref_code",
+      "type": "string",
+      "nullable": false,
+      "description": "都道府県コード（JIS X 0401）"
+    },
+    {
+      "name": "iso_3166_2",
+      "type": "string",
+      "nullable": false,
+      "description": "ISO 3166-2"
+    },
+    {
+      "name": "name_ja",
+      "type": "string",
+      "nullable": false,
+      "description": "日本語の名称"
+    },
+    {
+      "name": "name_en",
+      "type": "string",
+      "nullable": false,
+      "description": "英語の名称"
+    }
+  ],
+  "resolutions": [
+    {
+      "id": "medium",
+      "precision": 5,
+      "features": 47,
+      "vertices": 58788,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "japan-prefectures-medium.geojson",
+          "bytes": 1238231,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/prefectures/medium.geojson"
+        },
+        {
+          "format": "topojson",
+          "name": "japan-prefectures-medium.topojson",
+          "bytes": 582104,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "japan-prefectures-medium.fgb",
+          "bytes": 1006600,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/prefectures/medium.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "japan-prefectures-medium.parquet",
+          "bytes": 394699,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "japan-prefectures-medium.shp.zip",
+          "bytes": 463226,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "japan-prefectures-medium.pmtiles",
+          "bytes": 790509,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/prefectures/medium.pmtiles"
+        }
+      ]
+    },
+    {
+      "id": "low",
+      "precision": 4,
+      "features": 47,
+      "vertices": 11368,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "japan-prefectures-low.geojson",
+          "bytes": 223504,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/prefectures/low.geojson"
+        },
+        {
+          "format": "topojson",
+          "name": "japan-prefectures-low.topojson",
+          "bytes": 111512,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "japan-prefectures-low.fgb",
+          "bytes": 205848,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/prefectures/low.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "japan-prefectures-low.parquet",
+          "bytes": 76301,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "japan-prefectures-low.shp.zip",
+          "bytes": 73183,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "japan-prefectures-low.pmtiles",
+          "bytes": 117158,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/prefectures/low.pmtiles"
+        }
+      ]
+    }
+  ]
+}
