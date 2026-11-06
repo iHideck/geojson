@@ -1,0 +1,188 @@
+{
+  "id": "world/eez",
+  "title": {
+    "ja": "排他的経済水域",
+    "en": "Exclusive Economic Zones"
+  },
+  "geometry": "polygon",
+  "crs": "EPSG:4326",
+  "license": "CC-BY-4.0",
+  "credit": {
+    "ja": "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Maritime Boundaries and Exclusive Economic Zones (200NM), version 12. Available online at https://www.marineregions.org/. https://doi.org/10.14284/632 （geojson が簡略化して作成）",
+    "en": "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase: Maritime Boundaries and Exclusive Economic Zones (200NM), version 12. Available online at https://www.marineregions.org/. https://doi.org/10.14284/632 Simplified by the geojson project."
+  },
+  "disclaimer": {
+    "ja": "境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。",
+    "en": "The boundaries have no legal status and must not be used for surveying, navigation or other purposes that need positional accuracy or safety."
+  },
+  "sources": [
+    {
+      "id": "marine-regions-eez-v12",
+      "title": "Maritime Boundaries Geodatabase: Exclusive Economic Zones (200NM), version 12",
+      "publisher": "Flanders Marine Institute (VLIZ)",
+      "version": "12",
+      "retrieved": "2026-11-07",
+      "urls": [
+        "https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=MarineRegions:eez&outputFormat=application/json&srsName=EPSG:4326"
+      ],
+      "page_url": "https://doi.org/10.14284/632",
+      "license": "CC-BY-4.0",
+      "license_url": "https://www.marineregions.org/disclaimer.php"
+    },
+    {
+      "id": "natural-earth-admin0-jpn-10m",
+      "title": "Natural Earth Admin 0 Countries, point of view of Japan, 1:10m",
+      "publisher": "Natural Earth",
+      "version": "5.1.2",
+      "retrieved": "2026-11-06",
+      "urls": [
+        "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries_jpn.zip"
+      ],
+      "page_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/",
+      "license": "PDM-1.0",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/"
+    }
+  ],
+  "processing": [
+    "Marine Regions の marine-regions-eez-v12 を使った",
+    "属性を mrgid・iso_a3（主権国 ISO_SOV1）・name_en（GEONAME）・pol_type にした",
+    "180度線をまたぐ面は、180度線で分けた",
+    "主張が重なる区域や共同管理の区域は、Marine Regions のとおりに、ほかの区域と重ねたまま残した",
+    "50m: mapshaper -simplify interval=2500 keep-shapes で簡略化し、座標を小数点以下 5 桁に丸めた",
+    "50m: 島ごとに分けて簡略化し、1km² 以上の島と、各地物で一番大きな島を残した",
+    "50m: 簡略化と丸めで妥当でなくなった 7 件の形を、座標の格子を保ったまま直した",
+    "110m: mapshaper -simplify interval=15000 keep-shapes で簡略化し、座標を小数点以下 4 桁に丸めた",
+    "110m: 島ごとに分けて簡略化し、100km² 以上の島と、各地物で一番大きな島を残した",
+    "110m: 簡略化と丸めで妥当でなくなった 7 件の形を、座標の格子を保ったまま直した",
+    "50m: PMTiles の境界の線（borders）は、面の輪郭を、隣と共有する辺を1本ずつの線にし、陸（Natural Earth 10m）から 8km より近い海岸に沿う部分を除いて作った",
+    "110m: PMTiles の境界の線（borders）は、面の輪郭を、隣と共有する辺を1本ずつの線にし、陸（Natural Earth 10m）から 8km より近い海岸に沿う部分を除いて作った"
+  ],
+  "attributes": [
+    {
+      "name": "mrgid",
+      "type": "string",
+      "nullable": true,
+      "description": "Marine Regions の地物の ID"
+    },
+    {
+      "name": "iso_a3",
+      "type": "string",
+      "nullable": true,
+      "description": "主権国の ISO 3166-1 alpha-3"
+    },
+    {
+      "name": "name_en",
+      "type": "string",
+      "nullable": false,
+      "description": "英語の名称"
+    },
+    {
+      "name": "name_ja",
+      "type": "string",
+      "nullable": true,
+      "description": "日本語の名称"
+    },
+    {
+      "name": "pol_type",
+      "type": "string",
+      "nullable": true,
+      "description": "種類（200NM・Joint regime・Overlapping claim など）"
+    }
+  ],
+  "resolutions": [
+    {
+      "id": "50m",
+      "precision": 5,
+      "features": 285,
+      "vertices": 99573,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "world-eez-50m.geojson",
+          "bytes": 2109890,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/eez/50m.geojson"
+        },
+        {
+          "format": "topojson",
+          "name": "world-eez-50m.topojson",
+          "bytes": 1371056,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "world-eez-50m.fgb",
+          "bytes": 1665792,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/eez/50m.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "world-eez-50m.parquet",
+          "bytes": 812646,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "world-eez-50m.shp.zip",
+          "bytes": 984478,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "world-eez-50m.pmtiles",
+          "bytes": 1690555,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/eez/50m.pmtiles"
+        }
+      ]
+    },
+    {
+      "id": "110m",
+      "precision": 4,
+      "features": 285,
+      "vertices": 21240,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "world-eez-110m.geojson",
+          "bytes": 449380,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/eez/110m.geojson"
+        },
+        {
+          "format": "topojson",
+          "name": "world-eez-110m.topojson",
+          "bytes": 272487,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "world-eez-110m.fgb",
+          "bytes": 400608,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/eez/110m.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "world-eez-110m.parquet",
+          "bytes": 156909,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "world-eez-110m.shp.zip",
+          "bytes": 175040,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "world-eez-110m.pmtiles",
+          "bytes": 257069,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/eez/110m.pmtiles"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+mrgid,iso_a3,name_en,name_ja,pol_type
+49010,BEL,Belgian 12 NM,,12NM
+49012,ALB,Albanian 12 NM,,12NM
+49013,BGR,Bulgarian 12 NM,,12NM
+49014,HRV,Croatian 12 NM,,12NM
+49015,DNK,Danish 12 NM,,12NM
+49017,FIN,Finnish 12 NM,,12NM
+49018,FRA,French 12 NM,,12NM
+49019,GEO,Georgian 12 NM,,12NM
+49020,GRC,Greek 12 NM,,12NM
+49021,ISL,Icelandic 12 NM,,12NM
+49022,IRL,Irish 12 NM,,12NM
+49023,ITA,Italian 12 NM,,12NM
+49024,LVA,Latvian 12 NM,,12NM
+49070,MOZ,Mozambican 12 NM,,12NM
+49016,EST,Estonian 12 NM,,12NM
+49053,PNG,Papua New Guinean 12 NM,,12NM
+49054,FJI,Fijian 12 NM,,12NM
+49025,LTU,Lithuanian 12 NM,,12NM
+49026,MLT,Maltese 12 NM,,12NM
+49028,POL,Polish 12 NM,,12NM
+49055,TUV,Tuvaluan 12 NM,,12NM
+49056,KOR,South Korean 12 NM,,12NM
+49057,PRK,North Korean 12 NM,,12NM
+49058,KHM,Cambodian 12 NM,,12NM
+49059,THA,Thai 12 NM,,12NM
+49060,IND,Indian 12 NM (Andaman and Nicobar Islands),,12NM
+49061,COM,Comoran 12 NM,,12NM
+49063,FRA,French 12 NM (Réunion),,12NM
+49064,FRA,French 12 NM (Juan de Nova Island),,12NM
+49065,FRA,French 12 NM (Bassas da India),,12NM
+49066,FRA,French 12 NM (Europa Island),,12NM
+49067,MUS,Mauritian 12 NM,,12NM
+49068,MDV,Maldivian 12 NM,,12NM
+49069,LKA,Sri Lankan 12 NM,,12NM
+49071,MDG,Madagascan 12 NM,,12NM
+49062,SYC,Seychellois 12 NM,,12NM
+49030,ROU,Romanian 12 NM,,12NM
+49032,MNE,Montenegrin 12 NM,,12NM
+49034,SWE,Swedish 12 NM,,12NM
+49036,GBR,British 12 NM,,12NM
+49037,TUR,Turkish 12 NM,,12NM
+49042,FRA,French 12 NM (New Caledonia),,12NM
+49043,VUT,Vanuatuan 12 NM,,12NM
+49044,SLB,Solomon Island 12 NM,,12NM
+49045,PLW,Palauan 12 NM,,12NM
+49046,FSM,Micronesian 12 NM,,12NM
+49047,NRU,Nauruan 12 NM,,12NM
+49051,PHL,Philippine 12 NM,,12NM
+49072,KEN,Kenyan 12 NM,,12NM
+49073,SOM,Somali 12 NM,,12NM
+49074,ERI,Eritrean 12 NM,,12NM
+49075,DJI,Djiboutian 12 NM,,12NM
+49076,YEM,Yemeni 12 NM,,12NM
+49077,OMN,Omani 12 NM,,12NM
+49078,SDN,Sudanese 12 NM,,12NM
+49079,SAU,Saudi Arabian 12 NM,,12NM
+49080,KWT,Kuwaiti 12 NM,,12NM
+49081,BHR,Bahraini 12 NM,,12NM
+49082,PAK,Pakistani 12 NM,,12NM
+49083,ARE,Emirati 12 NM,,12NM
+49085,CPV,Cabo Verdean 12 NM,,12NM
+49087,ESP,Spanish 12 NM (Canary Islands),,12NM
+49089,TUN,Tunisian 12 NM,,12NM
+49092,MRT,Mauritanian 12 NM,,12NM
+49093,GMB,Gambian 12 NM,,12NM
+49094,SEN,Senegalese 12 NM,,12NM
+49095,LBY,Libyan 12 NM,,12NM
+49096,SYR,Syrian 12 NM,,12NM
+49097,LBN,Lebanese 12 NM,,12NM
+49098,ISR,Israeli 12 NM,,12NM
+49099,CYP,Cypriot 12 NM,,12NM
+49100,DZA,Algerian 12 NM,,12NM
+49101,GBR,British 12 NM (Ascension),,12NM
+49102,GBR,British 12 NM (Saint Helena),,12NM
+49103,BRA,Brazilian 12 NM (Trindade),,12NM
+49104,GBR,British 12 NM (Tristan da Cunha),,12NM
+49105,ZAF,South African 12 NM (Prince Edward Islands),,12NM
+49106,FRA,French 12 NM (Crozet Islands),,12NM
+49107,FRA,French 12 NM (Amsterdam and Saint Paul Islands),,12NM
+49108,FRA,French 12 NM (Kerguélen),,12NM
+49110,SLE,Sierra Leonean 12 NM,,12NM
+49111,LBR,Liberian 12 NM,,12NM
+49112,TGO,Togolese 12 NM,,12NM
+49113,BEN,Beninese 12 NM,,12NM
+49114,COG,Congolese (Republic of) 12 NM,,12NM
+49115,NAM,Namibian 12 NM,,12NM
+49116,ZAF,South African 12 NM,,12NM
+49117,STP,São Toméan 12 NM,,12NM
+49118,GNQ,Equatorial Guinean 12 NM,,12NM
+49120,GHA,Ghanaian 12 NM,,12NM
+49127,GBR,British 12 NM (Cayman Islands),,12NM
+49128,HTI,Haitian 12 NM,,12NM
+49129,DOM,Dominican (Republic) 12 NM,,12NM
+49130,GBR,British 12 NM (British Virgin Islands),,12NM
+49131,GBR,British 12 NM (Anguilla),,12NM
+49132,KNA,Kittitian and Nevisian 12 NM,,12NM
+49133,ATG,Antiguan and Barbudan 12 NM,,12NM
+49145,HND,Honduran 12 NM,,12NM
+49146,SLV,Salvadoran 12 NM,,12NM
+49147,MEX,Mexican 12 NM,,12NM
+49148,GTM,Guatemalan 12 NM,,12NM
+49121,FRA,French 12 NM (Clipperton Island),,12NM
+49123,ECU,Ecuadorian 12 NM (Galapagos),,12NM
+49124,BHS,Bahamian 12 NM,,12NM
+49125,GBR,British 12 NM (Turks and Caicos Islands),,12NM
+49126,CUB,Cuban 12 NM,,12NM
+49134,GBR,British 12 NM (Montserrat),,12NM
+49135,LCA,Saint Lucian 12 NM,,12NM
+49136,DMA,Dominican 12 NM,,12NM
+49137,BRB,Barbadian 12 NM,,12NM
+49139,TTO,Trinidadian and Tobagonian 12 NM,,12NM
+49140,VCT,Saint Vincentian 12 NM,,12NM
+49174,GUY,Guyanese 12 NM,,12NM
+49175,SUR,Surinamese 12 NM,,12NM
+49138,GRD,Grenadian 12 NM,,12NM
+49141,PAN,Panamanian 12 NM,,12NM
+49142,CRI,Costa Rican 12 NM,,12NM
+49143,NIC,Nicaraguan 12 NM,,12NM
+49144,COL,Colombian 12 NM,,12NM
+49149,ECU,Ecuadorian 12 NM,,12NM
+49150,VEN,Venezuelan 12 NM,,12NM
+49151,DNK,Danish 12 NM (Faeroe),,12NM
+49152,NOR,Norwegian 12 NM (Jan Mayen),,12NM
+49153,DNK,Danish 12 NM (Greenland),,12NM
+49154,GBR,British 12 NM (Pitcairn),,12NM
+49155,FRA,French 12 NM (French Polynesia),,12NM
+49156,KIR,Kiribati 12 NM (Line Group),,12NM
+49157,USA,United States 12 NM (Jarvis Island),,12NM
+49158,USA,United States 12 NM (Palmyra Atoll),,12NM
+49159,USA,United States 12 NM (American Samoa),,12NM
+49160,WSM,Samoan 12 NM,,12NM
+49161,NZL,New Zealand 12 NM (Cook Islands),,12NM
+49162,NZL,New Zealand 12 NM (Niue),,12NM
+49163,TON,Tongan 12 NM,,12NM
+49164,NZL,New Zealand 12 NM (Tokelau),,12NM
+49165,KIR,Kiribati 12 NM (Phoenix Group),,12NM
+49166,USA,United States 12 NM (Howland and Baker Islands),,12NM
+49167,USA,United States 12 NM (Johnston Atoll),,12NM
+49168,USA,United States 12 NM (Hawaii),,12NM
+49169,FRA,French 12 NM (Wallis and Futuna),,12NM
+49171,USA,United States 12 NM,,12NM
+49172,BLZ,Belizean 12 NM,,12NM
+49173,JAM,Jamaican 12 NM,,12NM
+49176,FRA,French 12 NM (French Guiana),,12NM
+49177,USA,United States 12 NM (Alaska),,12NM
+49178,BRA,Brazilian 12 NM,,12NM
+49179,CHL,Chilean 12 NM,,12NM
+49180,ARG,Argentinian 12 NM,,12NM
+49181,URY,Uruguayan 12 NM,,12NM
+49182,QAT,Qatari 12 NM,,12NM
+49183,IRN,Iranian 12 NM,,12NM
+49184,IRQ,Iraqi 12 NM,,12NM
+49039,AUS,Australian 12 NM (Christmas Island),,12NM
+49185,GNB,Bissau-Guinean 12 NM,,12NM
+49186,GIN,Guinean 12 NM,,12NM
+49187,CIV,Ivorian 12 NM,,12NM
+49188,NGA,Nigerian 12 NM,,12NM
+49189,CMR,Cameroonian 12 NM,,12NM
+49190,GAB,Gabonese 12 NM,,12NM
+49038,AUS,Australian 12 NM (Cocos Islands),,12NM
+49191,COD,Congolese (Democratic Republic of) 12 NM,,12NM
+49192,AGO,Angolan 12 NM,,12NM
+49193,TZA,Tanzanian 12 NM,,12NM
+49194,IND,Indian 12 NM,,12NM
+49195,BGD,Bangladeshi 12 NM,,12NM
+49196,MMR,Myanma 12 NM,,12NM
+49199,SGP,Singaporean 12 NM,,12NM
+49202,EGY,Egyptian 12 NM,,12NM
+49203,JOR,Jordanian 12 NM,,12NM
+49205,CAN,Canadian 12 NM,,12NM
+49206,FRA,French 12 NM (Saint-Pierre and Miquelon),,12NM
+49109,AUS,Australian 12 NM (Heard and McDonald Islands),,12NM
+49040,AUS,Australian 12 NM (Norfolk Island),,12NM
+49052,AUS,Australian 12 NM,,12NM
+49041,AUS,Australian 12 NM (Macquarie Island),,12NM
+49207,FRA,French 12 NM (Collectivity of Saint Martin),,12NM
+49209,CHL,Chilean 12 NM (Easter Island),,12NM
+49210,GBR,British 12 NM (Guernsey),,12NM
+49211,GBR,British 12 NM (Jersey),,12NM
+49212,MCO,Monégasque 12 NM,,12NM
+49213,NLD,Dutch 12 NM (Sint-Maarten),,12NM
+49214,CHL,Chilean 12 NM (Islas San Félix and San Ambrosio),,12NM
+49215,NLD,Dutch 12 NM (Curaçao),,12NM
+49219,BRN,Bruneian 12 NM,,12NM
+49216,NLD,Dutch 12 NM (Saba),,12NM
+49217,NLD,Dutch 12 NM (Aruba),,12NM
+49218,NLD,Dutch 12 NM (Bonaire),,12NM
+49220,KAZ,Kazakh 12 NM,,12NM
+49221,TKM,Turkmen 12 NM,,12NM
+49222,AZE,Azerbaijani 12 NM,,12NM
+49197,MYS,Malaysian 12 NM,,12NM
+49198,VNM,Vietnamese 12 NM,,12NM
+49200,CHN,Chinese 12 NM,,12NM
+49090,MAR,Moroccan 12 NM,,12NM
+49033,ESP,Spanish 12 NM,,12NM
+49240,PER,Peruvian 12 NM,,12NM
+49201,JPN,Japanese 12 NM,,12NM
+49204,IDN,Indonesian 12 NM,,12NM
+49208,TLS,Timorese 12 NM,,12NM
+62591,MUS,Mauritian 12 NM (Chagos Archipelago),,12NM
+49223,NLD,Dutch 12 NM (Sint-Eustatius),,12NM
+49224,FRA,French 12 NM (Guadeloupe),,12NM
+49225,FRA,French 12 NM (Martinique),,12NM
+49226,USA,United States 12 NM (Puerto Rico),,12NM
+49227,USA,United States 12 NM (United States Virgin Islands),,12NM
+49228,NOR,Norwegian 12 NM (Svalbard),,12NM
+62597,COL,Colombian 12 NM (Serrana Bank),,12NM
+62599,COL,Colombian 12 NM (Quitasueño),,12NM
+49231,FRA,French 12 NM (Saint-Barthélemy),,12NM
+49232,PSE,Palestinian 12 NM,,12NM
+49233,USA,United States 12 NM (Guam),,12NM
+49234,USA,United States 12 NM (Northern Mariana Islands),,12NM
+49235,COL,Colombian 12 NM (Serranilla),,12NM
+49236,COL,Colombian 12 NM (Bajo Nuevo),,12NM
+49237,TLS,Timorese 12 NM (Oecusse),,12NM
+49238,SVN,Slovenian 12 NM,,12NM
+49239,BIH,Bosnian and Herzegovinian 12 NM,,12NM
+49241,KIR,Kiribati 12 NM (Gilbert Islands),,12NM
+49242,DEU,German 12 NM,,12NM
+49031,RUS,Russian 12 NM,,12NM
+49048,MHL,Marshallese 12 NM,,12NM
+49084,PRT,Portuguese 12 NM (Azores),,12NM
+49086,PRT,Portuguese 12 NM (Madeira),,12NM
+49029,PRT,Portuguese 12 NM,,12NM
+49011,NLD,Dutch 12 NM,,12NM
+49027,NOR,Norwegian 12 NM,,12NM
+49170,NZL,New Zealand 12 NM,,12NM
+49119,NOR,Norwegian 12 NM (Bouvet),,12NM
+49122,GBR,British 12 NM (Bermuda),,12NM
+64447,GBR,British 12 NM (Isle of Man),,12NM
