@@ -1,5 +1,5 @@
 # 取得から検証・パッケージ化までを make build の1回で行う。重い処理は Docker のイメージの中で動く
-include mk/tools.mk mk/check.mk
+include mk/tools.mk mk/data.mk mk/check.mk
 
 .PHONY: help
 .DEFAULT_GOAL := help

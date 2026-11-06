@@ -1,0 +1,176 @@
+# レイヤーの登録表。取得・変換・検査・ビューア・README は、すべてこの表を読む
+#
+# enabled: false のレイヤーは作らない。feature_flag の環境変数が 1 のときだけ作る
+# publish: false のレイヤーは作って検査するが、data/・GitHub Pages・リリースに含めない
+
+layers:
+  - id: world/countries
+    title: { ja: 国境, en: Countries }
+    geometry: polygon
+    sources: [natural-earth-admin0-jpn-10m]
+    resolutions:
+      - { id: 50m, precision: 5 }
+      - { id: 110m, precision: 4 }
+    attributes:
+      - { name: iso_a2, type: string, nullable: true, description: ISO 3166-1 alpha-2 }
+      - { name: iso_a3, type: string, nullable: true, description: ISO 3166-1 alpha-3 }
+      - { name: iso_n3, type: string, nullable: true, description: ISO 3166-1 numeric }
+      - { name: name_ja, type: string, description: 日本語の名称 }
+      - { name: name_en, type: string, description: 英語の名称 }
+    license: CC0-1.0
+    credit:
+      ja: "Made with Natural Earth."
+      en: "Made with Natural Earth."
+    enabled: true
+    publish: true
+
+  - id: japan/prefectures
+    title: { ja: 都道府県境, en: Prefectures }
+    geometry: polygon
+    sources: [ksj-n03-2026]
+    resolutions:
+      - { id: medium, precision: 5 }
+      - { id: low, precision: 4 }
+    attributes:
+      - { name: pref_code, type: string, description: 都道府県コード（JIS X 0401） }
+      - { name: iso_3166_2, type: string, description: ISO 3166-2 }
+      - { name: name_ja, type: string, description: 日本語の名称 }
+      - { name: name_en, type: string, description: 英語の名称 }
+    license: CC-BY-4.0
+    credit:
+      ja: "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成"
+      en: "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html)"
+    enabled: true
+    publish: false
+    hold: 測量法の承認申請の要否を、国土地理院に確かめている
+
+  - id: japan/municipalities
+    title: { ja: 市区町村境, en: Municipalities }
+    geometry: polygon
+    sources: [ksj-n03-2026]
+    resolutions:
+      - { id: medium, precision: 5 }
+      - { id: low, precision: 4 }
+    attributes:
+      - { name: lg_code, type: string, nullable: true, description: 全国地方公共団体コード（検査数字を含む6桁） }
+      - { name: pref_code, type: string, description: 都道府県コード（JIS X 0401） }
+      - { name: pref_ja, type: string, description: 都道府県名 }
+      - { name: name_ja, type: string, description: 日本語の名称 }
+      - { name: name_en, type: string, nullable: true, description: 英語の名称 }
+    license: CC-BY-4.0
+    credit:
+      ja: "「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成"
+      en: "Derived from the National Land Numerical Information (Administrative Areas), MLIT, Japan (https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html)"
+    enabled: true
+    publish: false
+    hold: 測量法の承認申請の要否を、国土地理院に確かめている
+
+  - id: japan/islands
+    title: { ja: 主な島, en: Islands }
+    geometry: point
+    sources: [gsi-mencho-2026, ksj-n03-2026]
+    resolutions:
+      - { id: medium, precision: 5 }
+    attributes:
+      - { name: name_ja, type: string, description: 島名 }
+      - { name: name_kana, type: string, nullable: true, description: 島名の読み }
+      - { name: name_en, type: string, nullable: true, description: 英語の名称 }
+      - { name: area_km2, type: number, nullable: true, description: 面積（km²、面積調の値） }
+      - { name: pref_code, type: string, description: 都道府県コード（JIS X 0401） }
+      - { name: lg_codes, type: string, nullable: true, description: 所属する市区町村の全国地方公共団体コード（複数はカンマ区切り） }
+    license: CC-BY-4.0
+    credit:
+      ja: "国土地理院「全国都道府県市区町村別面積調」（https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm）、「国土数値情報（行政区域データ）」（国土交通省）を加工して作成"
+      en: "Derived from the GSI Area Survey of Prefectures and Municipalities (https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm) and the National Land Numerical Information, MLIT, Japan"
+    enabled: true
+    publish: false
+    hold: 位置を国土数値情報から求めるので、行政区域と同じ確認を待つ
+
+  - id: world/eez
+    title: { ja: 排他的経済水域, en: Exclusive Economic Zones }
+    geometry: polygon
+    sources: [marine-regions-eez-v12]
+    resolutions:
+      - { id: 50m, precision: 5 }
+      - { id: 110m, precision: 4 }
+    attributes: &maritime_attributes
+      - { name: mrgid, type: string, nullable: true, description: Marine Regions の地物の ID }
+      - { name: iso_a3, type: string, nullable: true, description: 主権国の ISO 3166-1 alpha-3 }
+      - { name: name_en, type: string, description: 英語の名称 }
+      - { name: name_ja, type: string, nullable: true, description: 日本語の名称 }
+      - { name: pol_type, type: string, nullable: true, description: 種類（200NM・Joint regime・Overlapping claim など） }
+    license: CC-BY-4.0
+    credit: &eez_credit
+      ja: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase, version 12. https://www.marineregions.org/ （簡略化して作成）"
+      en: "Flanders Marine Institute (2023). Maritime Boundaries Geodatabase, version 12. https://www.marineregions.org/ (simplified)"
+    enabled: false
+    feature_flag: GEOJSON_ENABLE_MARITIME
+    publish: false
+    hold: VLIZ の許可を待っている
+
+  - id: world/territorial-seas
+    title: { ja: 領海, en: Territorial seas }
+    geometry: polygon
+    sources: [marine-regions-12nm-v4]
+    resolutions:
+      - { id: 50m, precision: 5 }
+      - { id: 110m, precision: 4 }
+    attributes: *maritime_attributes
+    license: CC-BY-4.0
+    credit: *eez_credit
+    enabled: false
+    feature_flag: GEOJSON_ENABLE_MARITIME
+    publish: false
+    hold: VLIZ の許可を待っている
+
+  - id: world/contiguous-zones
+    title: { ja: 接続水域, en: Contiguous zones }
+    geometry: polygon
+    sources: [marine-regions-24nm-v4]
+    resolutions:
+      - { id: 50m, precision: 5 }
+      - { id: 110m, precision: 4 }
+    attributes: *maritime_attributes
+    license: CC-BY-4.0
+    credit: *eez_credit
+    enabled: false
+    feature_flag: GEOJSON_ENABLE_MARITIME
+    publish: false
+    hold: VLIZ の許可を待っている
+
+  - id: world/baselines
+    title: { ja: 基線, en: Baselines }
+    geometry: line
+    sources: [egov-ryokai-sekorei]
+    resolutions:
+      - { id: 50m, precision: 5 }
+      - { id: 110m, precision: 4 }
+    attributes:
+      - { name: kind, type: string, description: 種類（straight など） }
+      - { name: iso_a3, type: string, description: 国の ISO 3166-1 alpha-3 }
+      - { name: name_ja, type: string, nullable: true, description: 区間の名称 }
+    license: CC0-1.0
+    credit:
+      ja: "「領海及び接続水域に関する法律施行令」別表第一（e-Gov 法令検索）をもとに作成"
+      en: "Based on Annexed Table 1 of the Enforcement Order of the Act on the Territorial Sea and the Contiguous Zone (e-Gov)"
+    enabled: false
+    feature_flag: GEOJSON_ENABLE_MARITIME
+    publish: false
+    hold: 海域のレイヤーと同じく、管理者が有効にするまで含めない
+
+  - id: world/high-seas
+    title: { ja: 公海, en: High seas }
+    geometry: polygon
+    sources: [marine-regions-high-seas-v2]
+    resolutions:
+      - { id: 50m, precision: 5 }
+      - { id: 110m, precision: 4 }
+    attributes: *maritime_attributes
+    license: CC-BY-4.0
+    credit:
+      ja: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. https://www.marineregions.org/ （簡略化して作成）"
+      en: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. https://www.marineregions.org/ (simplified)"
+    enabled: false
+    feature_flag: GEOJSON_ENABLE_MARITIME
+    publish: false
+    hold: VLIZ の許可を待っている

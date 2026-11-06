@@ -1,8 +1,10 @@
 IMAGE ?= geojson-tools:local
 # Python のコマンドは、イメージの中ではそのまま、手元では uv を通して動かす
 PY_RUN := $(if $(GEOJSON_IN_IMAGE),,uv run --frozen)
+# 取得した元データと途中のファイルの置き場。worktree をまたいで使い回すときは、外の場所を指定する
+export GEOJSON_CACHE ?= $(CURDIR)/.cache
 # イメージの中で作ったファイルの持ち主を、手元の利用者にそろえる
-IN_IMAGE = docker run --rm -v "$(CURDIR)":/work -w /work -u "$(shell id -u):$(shell id -g)" -e HOME=/tmp -e GEOJSON_ENABLE_MARITIME $(IMAGE)
+IN_IMAGE = docker run --rm -v "$(CURDIR)":/work -v "$(GEOJSON_CACHE)":/cache -e GEOJSON_CACHE=/cache -w /work -u "$(shell id -u):$(shell id -g)" -e HOME=/tmp -e GEOJSON_ENABLE_MARITIME $(IMAGE)
 
 .PHONY: setup
 setup: # 手元で開発するための依存（Python と Node）を入れる
@@ -15,10 +17,11 @@ build-image: # データを作る道具のイメージを作る（GDAL・tippeca
 
 .PHONY: build
 build: build-image # 取得から検証・パッケージ化までを、イメージの中で行う
+	mkdir -p "$(GEOJSON_CACHE)"
 	$(IN_IMAGE) make build-in-image
 
 .PHONY: build-in-image
-build-in-image: check-tools # make build の中身。イメージの中で動かす
+build-in-image: check-tools fetch # make build の中身。イメージの中で動かす
 
 .PHONY: check-tools
 check-tools: # 道具がそろっているかを、版を表示して確かめる

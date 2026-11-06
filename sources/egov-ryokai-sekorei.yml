@@ -1,0 +1,13 @@
+id: egov-ryokai-sekorei
+title: 領海及び接続水域に関する法律施行令（昭和52年政令第210号）
+publisher: e-Gov 法令検索（デジタル庁）
+version: 352CO0000000210_20020401_413CO0000000434
+retrieved: 2026-11-06
+license: JP-COPYRIGHT-ACT-13
+license_url: https://laws.e-gov.go.jp/law/345AC0000000048
+page_url: https://laws.e-gov.go.jp/law/352CO0000000210
+files:
+  - url: https://laws.e-gov.go.jp/api/2/law_data/352CO0000000210_20020401_413CO0000000434?response_format=json
+    name: law_data.json
+    sha256: 13b3685f90f097efef73d4a2971d733990bede573bcd33bdf15644b431132a71
+    bytes: 68100
