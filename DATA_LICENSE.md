@@ -1,0 +1,33 @@
+# データのライセンス
+
+このリポジトリのコードは [MIT](LICENSE) です。データには、元データの条件が及びます。元データの条件の確認結果は [docs/license-review.md](docs/license-review.md) にあります。
+
+## レイヤーごとの条件
+
+| レイヤー | 元データ | 元データの条件 | このリポジトリが加工したデータの条件 |
+| --- | --- | --- | --- |
+| `world/countries` | [Natural Earth](https://www.naturalearthdata.com/) | パブリックドメイン | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.ja) |
+| `japan/prefectures`, `japan/municipalities` | [国土数値情報（行政区域データ）](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html)（国土交通省） | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja) | CC BY 4.0 |
+| `japan/islands` | [全国都道府県市区町村別面積調](https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm)（国土地理院）、国土数値情報（行政区域データ）、[Wikidata](https://www.wikidata.org/) | [公共データ利用規約（第1.0版）](https://www.digital.go.jp/resources/open_data/public_data_license_v1.0)、CC BY 4.0、CC0 | CC BY 4.0 |
+
+海域（EEZ・領海・接続水域・基線・公海）のレイヤーは、配布していません。
+
+## クレジットの書き方
+
+データを使うときは、使ったレイヤーのクレジットを書いてください。
+
+```text
+国境: Made with Natural Earth.
+都道府県境・市区町村境: 「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html）を加工して作成
+島: 国土地理院「全国都道府県市区町村別面積調」（https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm）、「国土数値情報（行政区域データ）」（国土交通省）を加工して作成
+```
+
+各ファイルの `metadata.json` に、出典・取得日・ライセンス・クレジット・加工の内容を書いています。
+
+## 注意
+
+境界は法的な境界を示しません。航海など、安全に関わる用途には使えません。
+
+## English summary
+
+The code is MIT-licensed. Each data layer keeps the terms of its source. `world/countries` is derived from Natural Earth (public domain) and released under CC0 1.0. `japan/prefectures`, `japan/municipalities`, and `japan/islands` are derived from the National Land Numerical Information (MLIT, CC BY 4.0) and the Geospatial Information Authority of Japan, and are released under CC BY 4.0. Maritime layers are not distributed. The boundaries have no legal status and must not be used for navigation.

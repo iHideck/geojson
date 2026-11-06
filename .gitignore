@@ -1,0 +1,18 @@
+# 取得した元データと、作った配布物は git に入れない
+/.cache/
+/dist/
+
+# 道具
+/node_modules/
+/.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# ビューア
+/site/dist/
+/test-results/
+/playwright-report/
+/.lighthouseci/
+
+.DS_Store
