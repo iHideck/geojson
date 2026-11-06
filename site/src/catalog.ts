@@ -14,6 +14,8 @@ export type CatalogLayer = {
   id: string;
   title: Text;
   geometry: "polygon" | "line" | "point";
+  // 境界の線を、PMTiles の borders（隣と接する線）ではなく、面の輪郭で引く（海域）
+  outlined: boolean;
   credit: Text;
   license: string;
   metadata: string;

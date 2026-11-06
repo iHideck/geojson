@@ -7,6 +7,7 @@ const layer = (id: string, resolutions: string[]): CatalogLayer => ({
   id,
   title: { ja: id, en: id },
   geometry: "polygon",
+  outlined: false,
   credit: { ja: "", en: "" },
   license: "CC0-1.0",
   metadata: "",

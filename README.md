@@ -43,7 +43,7 @@ GDAL では、GitHub Pages の FlatGeobuf を、ダウンロードせずに読�
 ogrinfo -so -al /vsicurl/https://ihideck.github.io/geojson/latest/world/countries/110m.fgb
 ```
 
-MapLibre GL JS では、PMTiles を [pmtiles](https://github.com/protomaps/PMTiles) のプロトコルで読みます。タイルのレイヤーは、面の `countries`、隣と接する境界の線の `borders`、名前を置く点の `labels` です。
+MapLibre GL JS では、PMTiles を [pmtiles](https://github.com/protomaps/PMTiles) のプロトコルで読みます。タイルのレイヤーは、面の `countries`、隣と接する境界の線の `borders`、名前を置く点の `labels` です。海域のレイヤーには `borders` が無いので、境界は面の輪郭で引きます。
 
 ```js
 import maplibregl from "maplibre-gl";

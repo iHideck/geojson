@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { normalize, type SearchIndex, search } from "./search.ts";
+import { entryName, normalize, type SearchIndex, search } from "./search.ts";
 
 const box: [number, number, number, number] = [0, 0, 1, 1];
 const INDEX: SearchIndex = {
@@ -47,4 +47,11 @@ test("名前は、一致・前方一致・部分一致の順に並べる", () =>
       ["japan/islands", 2],
     ],
   );
+});
+
+test("名前は画面の言葉で出し、日本語の名前が無い地物（海域）は英語の名前で出す", () => {
+  const japan = { name_ja: "日本", name_en: "Japan", bbox: box };
+  assert.equal(entryName(japan, "ja"), "日本");
+  assert.equal(entryName(japan, "en"), "Japan");
+  assert.equal(entryName({ name_en: "Japanese Exclusive Economic Zone", bbox: box }, "ja"), "Japanese Exclusive Economic Zone");
 });

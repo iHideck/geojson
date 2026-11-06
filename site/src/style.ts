@@ -30,9 +30,6 @@ export const DRAW_FROM: Readonly<Record<string, number>> = { "japan/municipaliti
 // 名前を出す国・地域。日本の周りと、世界地図で目印になる国
 const LABELLED = ["JPN", "CHN", "KOR", "PRK", "RUS", "TWN", "PHL", "MNG", "USA", "CAN", "AUS", "IDN", "IND", "BRA"];
 
-// 海域は、隣と接する線だけでなく、外側の線（200 海里などの限界）も描く。名前は出さない
-const OUTLINED = new Set(["world/eez", "world/territorial-seas", "world/contiguous-zones", "world/high-seas"]);
-
 // 名前を出し始めるズーム
 const LABEL_FROM: Readonly<Record<string, number>> = { "japan/prefectures": 5, "japan/municipalities": 9 };
 
@@ -189,7 +186,7 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
       opacity: [],
     });
   }
-  const lines = layer.geometry === "polygon" && !OUTLINED.has(layer.id) ? "borders" : tiles;
+  const lines = layer.geometry === "polygon" && !layer.outlined ? "borders" : tiles;
   const stage = layer.id === "world/countries" ? STAGE.borders : STAGE.japan;
   if (look.glow) {
     parts.push({
@@ -236,7 +233,8 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
       opacity: [],
     });
   }
-  if (layer.geometry === "polygon" && !OUTLINED.has(layer.id)) {
+  // 海域（outlined）には名前を出さない。区域が重なり、どの区域の名前かが分からないため
+  if (layer.geometry === "polygon" && !layer.outlined) {
     // 名前は、データの側が地物ごとに1つ作った点（labels）に置く。面に置くと、タイルや島ごとに何度も出る
     const countries = layer.id === "world/countries";
     parts.push({

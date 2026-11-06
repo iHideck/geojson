@@ -24,6 +24,7 @@ def catalog(layers: list[Layer]) -> dict:
                 "id": layer.id,
                 "title": {"ja": layer.title_ja, "en": layer.title_en},
                 "geometry": layer.geometry,
+                "outlined": layer.outlined,
                 "credit": {"ja": layer.credit_ja, "en": layer.credit_en},
                 "license": layer.license,
                 "metadata": distribution.metadata_path(layer),
