@@ -19,3 +19,4 @@
 - ビューアが読む目録（`latest/catalog.json`）と検索の索引（`latest/search.json`）。PMTiles の地物に、索引の行と同じ番号を付ける
 - ビューア Midnight Chart の地図。MapLibre GL JS と PMTiles で、GitHub Pages の上だけで動く。ズームに応じて解像度を切り替え、手動でも選べる
 - リリースと GitHub Pages のデプロイのワークフロー。v で始まるタグで GitHub Release を作って GitHub Pages に出し、公開した後に Range 要求と CORS を確かめる。リリース前の確認の手順（`docs/release-checklist.md`）
+- npm パッケージ `japan-world-boundaries` の構成（軽い GeoJSON・TopoJSON・`metadata.json`）。`make build` が `dist/npm` に組む。まだ公開しない
