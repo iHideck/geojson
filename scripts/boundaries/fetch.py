@@ -104,7 +104,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.update:
         update(reg.sources[args.update], args.cache, registry.ROOT / "sources" / f"{args.update}.yml")
         return 0
-    for source in reg.sources_for(reg.enabled_layers()):
+    for source in reg.inputs_for(reg.enabled_layers()):
         for path in ensure(source, args.cache):
             print(f"確認済み: {path.relative_to(args.cache)}")
     return 0
