@@ -156,6 +156,7 @@ def simplify_and_write(
         keep = ["-filter-fields", ",".join(a.name for a in layer.attributes)]
         precision = f"precision={10**-res.precision:.{res.precision}f}"
         output = [*keep, "-o", "format=geojson", "rfc7946", precision, geojson]
+        fixed: list[str] = []
         if islands is None:
             tools.mapshaper("-i", source, *args, *output)
         elif clean:
@@ -175,9 +176,6 @@ def simplify_and_write(
                 repaired = (work or out_dir) / f"{layer.slug}-{res.id}-repaired.geojson"
                 repaired.write_text(json.dumps(fixed_fc, ensure_ascii=False))
                 tools.mapshaper("-i", repaired, *output)
-                built.processing.append(
-                    f"{res.id}: 簡略化と丸めで妥当でなくなった {len(fixed)} 件の形を、座標の格子を保ったまま直した"
-                )
         after = geo.load(geojson)
         topojson = topojson_from(geojson, out_dir / f"{res.id}.topojson", name, res.precision)
         after_areas = _areas(after)
@@ -206,8 +204,11 @@ def simplify_and_write(
         )
         if islands is not None:
             names = "・".join(n for n, _, _ in islands.protected)
+            kept = f"{islands.min_km2[res.id]:g}km² 以上の島"
+            kept += f"、各地物で一番大きな島、次の島を残した: {names}" if names else "と、各地物で一番大きな島を残した"
+            built.processing.append(f"{res.id}: 島ごとに分けて簡略化し、{kept}")
+        if fixed:
             built.processing.append(
-                f"{res.id}: 島ごとに分けて簡略化し、{islands.min_km2[res.id]:g}km² 以上の島、"
-                f"各地物で一番大きな島、次の島を残した: {names}"
+                f"{res.id}: 簡略化と丸めで妥当でなくなった {len(fixed)} 件の形を、座標の格子を保ったまま直した"
             )
     return built
