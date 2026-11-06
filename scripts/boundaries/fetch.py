@@ -12,6 +12,8 @@ import hashlib
 import re
 import ssl
 import sys
+import time
+import urllib.error
 import urllib.request
 from datetime import date
 from pathlib import Path
@@ -20,6 +22,11 @@ from boundaries import registry
 
 USER_AGENT = "geojson-boundaries-build (+https://github.com/iHideck/geojson)"
 CHUNK = 1 << 20
+# 混んでいるときの返事。待ってからやり直す（Wikidata は、続けて取ると 429 を返す）
+RETRY_STATUSES = {429, 500, 502, 503, 504}
+ATTEMPTS = 6
+# 続けて取得するときに空ける間（秒）
+PACE = 0.5
 
 
 class ChecksumMismatch(RuntimeError):
@@ -45,7 +52,28 @@ def tls_context(legacy: bool) -> ssl.SSLContext:
     return context
 
 
+def retry_after(error: urllib.error.HTTPError, attempt: int) -> float:
+    """待つ秒数。Retry-After の秒数があれば従い、無ければ 2・4・8… 秒（60 秒まで）待つ。"""
+    value = error.headers.get("Retry-After") if error.headers else None
+    if value and value.strip().isdigit():
+        return min(float(value), 300.0)
+    return min(2.0 ** (attempt + 1), 60.0)
+
+
 def download(url: str, dest: Path, legacy_tls: bool = False) -> str:
+    for attempt in range(ATTEMPTS):
+        try:
+            return _download_once(url, dest, legacy_tls)
+        except urllib.error.HTTPError as e:
+            if e.code not in RETRY_STATUSES or attempt == ATTEMPTS - 1:
+                raise
+            wait = retry_after(e, attempt)
+            print(f"待つ: {url} が {e.code} を返した。{wait:g} 秒後にやり直す", file=sys.stderr)
+            time.sleep(wait)
+    raise AssertionError("ここには来ない")
+
+
+def _download_once(url: str, dest: Path, legacy_tls: bool) -> str:
     """dest.part に書いてから名前を変え、途中で止まっても壊れたファイルを残さない。"""
     part = dest.with_name(dest.name + ".part")
     digest = hashlib.sha256()
@@ -73,6 +101,7 @@ def ensure(source: registry.Source, cache: Path) -> list[Path]:
         dest.parent.mkdir(parents=True, exist_ok=True)
         print(f"取得: {f.url}", file=sys.stderr)
         got = download(f.url, dest, source.legacy_tls)
+        time.sleep(PACE)
         if got != f.sha256:
             dest.unlink()
             raise ChecksumMismatch(f"{source.id}: {f.name} の SHA256 が台帳と違う（台帳 {f.sha256}、取得 {got}）")

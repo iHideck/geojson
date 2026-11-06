@@ -75,3 +75,74 @@ def test_update_rewrites_the_checksum_size_and_date(tmp_path):
 def test_legacy_renegotiation_is_allowed_only_when_the_ledger_asks():
     assert fetch.tls_context(legacy=True).options & fetch.ssl.OP_LEGACY_SERVER_CONNECT
     assert not fetch.tls_context(legacy=False).options & fetch.ssl.OP_LEGACY_SERVER_CONNECT
+
+
+class FlakyServer:
+    """最初の何回かは指定の状態を返し、そのあと中身を返す、検査用のサーバー。"""
+
+    def __init__(self, failures: int, status: int, retry_after: str | None):
+        import http.server
+        import threading
+
+        self.calls = 0
+        outer = self
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *args):
+                pass
+
+            def do_GET(self):
+                outer.calls += 1
+                if outer.calls <= failures:
+                    self.send_response(status)
+                    if retry_after is not None:
+                        self.send_header("Retry-After", retry_after)
+                    self.end_headers()
+                    return
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"payload")
+
+        self.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+        self.url = f"http://127.0.0.1:{self.server.server_address[1]}/data.bin"
+
+    def close(self):
+        self.server.shutdown()
+        self.server.server_close()
+
+
+def test_a_busy_server_is_retried_after_the_time_it_asks(tmp_path, monkeypatch):
+    waits = []
+    monkeypatch.setattr(fetch.time, "sleep", waits.append)
+    server = FlakyServer(failures=2, status=429, retry_after="3")
+    try:
+        got = fetch.download(server.url, tmp_path / "data.bin")
+    finally:
+        server.close()
+    assert got == hashlib.sha256(b"payload").hexdigest()
+    assert waits == [3.0, 3.0]
+    assert server.calls == 3
+
+
+def test_without_retry_after_the_wait_doubles(tmp_path, monkeypatch):
+    waits = []
+    monkeypatch.setattr(fetch.time, "sleep", waits.append)
+    server = FlakyServer(failures=3, status=503, retry_after=None)
+    try:
+        fetch.download(server.url, tmp_path / "data.bin")
+    finally:
+        server.close()
+    assert waits == [2.0, 4.0, 8.0]
+
+
+def test_a_missing_file_is_not_retried(tmp_path, monkeypatch):
+    monkeypatch.setattr(fetch.time, "sleep", lambda s: pytest.fail("待ってはいけない"))
+    server = FlakyServer(failures=99, status=404, retry_after=None)
+    try:
+        with pytest.raises(fetch.urllib.error.HTTPError):
+            fetch.download(server.url, tmp_path / "data.bin")
+    finally:
+        server.close()
+    assert server.calls == 1
+    assert not (tmp_path / "data.bin").exists()
