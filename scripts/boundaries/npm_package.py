@@ -73,8 +73,9 @@ const countries = JSON.parse(await readFile(path, "utf8"));
 - 全形式（GeoPackage・Shapefile・FlatGeobuf・GeoParquet・PMTiles）/ All formats: https://github.com/iHideck/geojson/releases
 - クレジットとライセンス / Credits and licenses: DATA_LICENSE.md
 
-境界は法的な境界を示しません。航海など、安全に関わる用途には使えません。
-The boundaries have no legal status and must not be used for navigation or other safety-critical purposes.
+境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。
+The boundaries have no legal status and must not be used for surveying, navigation
+or other purposes that need positional accuracy or safety.
 """
 
 

@@ -12,8 +12,8 @@
     "en": "Derived from the GSI Area Survey of Prefectures and Municipalities (https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm). Positions from Wikidata (CC0). Local government codes from MIC, Japan (https://www.soumu.go.jp/denshijiti/code.html)"
   },
   "disclaimer": {
-    "ja": "境界は法的な境界を示しません。航海など、安全に関わる用途には使えません。",
-    "en": "The boundaries have no legal status and must not be used for navigation or other safety-critical purposes."
+    "ja": "境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。",
+    "en": "The boundaries have no legal status and must not be used for surveying, navigation or other purposes that need positional accuracy or safety."
   },
   "sources": [
     {
@@ -475,7 +475,7 @@
         {
           "format": "shp",
           "name": "japan-islands-medium.shp.zip",
-          "bytes": 17431,
+          "bytes": 17469,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.shp.zip"
         },
         {
