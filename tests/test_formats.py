@@ -190,9 +190,8 @@ def test_pmtiles_follow_the_registered_zooms_and_keep_every_feature():
             counts = {t["layer"]: t["count"] for t in meta["tilestats"]["layers"]}
             features = len(geo.load(DIST / layer.id / f"{res.id}.geojson")["features"])
             assert counts.pop(name) == features, f"{layer.id} {res.id}"
-            if layer.geometry == "polygon" and not layer.outlined:
-                assert counts.pop("borders") > 0, f"{layer.id} {res.id}: 境界の線が無い"
             if layer.geometry == "polygon":
+                assert counts.pop("borders") > 0, f"{layer.id} {res.id}: 境界の線が無い"
                 assert counts.pop("labels") == features, f"{layer.id} {res.id}: 名前を置く点が地物と同じ数でない"
             assert counts == {}
 

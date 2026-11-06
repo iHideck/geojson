@@ -186,7 +186,7 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
       opacity: [],
     });
   }
-  const lines = layer.geometry === "polygon" && !layer.outlined ? "borders" : tiles;
+  const lines = layer.geometry === "polygon" ? "borders" : tiles;
   const stage = layer.id === "world/countries" ? STAGE.borders : STAGE.japan;
   if (look.glow) {
     parts.push({

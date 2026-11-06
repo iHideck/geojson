@@ -58,6 +58,11 @@ class IslandRule:
     near_degrees: float = 0.02
 
 
+def outline_path(geojson: Path) -> Path:
+    """outlined のレイヤーで、builder が解像度ごとに書く境界の線。PMTiles の borders になる。"""
+    return geojson.with_suffix(".lines.geojson")
+
+
 def regroup_parts(parts: Path, dest: Path) -> None:
     """島ごとに簡略化した部分を、元の地物（fid の順）に戻す。同じ地物の部分どうしは重ならないので、並べるだけでよい。"""
     groups: dict[int, tuple[dict, list]] = {}

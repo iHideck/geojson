@@ -74,10 +74,10 @@ test("選んだ地物だけを強調し、英語ではラベルに英語名を�
   assert.deepEqual((label?.layout as Record<string, unknown>)["text-field"], ["coalesce", ["get", "name_en"], ["get", "name_ja"]]);
 });
 
-test("海域（outlined）は、隣と接する線ではなく面の輪郭で線を引き、名前を出さない", () => {
+test("面のレイヤーは境界の線を borders で引き、海域（outlined）には名前を出さない", () => {
   const style = buildStyle(CATALOG, BASE, shown());
   assert.equal(sourceLayer(style, "world/countries@50m:line"), "borders");
-  assert.equal(sourceLayer(style, "world/eez@50m:line"), "eez");
+  assert.equal(sourceLayer(style, "world/eez@50m:line"), "borders");
   assert.ok(style.layers.some((l) => l.id === "world/countries@50m:label"));
   assert.ok(!style.layers.some((l) => l.id.startsWith("world/eez@") && l.id.endsWith(":label")));
 });

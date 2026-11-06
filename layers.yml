@@ -3,8 +3,8 @@
 # enabled: false のレイヤーは作らない。feature_flag の環境変数が 1 のときだけ作る（いまは基線だけ）
 # publish: false のレイヤーは作って検査するが、data/・GitHub Pages・リリースに含めない
 # 解像度は細かい順に並べる。zoom は PMTiles を作るズームの範囲で、隣の解像度と隙間なく重ねる
-# outlined: true の面のレイヤーは、境界の線を、隣と接する線（PMTiles の borders）ではなく面の輪郭で引く。
-# 区域どうしが重なり、外側の限界（200 海里など）も境界になる海域に付ける
+# outlined: true の面のレイヤーは、境界の線（PMTiles の borders）を、隣と接する線ではなく、海岸に沿う部分を除いた
+# 面の輪郭にする。区域どうしが重なり、外側の限界（200 海里など）も境界になる海域に付ける
 
 layers:
   - id: world/countries
@@ -92,7 +92,8 @@ layers:
     title: { ja: 排他的経済水域, en: Exclusive Economic Zones }
     geometry: polygon
     outlined: true
-    sources: [marine-regions-eez-v12]
+    # Natural Earth は、境界の線から海岸に沿う部分を除くときの陸に使う
+    sources: [marine-regions-eez-v12, natural-earth-admin0-jpn-10m]
     resolutions:
       - { id: 50m, precision: 5, zoom: [2, 6] }
       - { id: 110m, precision: 4, zoom: [0, 3] }
@@ -113,7 +114,8 @@ layers:
     title: { ja: 領海, en: Territorial seas }
     geometry: polygon
     outlined: true
-    sources: [marine-regions-12nm-v4]
+    # Natural Earth は、境界の線から海岸に沿う部分を除くときの陸に使う
+    sources: [marine-regions-12nm-v4, natural-earth-admin0-jpn-10m]
     resolutions:
       - { id: 50m, precision: 5, zoom: [2, 6] }
       - { id: 110m, precision: 4, zoom: [0, 3] }
@@ -129,7 +131,8 @@ layers:
     title: { ja: 接続水域, en: Contiguous zones }
     geometry: polygon
     outlined: true
-    sources: [marine-regions-24nm-v4]
+    # Natural Earth は、境界の線から海岸に沿う部分を除くときの陸に使う
+    sources: [marine-regions-24nm-v4, natural-earth-admin0-jpn-10m]
     resolutions:
       - { id: 50m, precision: 5, zoom: [2, 6] }
       - { id: 110m, precision: 4, zoom: [0, 3] }
@@ -165,7 +168,8 @@ layers:
     title: { ja: 公海, en: High seas }
     geometry: polygon
     outlined: true
-    sources: [marine-regions-high-seas-v2]
+    # Natural Earth は、境界の線から海岸に沿う部分を除くときの陸に使う
+    sources: [marine-regions-high-seas-v2, natural-earth-admin0-jpn-10m]
     resolutions:
       - { id: 50m, precision: 5, zoom: [2, 6] }
       - { id: 110m, precision: 4, zoom: [0, 3] }
