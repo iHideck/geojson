@@ -2,6 +2,7 @@
 #
 # enabled: false のレイヤーは作らない。feature_flag の環境変数が 1 のときだけ作る
 # publish: false のレイヤーは作って検査するが、data/・GitHub Pages・リリースに含めない
+# 解像度は細かい順に並べる。zoom は PMTiles を作るズームの範囲で、隣の解像度と隙間なく重ねる
 
 layers:
   - id: world/countries
@@ -9,8 +10,8 @@ layers:
     geometry: polygon
     sources: [natural-earth-admin0-jpn-10m]
     resolutions:
-      - { id: 50m, precision: 5 }
-      - { id: 110m, precision: 4 }
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes:
       - { name: iso_a2, type: string, nullable: true, description: ISO 3166-1 alpha-2 }
       - { name: iso_a3, type: string, nullable: true, description: ISO 3166-1 alpha-3 }
@@ -29,8 +30,8 @@ layers:
     geometry: polygon
     sources: [ksj-n03-2026, soumu-dantai-code-2024]
     resolutions:
-      - { id: medium, precision: 5 }
-      - { id: low, precision: 4 }
+      - { id: medium, precision: 5, zoom: [6, 10] }
+      - { id: low, precision: 4, zoom: [3, 7] }
     attributes:
       - { name: pref_code, type: string, description: 都道府県コード（JIS X 0401） }
       - { name: iso_3166_2, type: string, description: ISO 3166-2 }
@@ -49,8 +50,8 @@ layers:
     geometry: polygon
     sources: [ksj-n03-2026, soumu-dantai-code-2024]
     resolutions:
-      - { id: medium, precision: 5 }
-      - { id: low, precision: 4 }
+      - { id: medium, precision: 5, zoom: [7, 10] }
+      - { id: low, precision: 4, zoom: [5, 8] }
     attributes:
       - { name: lg_code, type: string, nullable: true, description: 全国地方公共団体コード（検査数字を含む6桁） }
       - { name: pref_code, type: string, description: 都道府県コード（JIS X 0401） }
@@ -72,7 +73,7 @@ layers:
     # 座標が所属市区町村の中にあるかを確かめるためだけに使う。配布物には入れない
     checks_with: [ksj-n03-2026]
     resolutions:
-      - { id: medium, precision: 5 }
+      - { id: medium, precision: 5, zoom: [2, 8] }
     attributes:
       - { name: name_ja, type: string, description: 島名 }
       - { name: name_kana, type: string, nullable: true, description: 島名の読み }
@@ -92,8 +93,8 @@ layers:
     geometry: polygon
     sources: [marine-regions-eez-v12]
     resolutions:
-      - { id: 50m, precision: 5 }
-      - { id: 110m, precision: 4 }
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes: &maritime_attributes
       - { name: mrgid, type: string, nullable: true, description: Marine Regions の地物の ID }
       - { name: iso_a3, type: string, nullable: true, description: 主権国の ISO 3166-1 alpha-3 }
@@ -114,8 +115,8 @@ layers:
     geometry: polygon
     sources: [marine-regions-12nm-v4]
     resolutions:
-      - { id: 50m, precision: 5 }
-      - { id: 110m, precision: 4 }
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes: *maritime_attributes
     license: CC-BY-4.0
     credit: *eez_credit
@@ -129,8 +130,8 @@ layers:
     geometry: polygon
     sources: [marine-regions-24nm-v4]
     resolutions:
-      - { id: 50m, precision: 5 }
-      - { id: 110m, precision: 4 }
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes: *maritime_attributes
     license: CC-BY-4.0
     credit: *eez_credit
@@ -144,8 +145,8 @@ layers:
     geometry: line
     sources: [egov-ryokai-sekorei]
     resolutions:
-      - { id: 50m, precision: 5 }
-      - { id: 110m, precision: 4 }
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes:
       - { name: kind, type: string, description: 種類（straight など） }
       - { name: iso_a3, type: string, description: 国の ISO 3166-1 alpha-3 }
@@ -164,8 +165,8 @@ layers:
     geometry: polygon
     sources: [marine-regions-high-seas-v2]
     resolutions:
-      - { id: 50m, precision: 5 }
-      - { id: 110m, precision: 4 }
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
     attributes: *maritime_attributes
     license: CC-BY-4.0
     credit:

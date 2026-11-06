@@ -59,6 +59,9 @@ def test_resolutions_use_the_agreed_precision():
         ),
         ("sources: [natural-earth-admin0-jpn-10m]", "sources: [no-such-source]", "sources/no-such-source.yml がない"),
         ("    publish: true\n", "    publish: false\n", "hold（理由）が要る"),
+        ("{ id: 110m, precision: 4, zoom: [0, 3] }", "{ id: 110m, precision: 4, zoom: [0, 1] }", "隙間がある"),
+        ("{ id: 110m, precision: 4, zoom: [0, 3] }", "{ id: 110m, precision: 6, zoom: [0, 3] }", "細かい順"),
+        ("{ id: 50m, precision: 5, zoom: [2, 6] }", "{ id: 50m, precision: 5, zoom: [6, 2] }", "0 以上 14 以下"),
     ],
 )
 def test_a_broken_registry_is_rejected(tmp_path, before, after, message):

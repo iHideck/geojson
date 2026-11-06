@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import itertools
 import os
 import re
 from dataclasses import dataclass
@@ -53,6 +54,8 @@ class Source:
 class Resolution:
     id: str
     precision: int
+    minzoom: int
+    maxzoom: int
 
 
 @dataclass(frozen=True)
@@ -154,6 +157,21 @@ def _parse_source(path: Path) -> Source:
     )
 
 
+def _parse_resolutions(raw: list[dict], where: str) -> tuple[Resolution, ...]:
+    resolutions = []
+    for r in raw:
+        minzoom, maxzoom = (int(z) for z in _require(r, "zoom", f"{where} {r['id']}"))
+        if not 0 <= minzoom <= maxzoom <= 14:
+            raise RegistryError(f"{where} {r['id']}: zoom は 0 以上 14 以下で、[最小, 最大] の順にする")
+        resolutions.append(Resolution(r["id"], int(r["precision"]), minzoom, maxzoom))
+    for fine, coarse in itertools.pairwise(resolutions):
+        if coarse.precision > fine.precision:
+            raise RegistryError(f"{where}: 解像度は細かい順に並べる（{coarse.id} が {fine.id} より細かい）")
+        if coarse.maxzoom < fine.minzoom:
+            raise RegistryError(f"{where}: {coarse.id} と {fine.id} の zoom のあいだに隙間がある")
+    return tuple(resolutions)
+
+
 def _parse_layer(data: dict, sources: dict[str, Source]) -> Layer:
     lid = _require(data, "id", "layers.yml")
     where = f"layers.yml {lid}"
@@ -183,7 +201,7 @@ def _parse_layer(data: dict, sources: dict[str, Source]) -> Layer:
         geometry=_require(data, "geometry", where),
         sources=tuple(data["sources"]),
         checks_with=tuple(data.get("checks_with", [])),
-        resolutions=tuple(Resolution(r["id"], int(r["precision"])) for r in _require(data, "resolutions", where)),
+        resolutions=_parse_resolutions(_require(data, "resolutions", where), where),
         attributes=tuple(attributes),
         license=license_,
         credit_ja=credit["ja"],

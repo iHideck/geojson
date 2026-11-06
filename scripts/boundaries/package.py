@@ -7,7 +7,7 @@ import io
 import shutil
 from pathlib import Path
 
-from boundaries import geo, registry
+from boundaries import geo, registry, styles
 from boundaries.limits import CSV_LIMIT
 
 DIST = registry.ROOT / "dist"
@@ -49,8 +49,14 @@ def package(reg: registry.Registry, dist: Path = DIST, data: Path = DATA) -> lis
     return written
 
 
+def write_styles(reg: registry.Registry, out: Path = registry.ROOT / "styles") -> list[Path]:
+    """全レイヤーの QML と SLD を styles/ に書く。海域のように公開していないレイヤーの分も、スタイルは置く。"""
+    return [path for layer_id, style in styles.load().items() for path in styles.write(reg.layer(layer_id), style, out)]
+
+
 def main() -> int:
-    for path in package(registry.load()):
+    reg = registry.load()
+    for path in [*package(reg), *write_styles(reg)]:
         print(f"詰めた: {path.relative_to(registry.ROOT)}")
     return 0
 

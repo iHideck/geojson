@@ -1,0 +1,61 @@
+# QGIS の QML・SLD と GeoPackage に埋め込むスタイル。scripts/boundaries/styles.py がこの表から書き出す
+#
+# 色は Okabe-Ito の色覚の多様性に配慮した配色から選び、線の太さと破線の形でも区別する。
+# dash は線の長さと隙間の並び（mm）。null は実線。
+
+layers:
+  world/countries:
+    geometry: polygon
+    stroke: "#E69F00"
+    width_mm: 0.9
+    dash: null
+    fill: "#F2EFE9"
+    fill_opacity: 0.6
+  japan/prefectures:
+    geometry: polygon
+    stroke: "#0072B2"
+    width_mm: 0.6
+    dash: [5, 1.5]
+    fill: null
+  japan/municipalities:
+    geometry: polygon
+    stroke: "#56B4E9"
+    width_mm: 0.25
+    dash: [1, 1]
+    fill: null
+  japan/islands:
+    geometry: point
+    stroke: "#009E73"
+    size_mm: 2.2
+    label: name_ja
+  world/territorial-seas:
+    geometry: polygon
+    stroke: "#CC79A7"
+    width_mm: 0.5
+    dash: [3, 1.5]
+    fill: "#CC79A7"
+    fill_opacity: 0.12
+  world/contiguous-zones:
+    geometry: polygon
+    stroke: "#009E73"
+    width_mm: 0.4
+    dash: [4, 1, 1, 1]
+    fill: null
+  world/eez:
+    geometry: polygon
+    stroke: "#D55E00"
+    width_mm: 0.6
+    dash: [8, 2]
+    fill: null
+  world/baselines:
+    geometry: line
+    stroke: "#000000"
+    width_mm: 0.35
+    dash: [0.5, 1]
+  world/high-seas:
+    geometry: polygon
+    stroke: "#0072B2"
+    width_mm: 0.2
+    dash: null
+    fill: "#0072B2"
+    fill_opacity: 0.06

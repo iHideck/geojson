@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from boundaries import distribution
 from boundaries.layer_build import Built
 from boundaries.registry import Registry
 
@@ -21,7 +22,7 @@ def build_metadata(built: Built, reg: Registry) -> dict:
     for res in layer.resolutions:
         m = metrics[res.id]
         files = [
-            {"format": o.format, "name": o.path.name, "bytes": o.bytes} for o in built.outputs if o.resolution == res.id
+            distribution.file_entry(layer, res.id, o.format, o.bytes) for o in built.outputs if o.resolution == res.id
         ]
         resolutions.append(
             {
