@@ -12,6 +12,7 @@ on:
       - schemas/**
       - data/**
       - docs/size-report.md
+      - styles/**
       - tests/**
       - mk/**
       - package.json
@@ -55,9 +56,9 @@ jobs:
           restore-keys: sources-
       - name: イメージの中で make build-in-image を動かす
         run: mkdir -p .cache && docker run --rm -v "$PWD":/work -v "$PWD/.cache":/cache -e GEOJSON_CACHE=/cache -w /work -u "$(id -u):$(id -g)" -e HOME=/tmp geojson-tools:local make build-in-image
-      # 作り直した data/ とサイズの報告が、git に入っているものと同じなら、make build で再現できている
+      # 作り直した data/・サイズの報告・スタイルが、git に入っているものと同じなら、make build で再現できている
       - name: 作り直した結果が git のものと同じか確かめる
         run: |
-          git status --porcelain -- data docs/size-report.md
-          git diff --exit-code -- data docs/size-report.md
-          test -z "$(git status --porcelain -- data docs/size-report.md)"
+          git status --porcelain -- data docs/size-report.md styles
+          git diff --exit-code -- data docs/size-report.md styles
+          test -z "$(git status --porcelain -- data docs/size-report.md styles)"

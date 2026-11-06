@@ -7,7 +7,7 @@ import pycountry
 import pytest
 from shapely.geometry import Point, shape
 
-from boundaries import geo, registry
+from boundaries import distribution, geo, registry
 from boundaries.countries import PROTECTED_ISLANDS
 from boundaries.limits import CSV_LIMIT, FILE_LIMITS
 
@@ -34,10 +34,11 @@ def test_metadata_follows_the_schema_and_the_registry(layer):
     assert [a["name"] for a in meta["attributes"]] == [a.name for a in layer.attributes]
     assert [r["id"] for r in meta["resolutions"]] == [r.id for r in layer.resolutions]
     for res in meta["resolutions"]:
-        for f in res["files"]:
-            path = DATA / layer.id / f["name"]
-            if path.exists():
-                assert path.stat().st_size == f["bytes"], f["name"]
+        files = {f["format"]: f for f in res["files"]}
+        assert set(files) == set(distribution.FORMATS), res["id"]
+        assert (DATA / layer.id / f"{res['id']}.topojson").stat().st_size == files["topojson"]["bytes"]
+        for fmt, f in files.items():
+            assert f == distribution.file_entry(layer, res["id"], fmt, f["bytes"])
 
 
 @pytest.mark.parametrize(("layer", "res"), RESOLUTIONS, ids=lambda x: getattr(x, "id", ""))

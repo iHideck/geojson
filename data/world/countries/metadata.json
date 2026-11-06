@@ -82,13 +82,42 @@
       "files": [
         {
           "format": "geojson",
-          "name": "50m.geojson",
-          "bytes": 2268785
+          "name": "world-countries-50m.geojson",
+          "bytes": 2268785,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/50m.geojson"
         },
         {
           "format": "topojson",
-          "name": "50m.topojson",
-          "bytes": 1358208
+          "name": "world-countries-50m.topojson",
+          "bytes": 1358208,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "world-countries-50m.fgb",
+          "bytes": 1849288,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/50m.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "world-countries-50m.parquet",
+          "bytes": 812363,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "world-countries-50m.shp.zip",
+          "bytes": 1018374,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "world-countries-50m.pmtiles",
+          "bytes": 1619677,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/50m.pmtiles"
         }
       ]
     },
@@ -100,13 +129,42 @@
       "files": [
         {
           "format": "geojson",
-          "name": "110m.geojson",
-          "bytes": 416495
+          "name": "world-countries-110m.geojson",
+          "bytes": 416495,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/110m.geojson"
         },
         {
           "format": "topojson",
-          "name": "110m.topojson",
-          "bytes": 285022
+          "name": "world-countries-110m.topojson",
+          "bytes": 285022,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "world-countries-110m.fgb",
+          "bytes": 395512,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/110m.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "world-countries-110m.parquet",
+          "bytes": 155579,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "world-countries-110m.shp.zip",
+          "bytes": 165393,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "world-countries-110m.pmtiles",
+          "bytes": 235986,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/world/countries/110m.pmtiles"
         }
       ]
     }

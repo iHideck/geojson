@@ -448,13 +448,42 @@
       "files": [
         {
           "format": "geojson",
-          "name": "medium.geojson",
-          "bytes": 82844
+          "name": "japan-islands-medium.geojson",
+          "bytes": 82844,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/islands/medium.geojson"
         },
         {
           "format": "topojson",
-          "name": "medium.topojson",
-          "bytes": 64809
+          "name": "japan-islands-medium.topojson",
+          "bytes": 64809,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "japan-islands-medium.fgb",
+          "bytes": 67240,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/islands/medium.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "japan-islands-medium.parquet",
+          "bytes": 23553,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "japan-islands-medium.shp.zip",
+          "bytes": 17380,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "japan-islands-medium.pmtiles",
+          "bytes": 122145,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-islands-medium.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/japan/islands/medium.pmtiles"
         }
       ]
     }
