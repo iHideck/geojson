@@ -1,10 +1,8 @@
 import type { Feature, FeatureCollection } from "geojson";
 import type {
   ExpressionSpecification,
-  FillLayerSpecification,
   FilterSpecification,
   LayerSpecification,
-  LineLayerSpecification,
   SourceSpecification,
   StyleSpecification,
 } from "maplibre-gl";
@@ -50,6 +48,14 @@ type Part = {
   // 不透明度を持つ描き方の名前と、レイヤーの不透明度が 1 のときの値
   opacity: [string, number][];
 };
+
+type Owner = { hidden: boolean; opacity: number; from: number };
+const GROUND: Owner = { hidden: false, opacity: 1, from: 0 };
+const ownerOf = (layer: CatalogLayer, state: ViewState): Owner => ({
+  hidden: state.hidden.has(layer.id),
+  opacity: state.opacity[layer.id] ?? 1,
+  from: DRAW_FROM[layer.id] ?? 0,
+});
 
 export const sourceId = (layer: CatalogLayer, res: Resolution): string => `${layer.id}@${res.id}`;
 const tilesOf = (layer: CatalogLayer): string => layer.id.split("/").at(-1) as string;
@@ -240,18 +246,16 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
   return parts;
 }
 
-function place(owner: CatalogLayer, part: Part, range: ZoomRange | null, state: ViewState): LayerSpecification {
+function place(owner: Owner, part: Part, range: ZoomRange | null, revealed: number): LayerSpecification {
   const spec = part.spec;
-  const minzoom = Math.max(spec.minzoom ?? 0, range?.[0] ?? 0, DRAW_FROM[owner.id] ?? 0);
+  const minzoom = Math.max(spec.minzoom ?? 0, range?.[0] ?? 0, owner.from);
   const maxzoom = Math.min(spec.maxzoom ?? MAX_ZOOM, range?.[1] ?? 0);
-  if (state.hidden.has(owner.id) || minzoom >= maxzoom) {
+  if (owner.hidden || minzoom >= maxzoom) {
     return { ...spec, layout: { ...spec.layout, visibility: "none" } } as LayerSpecification;
   }
-  const revealed = state.revealed >= part.stage;
-  const layerOpacity = state.opacity[owner.id] ?? 1;
   const paint: Record<string, unknown> = { ...spec.paint };
   for (const [property, base] of part.opacity) {
-    paint[property] = revealed ? base * layerOpacity : 0;
+    paint[property] = revealed >= part.stage ? base * owner.opacity : 0;
     paint[`${property}-transition`] = FADE;
   }
   return { ...spec, minzoom, maxzoom, paint } as LayerSpecification;
@@ -263,38 +267,30 @@ function ground(catalog: Catalog, state: ViewState): LayerSpecification[] {
   const prefectures = catalog.layers.find((l) => l.id === "japan/prefectures");
   const fine = zoomRanges(prefectures?.resolutions ?? [], state.choices["japan/prefectures"] ?? "auto");
   const prefecturesFrom = Math.min(MAX_ZOOM, ...[...fine.values()].flatMap((range) => (range ? [range[0]] : [])));
-  const untilPrefectures = { filter: JAPAN, maxzoom: prefecturesFrom };
-  const fill = (spec: Omit<FillLayerSpecification, "type">): Part => ({
-    spec: { ...spec, type: "fill" },
-    stage: STAGE.land,
-    opacity: [["fill-opacity", 1]],
-  });
-  const coast = (spec: Omit<LineLayerSpecification, "type" | "paint">): Part => ({
-    spec: { ...spec, type: "line", paint: { "line-color": PALETTE.coast, "line-width": 0.7 } },
-    stage: STAGE.land,
-    opacity: [["line-opacity", 1]],
-  });
-  const layers: LayerSpecification[] = [];
+  const coasts: LayerSpecification[] = [];
+  const fills: LayerSpecification[] = [];
+  type Piece = { id: string; source: string; "source-layer": string; filter?: FilterSpecification; maxzoom?: number };
+  const add = (piece: Piece, color: string, range: ZoomRange | null): void => {
+    const placed = (spec: LayerSpecification): LayerSpecification => place(GROUND, { spec, stage: STAGE.land, opacity: [] }, range, state.revealed);
+    const coast = { "line-color": PALETTE.coast, "line-width": 1.4 };
+    coasts.push(placed({ ...piece, id: `${piece.id}-coast`, type: "line", layout: { "line-join": "round" }, paint: coast }));
+    fills.push(placed({ ...piece, type: "fill", paint: { "fill-color": color } }));
+  };
   const coarse = zoomRanges(countries.resolutions, state.choices[countries.id] ?? "auto");
-  const tiles = tilesOf(countries);
   for (const res of countries.resolutions) {
-    const source = sourceId(countries, res);
-    const parts = [
-      fill({ id: `${source}:land`, source, "source-layer": tiles, filter: ["!", JAPAN], paint: { "fill-color": PALETTE.land } }),
-      coast({ id: `${source}:coast`, source, "source-layer": tiles, filter: ["!", JAPAN] }),
-      fill({ id: `${source}:japan`, source, "source-layer": tiles, ...untilPrefectures, paint: { "fill-color": PALETTE.japan } }),
-      coast({ id: `${source}:japan-coast`, source, "source-layer": tiles, ...untilPrefectures }),
-    ];
-    layers.push(...parts.map((part) => place(countries, part, coarse.get(res.id) ?? null, state)));
+    const at = { source: sourceId(countries, res), "source-layer": tilesOf(countries) };
+    const range = coarse.get(res.id) ?? null;
+    add({ id: `${at.source}:land`, ...at, filter: ["!", JAPAN] }, PALETTE.land, range);
+    add({ id: `${at.source}:japan`, ...at, filter: JAPAN, maxzoom: prefecturesFrom }, PALETTE.japan, range);
   }
   if (prefectures) {
     for (const res of prefectures.resolutions) {
       const source = sourceId(prefectures, res);
-      const part = fill({ id: `${source}:land`, source, "source-layer": tilesOf(prefectures), paint: { "fill-color": PALETTE.japan } });
-      layers.push(place(countries, part, fine.get(res.id) ?? null, state));
+      add({ id: `${source}:land`, source, "source-layer": tilesOf(prefectures) }, PALETTE.japan, fine.get(res.id) ?? null);
     }
   }
-  return layers;
+  // 海岸は、面の輪郭を塗りより下に引き、海の側の半分だけを見せる。隣の国や都道府県と接する輪郭は、両側の塗りに隠れる
+  return [...coasts, ...fills];
 }
 
 export function buildStyle(catalog: Catalog, base: URL, state: ViewState): StyleSpecification {
@@ -320,10 +316,11 @@ export function buildStyle(catalog: Catalog, base: URL, state: ViewState): Style
   };
   for (const layer of [...catalog.layers].sort((a, b) => rank(a) - rank(b))) {
     const ranges = zoomRanges(layer.resolutions, state.choices[layer.id] ?? "auto");
+    const owner = ownerOf(layer, state);
     for (const res of layer.resolutions) {
       sources[sourceId(layer, res)] = { type: "vector", url: `pmtiles://${new URL(res.pmtiles, base).href}` };
       for (const part of partsFor(layer, res, state)) {
-        layers.push(place(layer, part, ranges.get(res.id) ?? null, state));
+        layers.push(place(owner, part, ranges.get(res.id) ?? null, state.revealed));
       }
     }
   }
