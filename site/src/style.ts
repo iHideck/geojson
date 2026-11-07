@@ -1,14 +1,16 @@
 import type { Feature, FeatureCollection } from "geojson";
 import type {
   ExpressionSpecification,
+  FillLayerSpecification,
   FilterSpecification,
   LayerSpecification,
+  LineLayerSpecification,
   SourceSpecification,
   StyleSpecification,
 } from "maplibre-gl";
 import { type Catalog, type CatalogLayer, featureId, type Resolution } from "./catalog.ts";
 import { FALLBACK_LINE, LINES, type LineLook, PALETTE, POINT } from "./palette.ts";
-import { type ZoomRange, zoomRanges } from "./resolution.ts";
+import { MAX_ZOOM, type ZoomRange, zoomRanges } from "./resolution.ts";
 import type { ViewState } from "./state.ts";
 
 // 下から順に描く。目録にあって、ここに無いレイヤーは最後に描く
@@ -30,6 +32,8 @@ export const DRAW_FROM: Readonly<Record<string, number>> = { "japan/municipaliti
 // 名前を出す国・地域。日本の周りと、世界地図で目印になる国
 const LABELLED = ["JPN", "CHN", "KOR", "PRK", "RUS", "TWN", "PHL", "MNG", "USA", "CAN", "AUS", "IDN", "IND", "BRA"];
 
+const JAPAN: ExpressionSpecification = ["==", ["get", "iso_a3"], "JPN"];
+
 // 名前を出し始めるズーム
 const LABEL_FROM: Readonly<Record<string, number>> = { "japan/prefectures": 5, "japan/municipalities": 9 };
 
@@ -38,7 +42,7 @@ const STAGE = { land: 0, graticule: 1, borders: 2, japan: 3, labels: 4 } as cons
 const FADE = { duration: 1000, delay: 0 };
 
 // 地図の上で選べる部分。前にあるものを先に選ぶ
-export const PICK_PARTS = ["point", "area", "land"] as const;
+export const PICK_PARTS = ["point", "area"] as const;
 
 type Part = {
   spec: LayerSpecification;
@@ -48,6 +52,7 @@ type Part = {
 };
 
 export const sourceId = (layer: CatalogLayer, res: Resolution): string => `${layer.id}@${res.id}`;
+const tilesOf = (layer: CatalogLayer): string => layer.id.split("/").at(-1) as string;
 
 function width(look: LineLook, factor = 1): ExpressionSpecification {
   const [z3, z6, z9] = look.width.map((w) => w * factor) as [number, number, number];
@@ -80,7 +85,7 @@ function name(lang: ViewState["lang"]): ExpressionSpecification {
 
 function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[] {
   const source = sourceId(layer, res);
-  const tiles = layer.id.split("/").at(-1) as string;
+  const tiles = tilesOf(layer);
   const id = (part: string): string => `${source}:${part}`;
   const look = LINES[layer.id] ?? FALLBACK_LINE;
   const selected: FilterSpecification = ["==", ["id"], state.selected?.layer === layer.id ? featureId(state.selected.index) : -1];
@@ -147,32 +152,7 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
     ];
   }
   const parts: Part[] = [];
-  if (layer.id === "world/countries") {
-    parts.push(
-      {
-        spec: {
-          id: id("land"),
-          type: "fill",
-          source,
-          "source-layer": tiles,
-          paint: { "fill-color": ["case", ["==", ["get", "iso_a3"], "JPN"], PALETTE.japan, PALETTE.land] },
-        },
-        stage: STAGE.land,
-        opacity: [["fill-opacity", 1]],
-      },
-      {
-        spec: {
-          id: id("coast"),
-          type: "line",
-          source,
-          "source-layer": tiles,
-          paint: { "line-color": PALETTE.coast, "line-width": 0.7 },
-        },
-        stage: STAGE.land,
-        opacity: [["line-opacity", 1]],
-      },
-    );
-  } else if (layer.geometry === "polygon") {
+  if (layer.geometry === "polygon") {
     // 地物を選べるように、見えない塗りを敷く
     parts.push({
       spec: {
@@ -260,25 +240,61 @@ function partsFor(layer: CatalogLayer, res: Resolution, state: ViewState): Part[
   return parts;
 }
 
-function place(layer: CatalogLayer, part: Part, range: ZoomRange | null, state: ViewState): LayerSpecification {
+function place(owner: CatalogLayer, part: Part, range: ZoomRange | null, state: ViewState): LayerSpecification {
   const spec = part.spec;
-  const from = DRAW_FROM[layer.id] ?? 0;
-  if (state.hidden.has(layer.id) || !range || range[1] <= from) {
+  const minzoom = Math.max(spec.minzoom ?? 0, range?.[0] ?? 0, DRAW_FROM[owner.id] ?? 0);
+  const maxzoom = Math.min(spec.maxzoom ?? MAX_ZOOM, range?.[1] ?? 0);
+  if (state.hidden.has(owner.id) || minzoom >= maxzoom) {
     return { ...spec, layout: { ...spec.layout, visibility: "none" } } as LayerSpecification;
   }
   const revealed = state.revealed >= part.stage;
-  const layerOpacity = state.opacity[layer.id] ?? 1;
+  const layerOpacity = state.opacity[owner.id] ?? 1;
   const paint: Record<string, unknown> = { ...spec.paint };
   for (const [property, base] of part.opacity) {
     paint[property] = revealed ? base * layerOpacity : 0;
     paint[`${property}-transition`] = FADE;
   }
-  return {
-    ...spec,
-    minzoom: Math.max(spec.minzoom ?? 0, range[0], from),
-    maxzoom: Math.min(spec.maxzoom ?? range[1], range[1]),
-    paint,
-  } as LayerSpecification;
+  return { ...spec, minzoom, maxzoom, paint } as LayerSpecification;
+}
+
+function ground(catalog: Catalog, state: ViewState): LayerSpecification[] {
+  const countries = catalog.layers.find((l) => l.id === "world/countries");
+  if (!countries) return [];
+  const prefectures = catalog.layers.find((l) => l.id === "japan/prefectures");
+  const fine = zoomRanges(prefectures?.resolutions ?? [], state.choices["japan/prefectures"] ?? "auto");
+  const prefecturesFrom = Math.min(MAX_ZOOM, ...[...fine.values()].flatMap((range) => (range ? [range[0]] : [])));
+  const untilPrefectures = { filter: JAPAN, maxzoom: prefecturesFrom };
+  const fill = (spec: Omit<FillLayerSpecification, "type">): Part => ({
+    spec: { ...spec, type: "fill" },
+    stage: STAGE.land,
+    opacity: [["fill-opacity", 1]],
+  });
+  const coast = (spec: Omit<LineLayerSpecification, "type" | "paint">): Part => ({
+    spec: { ...spec, type: "line", paint: { "line-color": PALETTE.coast, "line-width": 0.7 } },
+    stage: STAGE.land,
+    opacity: [["line-opacity", 1]],
+  });
+  const layers: LayerSpecification[] = [];
+  const coarse = zoomRanges(countries.resolutions, state.choices[countries.id] ?? "auto");
+  const tiles = tilesOf(countries);
+  for (const res of countries.resolutions) {
+    const source = sourceId(countries, res);
+    const parts = [
+      fill({ id: `${source}:land`, source, "source-layer": tiles, filter: ["!", JAPAN], paint: { "fill-color": PALETTE.land } }),
+      coast({ id: `${source}:coast`, source, "source-layer": tiles, filter: ["!", JAPAN] }),
+      fill({ id: `${source}:japan`, source, "source-layer": tiles, ...untilPrefectures, paint: { "fill-color": PALETTE.japan } }),
+      coast({ id: `${source}:japan-coast`, source, "source-layer": tiles, ...untilPrefectures }),
+    ];
+    layers.push(...parts.map((part) => place(countries, part, coarse.get(res.id) ?? null, state)));
+  }
+  if (prefectures) {
+    for (const res of prefectures.resolutions) {
+      const source = sourceId(prefectures, res);
+      const part = fill({ id: `${source}:land`, source, "source-layer": tilesOf(prefectures), paint: { "fill-color": PALETTE.japan } });
+      layers.push(place(countries, part, fine.get(res.id) ?? null, state));
+    }
+  }
+  return layers;
 }
 
 export function buildStyle(catalog: Catalog, base: URL, state: ViewState): StyleSpecification {
@@ -296,6 +312,7 @@ export function buildStyle(catalog: Catalog, base: URL, state: ViewState): Style
         "line-opacity-transition": FADE,
       },
     },
+    ...ground(catalog, state),
   ];
   const rank = (layer: CatalogLayer): number => {
     const i = DRAW_ORDER.indexOf(layer.id);
