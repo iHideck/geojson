@@ -125,7 +125,7 @@
         {
           "format": "shp",
           "name": "world-territorial-seas-50m.shp.zip",
-          "bytes": 552602,
+          "bytes": 552626,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-territorial-seas-50m.shp.zip"
         },
         {
@@ -172,7 +172,7 @@
         {
           "format": "shp",
           "name": "world-territorial-seas-110m.shp.zip",
-          "bytes": 127815,
+          "bytes": 127839,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-territorial-seas-110m.shp.zip"
         },
         {

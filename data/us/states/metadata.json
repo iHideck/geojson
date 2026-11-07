@@ -95,7 +95,7 @@
         {
           "format": "shp",
           "name": "us-states-50m.shp.zip",
-          "bytes": 85054,
+          "bytes": 85078,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.shp.zip"
         },
         {
@@ -142,7 +142,7 @@
         {
           "format": "shp",
           "name": "us-states-110m.shp.zip",
-          "bytes": 18126,
+          "bytes": 18150,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.shp.zip"
         },
         {

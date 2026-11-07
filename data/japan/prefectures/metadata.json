@@ -122,7 +122,7 @@
         {
           "format": "shp",
           "name": "japan-prefectures-medium.shp.zip",
-          "bytes": 463767,
+          "bytes": 463791,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-medium.shp.zip"
         },
         {
@@ -169,7 +169,7 @@
         {
           "format": "shp",
           "name": "japan-prefectures-low.shp.zip",
-          "bytes": 73724,
+          "bytes": 73748,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-prefectures-low.shp.zip"
         },
         {
