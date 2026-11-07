@@ -95,7 +95,7 @@ export function createDialogs(dialog: HTMLDialogElement, catalog: Catalog, base:
     const bundles = el("ul", {});
     for (const [key, name] of BUNDLES) bundles.append(el("li", {}, link(`${RELEASE}/${name}`, `${t[key]}`)));
     bundles.append(el("li", {}, link(new URL("stac/catalog.json", base).href, t.stac)));
-    sections.push(el("section", {}, el("h3", {}, t.allInOne), bundles, el("p", { class: "meta" }, t.pinned), el("p", { class: "meta" }, t.maritimeNote)));
+    sections.push(el("section", {}, el("h3", {}, t.allInOne), bundles, el("p", { class: "meta" }, t.pinned), el("p", { class: "meta" }, t.baselinesNote)));
     return sections;
   }
 
@@ -125,7 +125,7 @@ export function createDialogs(dialog: HTMLDialogElement, catalog: Catalog, base:
       el("p", {}, link(`${REPO}/blob/main/DATA_LICENSE.md`, t.dataLicense)),
       el("p", {}, t.codeLicense, " ", link(`${REPO}/blob/main/LICENSE`, "LICENSE")),
       el("p", {}, t.disclaimer),
-      el("p", {}, t.maritimeNote),
+      el("p", {}, t.baselinesNote),
       el("p", {}, t.privacy),
     ];
   }
