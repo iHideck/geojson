@@ -22,3 +22,11 @@ def test_the_capital_district_does_not_share_the_name_of_washington_state():
     )
     assert [f["properties"]["name_en"] for f in fc["features"]] == ["Washington", "District of Columbia"]
     assert notes == ["US-DC の name_en を「Washington」から「District of Columbia」に直した"]
+
+
+def test_an_area_without_a_shape_in_the_countries_layer_is_left_out():
+    fc, notes = admin1.select(
+        {"features": [feature("CHN", "CN-GD", "広東省"), feature("CHN", "CN-X01~", "パラセル諸島")]}, "CHN"
+    )
+    assert [f["properties"]["iso_3166_2"] for f in fc["features"]] == ["CN-GD"]
+    assert notes == ["CN-X01~（パラセル諸島）を除いた。国境のレイヤーに形が無い"]

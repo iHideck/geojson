@@ -29,6 +29,7 @@ export const LINES: Record<string, LineLook> = {
   "world/countries": { color: "#f4b35e", width: [1, 1.8, 2.4], glow: 0.34 },
   "japan/prefectures": FIRST_LEVEL_DIVISIONS,
   "us/states": FIRST_LEVEL_DIVISIONS,
+  "china/provinces": FIRST_LEVEL_DIVISIONS,
   "japan/municipalities": { color: "#a4b4d6", width: [0.5, 0.9, 1.2], dash: [1, 1.6] },
   "world/territorial-seas": { color: "#ea9bd2", width: [0.8, 1.4, 1.8], dash: [3, 2] },
   "world/contiguous-zones": { color: "#5fd4ab", width: [0.7, 1.2, 1.6], dash: [5, 2, 1, 2] },

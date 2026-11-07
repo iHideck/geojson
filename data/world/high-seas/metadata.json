@@ -123,7 +123,7 @@
         {
           "format": "shp",
           "name": "world-high-seas-50m.shp.zip",
-          "bytes": 148954,
+          "bytes": 148978,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-high-seas-50m.shp.zip"
         },
         {
@@ -170,7 +170,7 @@
         {
           "format": "shp",
           "name": "world-high-seas-110m.shp.zip",
-          "bytes": 33841,
+          "bytes": 33865,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-high-seas-110m.shp.zip"
         },
         {

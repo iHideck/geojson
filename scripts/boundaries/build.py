@@ -29,6 +29,7 @@ BUILDERS: dict[str, Builder] = {
     "world/high-seas": maritime.build_marine_regions,
     "world/baselines": maritime.build_baselines,
     "us/states": admin1.build,
+    "china/provinces": admin1.build,
 }
 
 

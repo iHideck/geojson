@@ -13,21 +13,26 @@ SOURCE = "natural-earth-admin1-10m"
 SHAPEFILE = "ne_10m_admin_1_states_provinces.shp"
 SOURCE_FIELDS = "adm0_a3,iso_3166_2,name_ja,name_en"
 # レイヤーごとに取り出す国（Natural Earth の adm0_a3）
-COUNTRY = {"us/states": "USA"}
+COUNTRY = {"us/states": "USA", "china/provinces": "CHN"}
 # 元データの名前を直すもの。iso_3166_2 で引く
 NAME_FIXES = {"US-DC": {"name_en": "District of Columbia"}}
+# 国境のレイヤー（日本の視点の版）とそろえるため、含めない地物と、その理由。iso_3166_2 で引く
+EXCLUDED = {"CN-X01~": "国境のレイヤーに形が無い"}
 # 国境と同じ間隔で簡略化し、同じ決まりで島を残す。変えると、州・省の外側の線が国境の線からずれる
 ISLANDS = IslandRule(min_km2=countries.ISLANDS.min_km2)
 
 
 def select(fc: dict, adm0_a3: str) -> tuple[dict, list[str]]:
-    """国の州・省を取り出し、属性を iso_3166_2・name_ja・name_en にする。直した名前の記録も返す。"""
+    """国の州・省を取り出し、属性を iso_3166_2・name_ja・name_en にする。除いた地物と直した名前の記録も返す。"""
     features, notes = [], []
     for f in fc["features"]:
         p = f["properties"]
         if p["adm0_a3"] != adm0_a3:
             continue
         code = p["iso_3166_2"]
+        if code in EXCLUDED:
+            notes.append(f"{code}（{p['name_ja']}）を除いた。{EXCLUDED[code]}")
+            continue
         props = {"iso_3166_2": code, "name_ja": p["name_ja"], "name_en": p["name_en"]}
         for key, value in NAME_FIXES.get(code, {}).items():
             notes.append(f"{code} の {key} を「{props[key]}」から「{value}」に直した")

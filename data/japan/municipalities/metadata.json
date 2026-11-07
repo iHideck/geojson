@@ -127,7 +127,7 @@
         {
           "format": "shp",
           "name": "japan-municipalities-medium.shp.zip",
-          "bytes": 1381436,
+          "bytes": 1381460,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-municipalities-medium.shp.zip"
         },
         {
@@ -174,7 +174,7 @@
         {
           "format": "shp",
           "name": "japan-municipalities-low.shp.zip",
-          "bytes": 275930,
+          "bytes": 275954,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/japan-municipalities-low.shp.zip"
         },
         {

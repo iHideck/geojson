@@ -13,6 +13,7 @@ PUBLISHED_NOW = {
     "japan/municipalities",
     "japan/islands",
     "us/states",
+    "china/provinces",
 } | MARINE_REGIONS
 
 

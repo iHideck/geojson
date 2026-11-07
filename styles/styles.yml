@@ -65,3 +65,9 @@ layers:
     width_mm: 0.6
     dash: [5, 1.5]
     fill: null
+  china/provinces:
+    geometry: polygon
+    stroke: "#0072B2"
+    width_mm: 0.6
+    dash: [5, 1.5]
+    fill: null

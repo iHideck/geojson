@@ -25,6 +25,8 @@
 | `world/high-seas` | 110m | 1→1 | 503,184→3,456 | +0.183% | 0 | する |
 | `us/states` | 50m | 51→51 | 53,352→8,911 | +0.023% | 0 | する |
 | `us/states` | 110m | 51→51 | 53,352→1,663 | -0.068% | 2 | する |
+| `china/provinces` | 50m | 31→31 | 53,214→10,024 | +0.002% | 0 | する |
+| `china/provinces` | 110m | 31→31 | 53,214→1,616 | +0.003% | 2 | する |
 
 ## ファイルの大きさ
 
@@ -134,3 +136,15 @@ GeoJSON と TopoJSON は、目標が 5MB で、上限が 10MB です。
 | `us/states` | 110m | parquet | 19 KB | 100.00 MB | OK |
 | `us/states` | 110m | shp | 18 KB | 100.00 MB | OK |
 | `us/states` | 110m | pmtiles | 33 KB | 50.00 MB | OK |
+| `china/provinces` | 50m | geojson | 206 KB | 10.00 MB | OK |
+| `china/provinces` | 50m | topojson | 92 KB | 10.00 MB | OK |
+| `china/provinces` | 50m | fgb | 164 KB | 100.00 MB | OK |
+| `china/provinces` | 50m | parquet | 74 KB | 100.00 MB | OK |
+| `china/provinces` | 50m | shp | 92 KB | 100.00 MB | OK |
+| `china/provinces` | 50m | pmtiles | 125 KB | 50.00 MB | OK |
+| `china/provinces` | 110m | geojson | 34 KB | 10.00 MB | OK |
+| `china/provinces` | 110m | topojson | 19 KB | 10.00 MB | OK |
+| `china/provinces` | 110m | fgb | 31 KB | 100.00 MB | OK |
+| `china/provinces` | 110m | parquet | 19 KB | 100.00 MB | OK |
+| `china/provinces` | 110m | shp | 15 KB | 100.00 MB | OK |
+| `china/provinces` | 110m | pmtiles | 24 KB | 50.00 MB | OK |

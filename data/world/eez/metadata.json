@@ -125,7 +125,7 @@
         {
           "format": "shp",
           "name": "world-eez-50m.shp.zip",
-          "bytes": 984504,
+          "bytes": 984528,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-50m.shp.zip"
         },
         {
@@ -172,7 +172,7 @@
         {
           "format": "shp",
           "name": "world-eez-110m.shp.zip",
-          "bytes": 175066,
+          "bytes": 175090,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-eez-110m.shp.zip"
         },
         {

@@ -7,7 +7,7 @@
 | レイヤー | 出典 | 条件 | 再配布 | クレジット | 公開時 |
 | --- | --- | --- | --- | --- | --- |
 | `world/countries` | Natural Earth v5.1.2 | パブリックドメイン | できる | 不要（任意） | 有効 |
-| `us/states` | Natural Earth v5.1.1（州・省） | パブリックドメイン | できる | 不要（任意） | 有効 |
+| `us/states`, `china/provinces` | Natural Earth v5.1.1（州・省） | パブリックドメイン | できる | 不要（任意） | 有効 |
 | `japan/prefectures`, `japan/municipalities` | 国土数値情報「行政区域」2026年版（N03） | オープンデータ（CC BY 4.0） | できる。測量法の承認申請は要らない（国土地理院に確認済み） | 必要 | 有効 |
 | `japan/islands` | 国土地理院「全国都道府県市区町村別面積調」付3「島面積」、Wikidata、総務省の団体コードの一覧 | 国土地理院コンテンツ利用規約（PDL1.0）、CC0、PDL1.0 | できる | 国土地理院と総務省の出典が必要 | 有効 |
 | `world/eez`, `world/territorial-seas`, `world/contiguous-zones`, `world/high-seas` | Marine Regions（VLIZ） | CC BY 4.0。ほかの場所でダウンロードできるようにしないよう依頼あり | できる（VLIZ の許可を得た） | 必要 | 有効 |

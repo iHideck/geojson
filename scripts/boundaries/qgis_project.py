@@ -21,6 +21,7 @@ ORDER = [
     "japan/municipalities",
     "japan/prefectures",
     "us/states",
+    "china/provinces",
     "world/territorial-seas",
     "world/contiguous-zones",
     "world/eez",
