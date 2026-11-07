@@ -20,6 +20,7 @@ ORDER = [
     "world/baselines",
     "japan/municipalities",
     "japan/prefectures",
+    "us/states",
     "world/territorial-seas",
     "world/contiguous-zones",
     "world/eez",

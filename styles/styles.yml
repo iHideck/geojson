@@ -59,3 +59,9 @@ layers:
     dash: null
     fill: "#0072B2"
     fill_opacity: 0.06
+  us/states:
+    geometry: polygon
+    stroke: "#0072B2"
+    width_mm: 0.6
+    dash: [5, 1.5]
+    fill: null

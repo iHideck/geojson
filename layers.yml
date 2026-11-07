@@ -180,3 +180,21 @@ layers:
       en: "Flanders Marine Institute (2024). Maritime Boundaries Geodatabase: High Seas, version 2. Available online at https://www.marineregions.org/. https://doi.org/10.14284/696 Simplified by the geojson project."
     enabled: true
     publish: true
+
+  - id: us/states
+    title: { ja: アメリカの州境, en: US states }
+    geometry: polygon
+    sources: [natural-earth-admin1-10m]
+    resolutions:
+      - { id: 50m, precision: 5, zoom: [2, 6] }
+      - { id: 110m, precision: 4, zoom: [0, 3] }
+    attributes:
+      - { name: iso_3166_2, type: string, description: ISO 3166-2 }
+      - { name: name_ja, type: string, description: 日本語の名称 }
+      - { name: name_en, type: string, description: 英語の名称 }
+    license: CC0-1.0
+    credit:
+      ja: "Made with Natural Earth."
+      en: "Made with Natural Earth."
+    enabled: true
+    publish: true

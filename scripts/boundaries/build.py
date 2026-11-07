@@ -13,7 +13,7 @@ import sys
 from collections.abc import Callable
 from pathlib import Path
 
-from boundaries import countries, islands, japan_admin, maritime, metadata, registry
+from boundaries import admin1, countries, islands, japan_admin, maritime, metadata, registry
 from boundaries.layer_build import Built
 
 DIST = registry.ROOT / "dist"
@@ -28,6 +28,7 @@ BUILDERS: dict[str, Builder] = {
     "world/contiguous-zones": maritime.build_marine_regions,
     "world/high-seas": maritime.build_marine_regions,
     "world/baselines": maritime.build_baselines,
+    "us/states": admin1.build,
 }
 
 

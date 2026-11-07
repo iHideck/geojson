@@ -125,7 +125,7 @@
         {
           "format": "shp",
           "name": "world-contiguous-zones-50m.shp.zip",
-          "bytes": 514125,
+          "bytes": 514151,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-contiguous-zones-50m.shp.zip"
         },
         {
@@ -172,7 +172,7 @@
         {
           "format": "shp",
           "name": "world-contiguous-zones-110m.shp.zip",
-          "bytes": 119501,
+          "bytes": 119527,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-contiguous-zones-110m.shp.zip"
         },
         {

@@ -22,10 +22,13 @@ export type LineLook = {
   glow?: number;
 };
 
+const FIRST_LEVEL_DIVISIONS: LineLook = { color: "#86d6f7", width: [0.7, 1.3, 1.8], dash: [4, 2], glow: 0.16 };
+
 // レイヤーごとの線の描き方。境界の線は、PMTiles の borders を使う
 export const LINES: Record<string, LineLook> = {
   "world/countries": { color: "#f4b35e", width: [1, 1.8, 2.4], glow: 0.34 },
-  "japan/prefectures": { color: "#86d6f7", width: [0.7, 1.3, 1.8], dash: [4, 2], glow: 0.16 },
+  "japan/prefectures": FIRST_LEVEL_DIVISIONS,
+  "us/states": FIRST_LEVEL_DIVISIONS,
   "japan/municipalities": { color: "#a4b4d6", width: [0.5, 0.9, 1.2], dash: [1, 1.6] },
   "world/territorial-seas": { color: "#ea9bd2", width: [0.8, 1.4, 1.8], dash: [3, 2] },
   "world/contiguous-zones": { color: "#5fd4ab", width: [0.7, 1.2, 1.6], dash: [5, 2, 1, 2] },

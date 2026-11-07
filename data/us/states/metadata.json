@@ -1,0 +1,158 @@
+{
+  "id": "us/states",
+  "title": {
+    "ja": "アメリカの州境",
+    "en": "US states"
+  },
+  "geometry": "polygon",
+  "crs": "EPSG:4326",
+  "license": "CC0-1.0",
+  "credit": {
+    "ja": "Made with Natural Earth.",
+    "en": "Made with Natural Earth."
+  },
+  "disclaimer": {
+    "ja": "境界は法的な境界を示しません。測量や航海など、位置の精度や安全に関わる用途には使えません。",
+    "en": "The boundaries have no legal status and must not be used for surveying, navigation or other purposes that need positional accuracy or safety."
+  },
+  "sources": [
+    {
+      "id": "natural-earth-admin1-10m",
+      "title": "Natural Earth Admin 1 States, Provinces, 1:10m",
+      "publisher": "Natural Earth",
+      "version": "5.1.1",
+      "retrieved": "2026-11-08",
+      "urls": [
+        "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_1_states_provinces.zip"
+      ],
+      "page_url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "license": "PDM-1.0",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/"
+    }
+  ],
+  "processing": [
+    "Natural Earth 10m の州・省（ne_10m_admin_1_states_provinces）から、adm0_a3 が USA の地物を取り出した",
+    "US-DC の name_en を「Washington」から「District of Columbia」に直した",
+    "属性を iso_3166_2・name_ja・name_en に絞った",
+    "50m: mapshaper -simplify interval=2500 keep-shapes で簡略化し、座標を小数点以下 5 桁に丸めた",
+    "50m: 島ごとに分けて簡略化し、1km² 以上の島と、各地物で一番大きな島を残した",
+    "110m: mapshaper -simplify interval=15000 keep-shapes で簡略化し、座標を小数点以下 4 桁に丸めた",
+    "110m: 島ごとに分けて簡略化し、100km² 以上の島と、各地物で一番大きな島を残した"
+  ],
+  "attributes": [
+    {
+      "name": "iso_3166_2",
+      "type": "string",
+      "nullable": false,
+      "description": "ISO 3166-2"
+    },
+    {
+      "name": "name_ja",
+      "type": "string",
+      "nullable": false,
+      "description": "日本語の名称"
+    },
+    {
+      "name": "name_en",
+      "type": "string",
+      "nullable": false,
+      "description": "英語の名称"
+    }
+  ],
+  "resolutions": [
+    {
+      "id": "50m",
+      "precision": 5,
+      "features": 51,
+      "vertices": 8911,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "us-states-50m.geojson",
+          "bytes": 198988,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/us/states/50m.geojson"
+        },
+        {
+          "format": "topojson",
+          "name": "us-states-50m.topojson",
+          "bytes": 117869,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "us-states-50m.fgb",
+          "bytes": 159424,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/us/states/50m.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "us-states-50m.parquet",
+          "bytes": 78798,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "us-states-50m.shp.zip",
+          "bytes": 85054,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "us-states-50m.pmtiles",
+          "bytes": 152573,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-50m.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/us/states/50m.pmtiles"
+        }
+      ]
+    },
+    {
+      "id": "110m",
+      "precision": 4,
+      "features": 51,
+      "vertices": 1663,
+      "files": [
+        {
+          "format": "geojson",
+          "name": "us-states-110m.geojson",
+          "bytes": 40654,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.geojson",
+          "pages_url": "https://ihideck.github.io/geojson/latest/us/states/110m.geojson"
+        },
+        {
+          "format": "topojson",
+          "name": "us-states-110m.topojson",
+          "bytes": 28545,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.topojson"
+        },
+        {
+          "format": "fgb",
+          "name": "us-states-110m.fgb",
+          "bytes": 38392,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.fgb",
+          "pages_url": "https://ihideck.github.io/geojson/latest/us/states/110m.fgb"
+        },
+        {
+          "format": "parquet",
+          "name": "us-states-110m.parquet",
+          "bytes": 19028,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.parquet"
+        },
+        {
+          "format": "shp",
+          "name": "us-states-110m.shp.zip",
+          "bytes": 18126,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.shp.zip"
+        },
+        {
+          "format": "pmtiles",
+          "name": "us-states-110m.pmtiles",
+          "bytes": 33866,
+          "url": "https://github.com/iHideck/geojson/releases/latest/download/us-states-110m.pmtiles",
+          "pages_url": "https://ihideck.github.io/geojson/latest/us/states/110m.pmtiles"
+        }
+      ]
+    }
+  ]
+}
