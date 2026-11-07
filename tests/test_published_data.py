@@ -89,7 +89,7 @@ def test_islands_that_matter_for_japan_survive_simplification(res, tolerance):
 
 
 # 州・省のレイヤーに入るはずの地物の数
-SUBDIVISIONS = {"us/states": 51}
+SUBDIVISIONS = {"us/states": 51, "china/provinces": 31}
 
 
 @pytest.mark.parametrize(
@@ -105,3 +105,24 @@ def test_subdivisions_are_complete_with_iso_3166_2_codes_of_the_country(layer, r
     for code in codes:
         subdivision = pycountry.subdivisions.get(code=code)
         assert subdivision is not None and subdivision.country_code == alpha_2, code
+
+
+# 地域の中の点と、その点が入るはずの中国の省（None は、どの省にも入らない）。扱いは docs/disputed-areas.md
+CHINA_REGIONS = [
+    ("アクサイチン", 79.4, 35.3, "CN-XJ"),
+    ("シャクスガム渓谷", 76.6, 36.0, "CN-XJ"),
+    ("アルナーチャル・プラデーシュ", 93.6, 28.0, None),
+    ("台湾", 121.0, 23.7, None),
+    ("香港", 114.17, 22.32, None),
+    ("マカオ", 113.545, 22.19, None),
+    ("西沙諸島", 111.202, 15.784, None),
+]
+
+
+@pytest.mark.parametrize("res", ["50m", "110m"])
+@pytest.mark.parametrize(("name", "lon", "lat", "code"), CHINA_REGIONS, ids=[r[0] for r in CHINA_REGIONS])
+def test_regions_belong_to_the_chinese_provinces_as_in_the_countries_layer(res, name, lon, lat, code):
+    features = geo.topojson_features(json.loads((DATA / "china" / "provinces" / f"{res}.topojson").read_text()))
+    point = Point(lon, lat)
+    inside = [f["properties"]["iso_3166_2"] for f in features if shape(f["geometry"]).contains(point)]
+    assert inside == ([code] if code else []), name

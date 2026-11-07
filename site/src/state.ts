@@ -27,6 +27,7 @@ export const HIDDEN_BY_DEFAULT: readonly string[] = [
   "world/high-seas",
   // 州・省を描くのは一部の国だけなので、最初は日本の都道府県だけを見せる
   "us/states",
+  "china/provinces",
 ];
 
 export function initialState(catalog: Catalog, lang: Lang): ViewState {

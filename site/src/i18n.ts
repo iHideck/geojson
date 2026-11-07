@@ -63,6 +63,7 @@ const ja = {
     "world/contiguous-zones": "接続水域",
     "world/high-seas": "公海",
     "us/states": "州",
+    "china/provinces": "省・自治区・直轄市",
   } as Record<string, string>,
   field: {
     iso_a2: "ISO 3166-1 alpha-2",
@@ -144,6 +145,7 @@ const en: typeof ja = {
     "world/contiguous-zones": "Contiguous zone",
     "world/high-seas": "High seas",
     "us/states": "State",
+    "china/provinces": "Province-level division",
   } as Record<string, string>,
   field: {
     iso_a2: "ISO 3166-1 alpha-2",

@@ -16,6 +16,7 @@ https://ihideck.github.io/geojson/ （ビューア Midnight Chart）
 | --- | --- | --- | --- | --- |
 | `world/countries` | 国境 | 50m・110m | Natural Earth（日本の視点の版） | 配布中 |
 | `us/states` | アメリカの州境 | 50m・110m | Natural Earth | 配布中 |
+| `china/provinces` | 中国の省境 | 50m・110m | Natural Earth | 配布中 |
 | `japan/islands` | 主な島（点） | medium | 国土地理院「面積調」、Wikidata | 配布中 |
 | `japan/prefectures` | 都道府県境 | medium・low | 国土数値情報（行政区域） | 配布中 |
 | `japan/municipalities` | 市区町村境 | medium・low | 国土数値情報（行政区域） | 配布中 |
@@ -68,7 +69,7 @@ map.addLayer({ id: "borders", type: "line", source: "countries", "source-layer":
 Lightweight boundaries of Japan and the world, drawn to one standard so the layers line up.
 
 - Viewer: https://ihideck.github.io/geojson/ (Midnight Chart)
-- Published now: `world/countries` (Natural Earth, Japanese point of view), `us/states` (Natural Earth), `japan/prefectures`, `japan/municipalities` and `japan/islands`. Maritime zones (EEZ, territorial seas, contiguous zones, high seas) are simplified from Marine Regions (VLIZ) with permission.
+- Published now: `world/countries` (Natural Earth, Japanese point of view), `us/states` and `china/provinces` (Natural Earth), `japan/prefectures`, `japan/municipalities` and `japan/islands`. Maritime zones (EEZ, territorial seas, contiguous zones, high seas) are simplified from Marine Regions (VLIZ) with permission.
 - Formats: GeoJSON, TopoJSON, GeoPackage with QGIS styles, a QGIS project, Shapefile (UTF-8), FlatGeobuf, GeoParquet, PMTiles and a STAC catalog. See the table above for URLs.
 - Credits and licenses: [DATA_LICENSE.md](DATA_LICENSE.md). The boundaries have no legal status and must not be used for surveying or navigation.
 
