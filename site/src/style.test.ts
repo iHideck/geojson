@@ -97,8 +97,7 @@ test("隠したレイヤーと、演出でまだ見せていない段階の線�
   const intro = buildStyle(CATALOG, BASE, shown({ revealed: 1 }));
   const border = intro.layers.find((l) => l.id === "world/countries@110m:line");
   assert.equal((border?.paint as Record<string, unknown>)["line-opacity"], 0);
-  const land = intro.layers.find((l) => l.id === "world/countries@110m:land");
-  assert.equal((land?.paint as Record<string, unknown>)["fill-opacity"], 1);
+  assert.equal(painters(intro, 1, { "world/countries": { iso_a3: "KOR" } }).length, 1);
 });
 
 test("選んだ地物だけを強調し、英語ではラベルに英語名を使う", () => {
@@ -133,24 +132,37 @@ test("日本の陸は、都道府県のタイルがあるズームから都道�
   }
 });
 
-test("日本を都道府県の形で塗るズームでは、国境の形の日本の海岸を引かない", () => {
+test("海岸は陸の塗りより下に1本だけ引き、隣の国や都道府県と接する輪郭は塗りで隠す", () => {
   const style = buildStyle(CATALOG, BASE, shown());
-  const coasts = (zoom: number, iso_a3: string): number =>
-    drawing(style, zoom, { "world/countries": { iso_a3 } }).filter((l) => l.type === "line" && l["source-layer"] === "countries").length;
-  assert.equal(coasts(PREFECTURE_TILES_FROM - 0.5, "JPN"), 1);
-  assert.equal(coasts(8.3, "JPN"), 0);
-  assert.equal(coasts(8.3, "KOR"), 1);
+  const firstFill = style.layers.findIndex((l) => l.type === "fill" && (l.paint?.["fill-opacity"] ?? 1) !== 0);
+  for (const zoom of [1, PREFECTURE_TILES_FROM - 0.5, PREFECTURE_TILES_FROM, 8.3]) {
+    for (const probe of [JAPAN_LAND, { "world/countries": { iso_a3: "KOR" } }]) {
+      const coasts = drawing(style, zoom, probe).filter((l) => l.type === "line" && l["source-layer"] !== "borders");
+      assert.equal(coasts.length, 1, `${zoom}: ${coasts.map((l) => l.id)}`);
+      assert.ok(style.layers.indexOf(coasts[0] as LayerSpecification) < firstFill, `${zoom}: ${coasts[0]?.id}`);
+    }
+  }
 });
 
-test("日本の陸は、都道府県を隠しても都道府県の形で塗り、国境のレイヤーの表示と不透明度に従う", () => {
+test("日本の陸は、都道府県を隠しても都道府県の形で塗る", () => {
   const noPrefectures = buildStyle(CATALOG, BASE, shown({ hidden: new Set(["japan/prefectures"]) }));
   assert.deepEqual(painters(noPrefectures, 8.3, JAPAN_LAND).map((id) => id.split("@")[0]), ["japan/prefectures"]);
-  const noCountries = buildStyle(CATALOG, BASE, shown({ hidden: new Set(["world/countries"]) }));
-  assert.deepEqual([1, 8.3].flatMap((zoom) => painters(noCountries, zoom, JAPAN_LAND)), []);
-  const faded = buildStyle(CATALOG, BASE, shown({ opacity: { "world/countries": 0.4 } }));
-  const [id] = painters(faded, 8.3, JAPAN_LAND);
-  const land = faded.layers.find((l) => l.id === id) as FillLayerSpecification;
-  assert.equal(land.paint?.["fill-opacity"], 0.4);
+});
+
+test("国境を隠しても薄くしても、陸の塗りはそのままで、国境の線と名前だけが消える", () => {
+  const style = buildStyle(CATALOG, BASE, shown({ hidden: new Set(["world/countries"]), opacity: { "world/countries": 0.4 } }));
+  for (const zoom of [1, 8.3]) {
+    for (const probe of [JAPAN_LAND, { "world/countries": { iso_a3: "KOR" } }]) {
+      const ids = painters(style, zoom, probe);
+      assert.equal(ids.length, 1, `${zoom}: ${ids}`);
+      const land = style.layers.find((l) => l.id === ids[0]) as FillLayerSpecification;
+      assert.equal(land.paint?.["fill-opacity"] ?? 1, 1, `${zoom}: ${ids}`);
+    }
+  }
+  const countries = style.layers.filter(
+    (l) => l.id.startsWith("world/countries@") && (l.type === "symbol" || (l.type === "line" && l["source-layer"] === "borders")),
+  );
+  assert.ok(countries.length > 0 && countries.every((l) => l.layout?.visibility === "none"));
 });
 
 test("陸の塗りは、境界の線・名前・点より下に描く", () => {
