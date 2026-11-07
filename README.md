@@ -8,7 +8,7 @@ Lightweight GeoJSON boundaries for Japan and the world, with an interactive map 
 
 ## 地図で見る
 
-https://ihideck.github.io/geojson/ （ビューア Midnight Chart。公開の準備中）
+https://ihideck.github.io/geojson/ （ビューア Midnight Chart）
 
 ## レイヤー
 
@@ -66,7 +66,7 @@ map.addLayer({ id: "borders", type: "line", source: "countries", "source-layer":
 
 Lightweight boundaries of Japan and the world, drawn to one standard so the layers line up.
 
-- Viewer: https://ihideck.github.io/geojson/ (not published yet)
+- Viewer: https://ihideck.github.io/geojson/ (Midnight Chart)
 - Published now: `world/countries` (Natural Earth, Japanese point of view), `japan/prefectures`, `japan/municipalities` and `japan/islands`. Maritime zones (EEZ, territorial seas, contiguous zones, high seas) are simplified from Marine Regions (VLIZ) with permission.
 - Formats: GeoJSON, TopoJSON, GeoPackage with QGIS styles, a QGIS project, Shapefile (UTF-8), FlatGeobuf, GeoParquet, PMTiles and a STAC catalog. See the table above for URLs.
 - Credits and licenses: [DATA_LICENSE.md](DATA_LICENSE.md). The boundaries have no legal status and must not be used for surveying or navigation.
