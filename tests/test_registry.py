@@ -7,7 +7,13 @@ from boundaries import registry
 
 MARITIME = {"world/eez", "world/territorial-seas", "world/contiguous-zones", "world/baselines", "world/high-seas"}
 MARINE_REGIONS = {"world/eez", "world/territorial-seas", "world/contiguous-zones", "world/high-seas"}
-PUBLISHED_NOW = {"world/countries", "japan/prefectures", "japan/municipalities", "japan/islands"} | MARINE_REGIONS
+PUBLISHED_NOW = {
+    "world/countries",
+    "japan/prefectures",
+    "japan/municipalities",
+    "japan/islands",
+    "us/states",
+} | MARINE_REGIONS
 
 
 def copy_registry(tmp_path: Path) -> Path:

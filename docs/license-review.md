@@ -1,12 +1,13 @@
 # データ元の利用条件
 
-各データ元の利用条件を、公式ページで確かめた結果です。確認日は 2026-11-06 です。条件が確かめられないデータは、リポジトリにも配布物にも GitHub Pages にも含めません。
+各データ元の利用条件を、公式ページで確かめた結果です。確認日は 2026-11-06 です（Natural Earth の州・省は 2026-11-08）。条件が確かめられないデータは、リポジトリにも配布物にも GitHub Pages にも含めません。
 
 ## 結論
 
 | レイヤー | 出典 | 条件 | 再配布 | クレジット | 公開時 |
 | --- | --- | --- | --- | --- | --- |
 | `world/countries` | Natural Earth v5.1.2 | パブリックドメイン | できる | 不要（任意） | 有効 |
+| `us/states` | Natural Earth v5.1.1（州・省） | パブリックドメイン | できる | 不要（任意） | 有効 |
 | `japan/prefectures`, `japan/municipalities` | 国土数値情報「行政区域」2026年版（N03） | オープンデータ（CC BY 4.0） | できる。測量法の承認申請は要らない（国土地理院に確認済み） | 必要 | 有効 |
 | `japan/islands` | 国土地理院「全国都道府県市区町村別面積調」付3「島面積」、Wikidata、総務省の団体コードの一覧 | 国土地理院コンテンツ利用規約（PDL1.0）、CC0、PDL1.0 | できる | 国土地理院と総務省の出典が必要 | 有効 |
 | `world/eez`, `world/territorial-seas`, `world/contiguous-zones`, `world/high-seas` | Marine Regions（VLIZ） | CC BY 4.0。ほかの場所でダウンロードできるようにしないよう依頼あり | できる（VLIZ の許可を得た） | 必要 | 有効 |
@@ -15,9 +16,10 @@
 ## Natural Earth
 
 - 対象は admin 0 countries（50m と 110m）と、日本の視点版 `ne_10m_admin_0_countries_jpn` です。
+- 州・省には、admin 1 states, provinces の `ne_10m_admin_1_states_provinces`（v5.1.1）を使います。利用規約は同じです。
 - 最新版は v5.1.2 です（GitHub `nvkelso/natural-earth-vector` の最新リリース）。
 - 利用規約の原文は次のとおりです。「All versions of Natural Earth raster + vector map data found on this website are in the public domain.」「No permission is needed to use Natural Earth. Crediting the authors is unnecessary.」
-- 国名の多言語表記（`NAME_JA` など）は Wikidata（CC0）から取ったと、同じページに書かれています。
+- 国名と州・省の名前の多言語表記（`NAME_JA`・`name_ja` など）は Wikidata（CC0）から取ったと、同じページに書かれています。
 - 日本の視点版は 10m にしかありません。50m と 110m の既定版では、北方領土がロシアに含まれます。扱いは `docs/disputed-areas.md` に書きます。
 
 出典: [Natural Earth Terms of Use](https://www.naturalearthdata.com/about/terms-of-use/)

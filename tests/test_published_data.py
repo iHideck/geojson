@@ -7,7 +7,7 @@ import pycountry
 import pytest
 from shapely.geometry import Point, shape
 
-from boundaries import distribution, geo, registry
+from boundaries import admin1, distribution, geo, registry
 from boundaries.countries import PROTECTED_ISLANDS
 from boundaries.limits import CSV_LIMIT, FILE_LIMITS
 
@@ -86,3 +86,22 @@ def test_islands_that_matter_for_japan_survive_simplification(res, tolerance):
     outline = shape(japan["geometry"])
     missing = [name for name, lon, lat in PROTECTED_ISLANDS if outline.distance(Point(lon, lat)) > tolerance]
     assert missing == []
+
+
+# 州・省のレイヤーに入るはずの地物の数
+SUBDIVISIONS = {"us/states": 51}
+
+
+@pytest.mark.parametrize(
+    ("layer", "res"),
+    [(layer, res) for layer, res in RESOLUTIONS if layer.id in admin1.COUNTRY],
+    ids=lambda x: getattr(x, "id", ""),
+)
+def test_subdivisions_are_complete_with_iso_3166_2_codes_of_the_country(layer, res):
+    features = geo.topojson_features(json.loads((DATA / layer.id / f"{res.id}.topojson").read_text()))
+    codes = [f["properties"]["iso_3166_2"] for f in features]
+    assert len(codes) == len(set(codes)) == SUBDIVISIONS[layer.id]
+    alpha_2 = pycountry.countries.get(alpha_3=admin1.COUNTRY[layer.id]).alpha_2
+    for code in codes:
+        subdivision = pycountry.subdivisions.get(code=code)
+        assert subdivision is not None and subdivision.country_code == alpha_2, code

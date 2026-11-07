@@ -19,6 +19,7 @@ const DRAW_ORDER = [
   "world/contiguous-zones",
   "world/territorial-seas",
   "world/baselines",
+  "us/states",
   "japan/municipalities",
   "japan/prefectures",
   "japan/islands",
@@ -33,7 +34,7 @@ const LABELLED = ["JPN", "CHN", "KOR", "PRK", "RUS", "TWN", "PHL", "MNG", "USA",
 const JAPAN: ExpressionSpecification = ["==", ["get", "iso_a3"], "JPN"];
 
 // 名前を出し始めるズーム
-const LABEL_FROM: Readonly<Record<string, number>> = { "japan/prefectures": 5, "japan/municipalities": 9 };
+const LABEL_FROM: Readonly<Record<string, number>> = { "japan/prefectures": 5, "japan/municipalities": 9, "us/states": 4 };
 
 // 演出で見せる順番。0 は最初から見せる
 const STAGE = { land: 0, graticule: 1, borders: 2, japan: 3, labels: 4 } as const;
