@@ -52,7 +52,7 @@ const ja = {
   privacy: "このサイトは、アクセス解析・広告・外部の地図タイルを使いません。",
   codeLicense: "コードは MIT ライセンスです。",
   dataLicense: "データのライセンスとクレジットの書き方",
-  maritimeNote: "海域（EEZ・領海・接続水域・基線・公海）のデータは、まだ配っていません。",
+  baselinesNote: "日本の直線基線のデータは、まだ配っていません。",
   kind: {
     "world/countries": "国・地域",
     "japan/prefectures": "都道府県",
@@ -132,7 +132,7 @@ const en: typeof ja = {
   privacy: "This site uses no analytics, no ads and no external map tiles.",
   codeLicense: "The code is under the MIT License.",
   dataLicense: "Data licenses and how to credit",
-  maritimeNote: "Maritime zones (EEZ, territorial seas, contiguous zones, baselines, high seas) are not distributed yet.",
+  baselinesNote: "Japan's straight baselines are not distributed yet.",
   kind: {
     "world/countries": "Country or area",
     "japan/prefectures": "Prefecture",
