@@ -23,6 +23,8 @@
 | `world/contiguous-zones` | 110m | 220→220 | 3,895,934→13,206 | -0.748% | 53 | する |
 | `world/high-seas` | 50m | 1→1 | 503,184→14,090 | +0.020% | 0 | する |
 | `world/high-seas` | 110m | 1→1 | 503,184→3,456 | +0.183% | 0 | する |
+| `us/states` | 50m | 51→51 | 53,352→8,911 | +0.023% | 0 | する |
+| `us/states` | 110m | 51→51 | 53,352→1,663 | -0.068% | 2 | する |
 
 ## ファイルの大きさ
 
@@ -120,3 +122,15 @@ GeoJSON と TopoJSON は、目標が 5MB で、上限が 10MB です。
 | `world/high-seas` | 110m | parquet | 33 KB | 100.00 MB | OK |
 | `world/high-seas` | 110m | shp | 33 KB | 100.00 MB | OK |
 | `world/high-seas` | 110m | pmtiles | 50 KB | 50.00 MB | OK |
+| `us/states` | 50m | geojson | 194 KB | 10.00 MB | OK |
+| `us/states` | 50m | topojson | 115 KB | 10.00 MB | OK |
+| `us/states` | 50m | fgb | 156 KB | 100.00 MB | OK |
+| `us/states` | 50m | parquet | 77 KB | 100.00 MB | OK |
+| `us/states` | 50m | shp | 83 KB | 100.00 MB | OK |
+| `us/states` | 50m | pmtiles | 149 KB | 50.00 MB | OK |
+| `us/states` | 110m | geojson | 40 KB | 10.00 MB | OK |
+| `us/states` | 110m | topojson | 28 KB | 10.00 MB | OK |
+| `us/states` | 110m | fgb | 37 KB | 100.00 MB | OK |
+| `us/states` | 110m | parquet | 19 KB | 100.00 MB | OK |
+| `us/states` | 110m | shp | 18 KB | 100.00 MB | OK |
+| `us/states` | 110m | pmtiles | 33 KB | 50.00 MB | OK |

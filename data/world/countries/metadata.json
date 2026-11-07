@@ -109,7 +109,7 @@
         {
           "format": "shp",
           "name": "world-countries-50m.shp.zip",
-          "bytes": 1018978,
+          "bytes": 1019004,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-50m.shp.zip"
         },
         {
@@ -156,7 +156,7 @@
         {
           "format": "shp",
           "name": "world-countries-110m.shp.zip",
-          "bytes": 165997,
+          "bytes": 166023,
           "url": "https://github.com/iHideck/geojson/releases/latest/download/world-countries-110m.shp.zip"
         },
         {
