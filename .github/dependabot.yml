@@ -4,7 +4,8 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: "cron"
+      cronjob: "0 0 1,15 * *"
     groups:
       npm:
         patterns: ['*']
@@ -12,7 +13,8 @@ updates:
   - package-ecosystem: npm
     directory: /site
     schedule:
-      interval: weekly
+      interval: "cron"
+      cronjob: "0 0 1,15 * *"
     groups:
       site:
         patterns: ['*']
@@ -23,7 +25,8 @@ updates:
   - package-ecosystem: uv
     directory: /
     schedule:
-      interval: weekly
+      interval: "cron"
+      cronjob: "0 0 1,15 * *"
     groups:
       python:
         patterns: ['*']
@@ -31,7 +34,8 @@ updates:
   - package-ecosystem: docker
     directory: /
     schedule:
-      interval: weekly
+      interval: "cron"
+      cronjob: "0 0 1,15 * *"
     groups:
       docker:
         patterns: ['*']
@@ -39,7 +43,8 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: "cron"
+      cronjob: "0 0 1,15 * *"
     groups:
       github-actions:
         patterns: ['*']
