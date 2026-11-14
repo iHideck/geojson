@@ -20,7 +20,7 @@ capture-site: # OGP と静止画（site/public/og.jpg）を、ビルドしたビ
 	npm run capture --prefix site
 
 # 見た目の元の画面は、CI と同じ Playwright のイメージの中で撮る（フォントや描画が環境で変わらないように）
-PLAYWRIGHT_IMAGE := mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
+PLAYWRIGHT_IMAGE := mcr.microsoft.com/playwright:v1.65.0-noble@sha256:9beb546099e11f52d62e505537914870e01a67e0e6b00ae41da4775324e73dbe
 
 .PHONY: test-site
 test-site: # ビューアをブラウザで確かめる（PMTiles の表示・操作・見た目）。make build の後に動かす
