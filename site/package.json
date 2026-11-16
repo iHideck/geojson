@@ -14,17 +14,17 @@
     "lighthouse": "lhci autorun --config=lighthouserc.desktop.json && lhci autorun --config=lighthouserc.mobile.json"
   },
   "dependencies": {
-    "maplibre-gl": "6.16.0",
+    "maplibre-gl": "6.18.0",
     "pmtiles": "4.5.0"
   },
   "devDependencies": {
-    "@lhci/cli": "0.16.0",
-    "@maplibre/maplibre-gl-style-spec": "26.5.1",
+    "@lhci/cli": "0.16.1",
+    "@maplibre/maplibre-gl-style-spec": "26.6.0",
     "@playwright/test": "1.65.0",
     "@types/geojson": "7946.0.16",
     "@types/node": "24.19.2",
     "sirv": "3.0.2",
     "typescript": "7.0.2",
-    "vite": "8.3.6"
+    "vite": "8.3.8"
   }
 }
